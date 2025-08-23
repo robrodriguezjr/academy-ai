@@ -17,3 +17,7 @@ dist/
 
 # OS
 .DS_Store
+
+# Never commit SSH keys
+key
+key.pub	
