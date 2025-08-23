@@ -1,0 +1,72 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "academy-kb-ext",
+  "title": "Academy kb ext",
+  "description": "",
+  "icon": "extension-icon.png",
+  "author": "robjr1",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "academy-kb",
+      "title": "Academy KB",
+      "description": "Query your local Academy KB",
+      "mode": "view"
+    },
+    {
+      "name": "reindex",
+      "title": "Academy KB: Reindex",
+      "description": "Trigger a reindex on the server",
+      "mode": "view"
+    },
+    {
+  "name": "status",
+  "title": "Academy KB: Index Status",
+  "description": "Show current vector count and last reindex time",
+  "mode": "view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "apiUrl",
+      "title": "API URL",
+      "description": "Base URL of your KB API",
+      "type": "textfield",
+      "default": "http://127.0.0.1:8002"
+    },
+    {
+      "name": "apiToken",
+      "title": "API Token",
+      "description": "Bearer token for your KB API",
+      "type": "password",
+      "default": "supersecret123"
+    },
+    {
+      "name": "docsDir",
+      "title": "Docs Directory",
+      "description": "Local folder where your .md files live",
+      "type": "textfield",
+      "default": "/Users/robjr/academy-kb/academy-kb/data/raw/docs"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.102.3",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.4",
+    "@types/node": "22.13.10",
+    "@types/react": "19.0.10",
+    "eslint": "^9.22.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish"
+  }
+}
