@@ -1,0 +1,345 @@
+LS 09 Lightroom Essentials—Tonal Value
+===
+
+[00:00:00] Hello everyone and welcome to another Creative Path Academy live stream. It's great to, uh, have you all here tonight. I'm excited to be here as well. Uh, thank you for, uh, little schedule change there, uh, tonight meeting on Tuesday because I figured that, um, there'd be a lot of stuff going on tomorrow if you were in North America for our Thanksgiving holiday on Thursday.
+
+So I know Wednesday can be kind of busy, so I figured I'd move it up a day and, uh, leave, uh, tomorrow a little bit open for whatever it is that you have planned. Uh, tonight, um, I [00:01:00] am starting a kind of a new theme, which is, uh, I'm calling Lightroom Essentials. And, um, instead of looking at, uh, specific tools in Lightroom, I want to approach it from the standpoint of composition and visual storytelling.
+
+In other words, what are the, uh, what are the properties and characteristics of composition that we can adjust in Lightroom? And then how, what tools would be used to adjust those things. And if you think about this, right, we have really obvious ones, uh, the one that I'm talking about tonight, which is tonal value.
+
+And you can think of tonal value as the amount of light in your picture. That's what value is. Value is, uh, how bright something is, right? So how much light there is, if there's a lot of light in an area, it's very, very bright. And if there's not a lot of light of light. Then it's very dark. So that's tonal value.
+
+And so total value is extremely important in photography. In fact, that's what photography is, right? It's the [00:02:00] capture of light. And um, not only is it critically important in composition, but when you are adjusting or editing or developing your images, I think it's very, very powerful to know, um, what tools you can use to best adjust your tonal values and your image.
+
+In subsequent weeks, we'll be talking about other things like color, right? And so what are the best tools that we have in Lightroom to adjust color, and perhaps we'll get into things like texture and detail. Also. Those are the, I think, the key sort of visual cues that we, um, look at when we are looking at an image.
+
+So tonight again, it'll be about tonal value. And the reason why tonal value is important in photography is because it really does, um, allow you to set the mood or the feel of an image. Uh, an image that has a lot of contrast tends to be, um, kind of loud and, uh, in your face, so to speak. An image that [00:03:00] is, when we call an image, soft or quiet, one of the things that go, tends to go along with that is low contrast, right?
+
+Of a, a, um, a smaller separation between the lights and the darks. Visually, that looks softer to us. You can think about fog versus, uh, sunny day, right? Sunny day, high contrast, foggy day, low contrast. Uh, and so it, it helps create mood and also contrast or the difference in tonal values helps also to separate things in your image, separate objects, and create a sense of depth.
+
+Generally speaking, we tend to perceive things that are closer to us in an image as being darker and having more contrast and things far away as having less contrast. You can think about a hazy horizon, that kind of thing. So contrast really important and it's something that I am always. Um, I, I won't use the word thinking about, but it's something that I'm [00:04:00] always, um, trying to get a sense of what, how much contrast I have in my image, whether that's actually helping the composition and it affects everything where the viewer goes.
+
+Um, how you lead a viewer through an image. Um, and what has more visual weight than less visual weight. So I'm gonna show you some examples, very quick examples, just to give you a sense of that. Then we'll jump into Lightroom and show you the tools that we can be, that are, that are at, uh, at our disposal to adjust contrast.
+
+And then I'll walk you through maybe a couple of example images where I'm using those tools as usual. Um, if you have any questions, please, um. Use the, uh, area where there's a, a round symbol with a person inside of it. Click on that on that column and you can leave a question for me there. Um, I'm always happy to answer your questions and interact and, uh, of course, if you've got any feedback as well.
+
+Um, please share. Um, anyone who's to new the academy welcome as well. I see a lot of familiar faces. Mildred, [00:05:00] uh, Justine, Helen, Steve, Jeff, Carl, Jean Marie, Donald. Tom, Martha. Um, all great to see you here. So thank you for, um, for joining. Okay, so let me jump into Light Lightroom and just show you a few examples here.
+
+I. Here's an image where, uh, and, and let me say at, at the outset, right? Tonal value and color are related of course, but they are not exclusive. So tonal value can and does have an important role in a color image or a black and white image, and a black and white image. Of course, it's much more obvious, but it's definitely an an, an, um, something that you should consider as well in color images.
+
+So in this example image here, you can see that I'm using contrast and the highest amount of contrast right in this area here to establish my foreground. And then that [00:06:00] establishes this layer. And then we've got a second area of strong contrast back here. And then you see how the image softens up. Back here again, I'm talking about contrast and.
+
+I was very careful to make sure that this area here had the greatest amount of contrast in the image, because that's the area that tends to be the loudest. So you can think of contrast as volume. Notice that everything else, my clouds back here, even these mountains back here, they're all, um, secondary in hierarchy to this area in the front.
+
+That's in contrast. That's also helped, of course, by the wonderful fog that I had this particular day. But nonetheless, we could have easily got in, in Lightroom and made this area much more contrasty, so to speak. That for me would have, um, obscured the foreground. Here's another example of an image where, and this is of course, black and white.
+
+As you can see, I'm using contrast as a way to, uh, create something that's [00:07:00] very graphic, a very graphical image. These white lines that extend out into the distance are. Uh, graphic in nature and very strong because they're surrounded by these darker areas. And that creates your contrast Once again, notice that the highest amount of contrast, in other words, the biggest separation between the brightest part and the darkest part is right here in the foreground.
+
+And that's because that's where I want to sort of establish the beginning of the image. And then as we move up the image this way, you could see that that contrast gets less and less. And then back here, it even gets at its, uh, uh, quietest, if you will, right? Relatively speaking. Again, I could have made the sky a lot darker if I wanted to, but that would've, I think, pulled away from this sense of movement because our eyes are generally attracted to areas, well, our eyes like gradation and variation.[00:08:00] 
+
+And so because there's variation here, it keeps your eye moving. Back and forth. And that creates the kind of the abstract nature of this image. This is a, a picture where I'm looking up at a building in New York City, but the idea that I had in mind was something like, almost like a, some kind of a platform that you could walk out on in some kind of a science fiction movie or something like that.
+
+So that's the idea.
+
+Here's another example of, um, a reflection in a puddle, uh, in Paris. And you can see here how I am trying to use, of course, color is a major component, and that was one of the visual elements that I used to put the image together. But it was also the contrast. It's also the, uh, the pattern of lights and darks.
+
+So notice that these lights here are surrounded by a midtone, something that is not as light. And then these [00:09:00] midtone colors here are surrounded by. Darker areas. So I'm sort of playing not only with the color, but also with the contrast with the light to dark relationship. And you can see that the blue here, while it's a different color tonally, in other words, the amount of light that the, the sky has, the amount of light here is very similar to, you know, this area around here.
+
+So it's, it's really not that different in terms of tonal variation. What makes it different is the color, but tonally, I wanted that to be kind of seamless so that your eye wouldn't be drawn into this area and the, you know, if the sky was really bright. Again, I'm doing that through tone to, through varying the tone so that, um, areas that have lower contrast, don't pull your eyes as much as areas that have higher contrast.
+
+Here's another example here where you can see this part here is the highest [00:10:00] contrast. Then high contrast over here, and then everything in between here are different layers of varying amounts of tonal value from the darkest to some lighter areas here to this, uh, middle area here. That's kind of a midtone.
+
+And this area is very important here because had I let that go too dark or, or, or, or if that was too dark, you could see how there wouldn't be a very easy way for the eye to travel through the section to get up to the sky. It would just be all sort of black and dark and uninteresting. But because I opened this up a little bit by, when I use that word open, what I'm thinking about is it's dark and sort of.
+
+Not too visible. Opening means adding some light into it, opening it up, uh, visually so that we can see some more interest and some more light that creates the bridge [00:11:00] between the lightest part of the image and these dark areas in here.
+
+And one last image here. You can see that generally the image is not a high contrast image from here to here. Maybe these are midtones. So I'm only using from lights to midtones. It's these little. Uh, that area there with those little plants coming out of the water that adds the highest contrast. And that's where the accent of the images, I added this little accent area to create some context to create some, uh, a visual accent, if you will.
+
+But if you take this out, then it almost, the image becomes even softer and even more kind of, uh, lightweight because there isn't a lot of strong contrast. And I, again, purposely did that. I didn't wanna lower this, this blue area here. I didn't wanna make that too dark because I would pull away from those, that little accent there [00:12:00] that I wanted to maintain.
+
+Actually, one more image, and here you can see where. I'm using contrast or tonal value as a way to keep the image as soft as possible. Notice that here, I have not darkened that as much as I could have. That could be, it could be potentially right from a developing standpoint, much darker and richer. But when I, when I did that or when I do that, or if I were to do that, that would make this rock much heavier and much, um, much stronger, much heavier, much louder.
+
+If I added more contrast here, the way I would do that would be by just adding more black into the image and that this black here would, uh, create contrast with the brighter areas next to it. That would make that rock much louder. And then the image just becomes about this area here. But of course, I've got all of this here and because I've had got all of that, I want that [00:13:00] to.
+
+Fit in with the image better. I want to balance out the tonal value so that this is just adding, or this is just kind of establishing the image, but still keep it light and quiet and sort of area ephemeral. That's how I felt when I made this picture. So that's the whole idea to, uh, at the end of the day to think about the, the, the mood and the feel that you wanna impart in the image.
+
+So that's, those are just a few examples. Let me jump to full screen here, and I'm gonna switch over to this image here, and we'll use this as a, as our beginning image. I'm gonna press D here for develop.
+
+Okay. So in Lightroom we have various adjustments and the majority of those adjustments have to do with. Light tone or [00:14:00] color. Now, today we're talking about tone only. Most of the basic panel is tone, with the exception of the white balance area and the color area down here, vibrance and saturation. But all of this here, the basic panel really is your, your main area to create the, to, uh, to, to create the biggest amount of adjustments when it comes to tone.
+
+This is where you're gonna do most of the heavy work, right? This is like 80% of it is gonna be done here. Everything else is just going to be, uh, an a, a kind of a in addition or, uh, just a icing on the cake, if you will. Of course, the icing on the cake can make or break an image, and I'm not diminishing how important that is, but you really want to get the feel of the image and the, the sort of the direction that you want to take the image in, in the basic panel here.
+
+Now just to go through where all the tonal adjustments are. [00:15:00] Of course here we have exposure, contrast, highlights, shadows, whites, and blacks. Those are your key adjustments that really move the histogram around, and I'll show you that later. Another one that also can do a lot of tonal work is of course the tone curve, hence the name tone curve.
+
+And here you can see, uh, a representation of the histogram of histogram in the image or the tonal values. And then we can manipulate this line, which basically lets us either, um, increase or decrease portions of the tone curve. And I'll go over that a little bit later in the color mixer. Okay. If we're in the mixer area, we have hue and saturation, which are color adjustments, but we have luminance, luminance, another word for light.
+
+And this is our. Tonal adjustments so we can adjust the lightness, brightness, or [00:16:00] darkness of particular colors. Now, that does affect the color, of course, so if you darken an image, it's going to look a little bit, depending on how bright the image is to begin with, you can, you can actually make it look less or more saturated.
+
+But essentially that's a way to lighten or darken an image. Interestingly, um, I recently read that Lightroom or Adobe, I should say, had the option of allowing you to adjust the luminosity of colors, whether in the tone curve or, let me rephrase that a different way. They had the option of allowing you to adjust the tone without changing the saturation of the color and the.
+
+Uh, I guess Thomas Noll, who's the, the, the Photoshop, uh, guru, the guy who, uh, created Photoshop and also Lightroom, he decided to allow the tonal adjustments to adjust the color because he thought that was more like what film does when you adjust film, when you, uh, lighten a [00:17:00] darken up, uh, your film, you also get a change in saturation.
+
+So we wanted to maintain that kind of connection to film and how film reacts just a little, um, FYI there. Okay. Back to the color mixer. Also in point color. Notice that in point color, we also have an adjustment for luminosity. So even though we do have hue in saturation, there's luminosity again. That is again, the brightness and darkness, how much light is, is hitting or shining on a color.
+
+And then we have color grading, which also has. Tonal adjustments, and that's this slider here. I don't use these all too much because I think that they're, they are in a sense, kind of redundant to what we have in the other panels, but just so that you're aware of them. And I think for the most part, uh, that is it actually.
+
+We also have, um, vignetting, which is darkening of the edges. So that's kind of a [00:18:00] color adjustment. Uh, the other one, I forgot here, maybe I didn't mention it, but again, the presence area, so texture, clarity, and d haze back in the, in the basic panel that also adjusts tone. It just, um, it's just that it adjusts the tone in a very narrow way.
+
+So of course, clarity isn't just in the midtones and d haze is a way of, of adding contrast to remove sort of the fog in an image. Now, if you really learn and master all of the adjustments that I just showed you, then. Uh, those are the same adjustments that you find when you make local adjustments. So in with local adjustments, the tools are different.
+
+How we are creating the mask, it's what's, it's what's different from the basic panel, right? In the basic panel, everything is global. When we go into local adjustments, we can create masks in different [00:19:00] way to, uh, select different parts of the image. But once we do create a mask, so if I just create a quick brush here, once we create a mask, you can see that we have the same or very similar adjustments.
+
+So in the tone area here for a local adjustment, we basically have all of the adjustments that you would find in the basic panel exposure, contrast, highlight, shadows, whites, and blacks. That's pretty much identical. Remember that in the basic panel we also have clarity. Uh, texture and D haze, and we have that here as well.
+
+They just moved it to a different area, so it's down here and the effects section. And those of you who use Lightroom desktop, which is the same as Lightroom mobile, will know that that's how they organize it in the, in Lightroom mobile, they actually put these adjustments in their own effects panel, but they're the same here.
+
+We also have, um, our point color [00:20:00] adjustment here, which again has that luminosity adjustment, and we have the same tone curve that we have in the, uh, non-local adjustments. So if you learn the adjustments here and you learn what they do and you learn to use them properly, then the local adjustments really is just about learning how to create masks.
+
+The adjustments will be the same. So I wanna focus in now on the basic panel here, and I'm gonna switch now to a graphic. And so I want to explain to you using this graphic, what the adjustments in the basic panel do, because I find when I'm working with students or when I'm evaluating or critiquing images, or I'm getting questions that sometimes I get a sense that, uh, not everyone is exactly sure about what each of these adjustments do.
+
+So here's our histogram, and just to [00:21:00] review the histogram is a representation of the light in your image tonal value. Now, the, the Lightroom histogram also shows us various, or it breaks down the colors, but it's still representing light, how much light we have in an in the image. So the height of the histogram, the peaks and valleys of the histogram.
+
+Are just a representation of the amount of light, but they don't signify anything relevant, really anything that's useful in terms of what you should be paying attention to. Um, you don't, you certainly don't clip. If you, if your peak goes up to the top here, what you want to be aware of is the range, the darkest darks and the brightest brights.
+
+If anything pushes up against the left hand side here, then you're potentially clipping and losing information. And same thing in the highlights. It's clipping and losing information. Now, over here what I have is, [00:22:00] you can see I have the same representation of our histogram darks over here, lights over here.
+
+And you can imagine that we have a gradation of tones from left to right, just like we have over here. Now in Lightroom, we have these sliders, the exposure slider. Here is essentially equivalent to the exposure setting on your camera. It really controls how bright or dark and image looks. And the reason why it has the biggest sort of influence in our perception of how bright or dark and image is, is because it adjusts the midtones, this central area here, and that's the area that our eyes are most sensitive to.
+
+We're really sensitive to those midtones and therefore the exposure slider moves the midtones darker or lighter. So the exposure slider is adjusting pretty much everything from here to here. Everything you see between these [00:23:00] dash lines, it doesn't really adjust our darkest darks or our whitest whites, everything in the center.
+
+And so that really is going to give you a sense of. The overall light in your image. If, if an image feels a little on the dark side, generally you want to adjust the exposure. If it looks generally too bright, you want to adjust the exposure. When I say generally too bright, I mean that overall it looks bright.
+
+Not that there's a really bright patch in the sky, but generally speaking, it looks too bright. Now our shadows are in this range, and that's controlled by the shadow slider, and our highlights are in this range, and that's controlled by the highlight slider. Now, none of these adjustments can adjust the tonal values in isolation, right?
+
+So any adjustment that you make. With these adjustments are going to push the whole histogram left and right. It's just a question [00:24:00] of where the emphasis is. So as I said, when you adjust the exposure, the emphasis is in the midtones. When you adjust the shadows, the emphasis is going to be in the shadow area.
+
+So maybe this band, that lower band of shadows, and same thing for the highlights in here. So when you pull down on the highlight slider, like if you have a bright patch in the sky and you pull down on the highlight slider, what you're doing is you're expanding this range in here. And when you expand that range, you get variation.
+
+When you get variation, you can see different things. You can see the cloud. That before was too bright because it was all the tones were kind of squashed together. And the same thing in the shadows. Generally speaking in the shadows, we wanna push the shadow slider this way or to the right because that means that our darks in here will get expanded out.
+
+So now we can see more variation in the darks over here. [00:25:00] And then finally, we have the whites and the blacks. And what the black slider does is that it sets the, uh, the absolute blackest thing in your image, the darkest thing in your image, and the same thing with the whites. It'll set the whitest thing in your image, the whitest area or the whitest spot in your image.
+
+Now, as I've said many times before, I'm sure you've heard me say that this depends on whether you actually have something in your image that you want to be solid white or solid black. And sometimes that's not the case as I'm gonna show you in, in, uh, when I show you some images. Also keep in mind that the point of the white slider and the black slider, these are not absolute values.
+
+They are relative values. What I mean by that is that if you set on your, on, on a properly calibrated monitor, which is what I hope you have, when you set the white point, you're saying that you want your monitor to, uh, give you to, to you, you [00:26:00] want that area that you're setting to. Its to to, uh, to the whitest part of the image.
+
+You want your monitor to, uh, also represent it with the whitest that the monitor can go. In other words, whatever it is that you are monitoring on whatever you're viewing on, you're going to get absolute white out of that device or absolute black out of that device. Depending on where you set the white and black slider.
+
+If you now view your image on a different device, a device that let's say is even brighter, that can generate more light, then your whites are going to. Be calibrated or, uh, they're going to be translated to that device and it'll look even brighter based on the device that you're using. That's, that's the whole point of setting the whites and blacks so that regardless of what device you're viewing it on, the device knows, okay, this spot should be as wide as it can be, and so I'm going to show that as white as I can make it.
+
+That's the whole point of profiles and, um, monitor profiles and paper profiles, et [00:27:00] cetera. This also has to do with printing. If you set your whites properly, then that means that when you print onto a, uh, uh, particular piece of paper, if that paper doesn't have, the brightness of your monitor is never gonna be as bright as your monitor, but you'll be able to get the most out of the paper because you set your white point properly and that's a.
+
+Profile thing and also a calibration thing. So that's why it's very critically important to have your monitor calibrated properly because then when you set your whites and your blacks and everything else as well, color of course, that's also a big one. But when you set your white point in your black point on a properly calibrated monitor, you can be sure that that in fact, you're seeing the whitest and the blackest part of the image on your monitor, and it'll translate to other monitors and other devices like iPhones and iPads and even to printing.
+
+It'll translate properly down here. I just wanna show you that high contrast means we have a bright [00:28:00] area close to a a, a bright area, next to a dark area, high contrast, low contrast, and you can see just by looking at these two areas, that this.here stands out way more than this dot. This circle here, or dot whatever you wanna call it, it's much more obvious here.
+
+Stands out much more than here, draws more attention to itself. And that's what I was talking about before in terms of images, creating visual weight and visual hierarchy. Now, one more thing I wanna show you here is that even though I showed you a, a, uh, monochromatic band of tones, tonal value also is a quality of color.
+
+So here, this is blue, but you can see that this is all I'm adjusting here is the tonal value. Or, or, or you potentially can adjust the ton of value of a color. So this is your lightest blue. And as you darken that blue, you see that it gets dark and dark until eventually we get to black. Why do we get to black?
+
+Well, because [00:29:00] tonal value is the amount of light in your image. And if you have no light or very little light in your image, then doesn't matter what color it is, it's going to look black. But this is just to illustrate to you that. Tone of value is, uh, related to color, but it's also its own thing. And colors have their luminosity as we saw in Lightroom, where you can adjust the brightness or darkness of colors, um, not just, uh, specific or relative to relevant to, uh, black and white images.
+
+Are there any questions about any of, of that, of what I've talked about so far? Um, I just wanna make sure that you guys have a good handle on the adjustments here. Again, these are our adjustments in Lightroom. It's really important that you know what these do and how to use them so that when you have a plan to start adding your image, you kind of know what adjustments are going to do what.
+
+And as I mentioned before, these are the same ones that you find in the local adjustments. And so it's, [00:30:00] again, very powerful. Okay, so I'm gonna switch back to Lightroom.
+
+So here's an image that, um, is quite challenging as you can see, because it was extremely bright and big sky strong color here. And so the majority of the adjustments for this image are going to be tonal adjustments. It isn't the color so much that I need to get a handle on, it's the tonal values. How do we adjust all the different tones in the image to, um, to get something that looks richer, that looks, uh, more clearer, that has a mood to it and has depth.
+
+And right now it doesn't look like it has much depth because you just have the land and the sky here. And this is where I want to, I think this image is a good one to show you. Again, these adjustments, exposure again is [00:31:00] how brighter or dark the image looks generally. And for that, I need to kind of look at a.
+
+At a kind of midtone area of the image, which is around here. I can't use this for exposure and I can't use our darkest darks for exposure. So that looks like it's a bit too dark perhaps, and that is too light. So I would say generally speaking, that the exposure is pretty much, um, right on and excellent treatment of total adjustment context.
+
+Thank you John Marie, appreciate that. Um, and again, please if anyone has any questions, don't be shy. Please ask because that's how we all learn. I also learn if I need to explain something, um, in a better way. So my exposure here is actually pretty much spot on because exposure again is the midtones.
+
+Everything up here is mid to highlights to whites, and everything down here is in my shadows. Midtones, for the most part, are okay.[00:32:00] 
+
+Highlights. Now we start to see a change in the sky. So you see here that when I pull down the highlights, what we're getting is more separation in this area here, because the highlights, as I showed you here, are adjusting this range of the tonal values. So they're opening up if my clouds are all here.
+
+Then when I pulled on the highlights, I pulled on more tone so that I have some clouds that are in this tonal value and I get some separation. And that's what you're seeing here. This is a little darker than this, or this is a little darker than that. And so notice here you really can't see any separation, but I pull this down, you get some separation.
+
+However, I'm not getting enough separation or as much as I'd like, and that means that I'm going to have to use, uh, some heavy duty tools, right, to get more separation here. That's gonna be a combination of. [00:33:00] D Haes, which d haes is even a more powerful version of kind of pulling down the highlights. It kind of darkens things and separates out things that are kind of hazy, but also probably I'll use some local adjustments.
+
+I always caution or warn students, and I'm warning you to be careful when you use highlights at minus a hundred, because it means that, or at least for me in this, in this case, it means that I'm using the highlights to really get a handle on the sky, but I'm really not paying attention. Or perhaps it is doing some, um, having some negative consequences in areas where I don't need so much of those highlights.
+
+So, for example, if I pull those highlights down, it really does kind of take away the sparkle on these, on this little village here. So if I pull those highlights down, you see, I would prefer to leave that more open. It's subtle, but. If I can't get what I want with the highlights, [00:34:00] you know, around here, then I'll probably stop there and I'll use a local adjustments on the sky, a local adjustment on the sky.
+
+Okay, some shadows again, notice the shadows now isn't doing anything or very little to the sky. It is, um, doing more to the shadows here. Okay, so see that there.
+
+Now Jeffrey asks, why do you not set your white and black points first before doing any other adjustments? Is it you want to keep the narrow histogram because of the haze or some other reason? So that's an excellent question, Jeffrey. Ask, why am I not setting the white and the black point first before doing anything else?
+
+The reason for that is because. Um, I, I want to get the image in the ballpark of the feel and the mood that I want, and I mostly do that with the exposure and the highlights [00:35:00] and shadows before the whites and blacks. The whites and blacks tend to, I think, uh, they're very, they're very powerful and they can add more contrast to an image than you may think you want to begin with.
+
+And so I like to get the feel of the image first before adjusting whites and blacks. And the second reason is, is that in this image here, I'm already clipping with the whites. I mean, if I push this up a little bit, well, actually I'm not clipping anywhere, but if I go this high with the white set, my white point, right?
+
+I've completely lost the feel of the image. It's even worse now than it was before, because really I have to address the sky with a local adjustment. So the whites and blacks are something that I do. A little bit later, depending on the image. I was gonna get down to those. And also you'll notice that Adobe doesn't put them right at the top.
+
+Right? They're below these adjustments and they, they're, they're, they do that for a reason. So that's the, the real reason is that [00:36:00] in a sense that that is something that gets, gets me closer to what I want, but it's something that I'm always revisiting as I continue to make local adjustments to the image.
+
+Now, here are my blacks. I'm gonna push the blacks down around here. And that's where something is clipping. But again, I am not confident that that's the correct black point yet because I know that I have to make a lot of local adjustments. It's richer now, but the sky's still not there. So I use the whites and the blacks.
+
+Of course I use them. I think they're critically important to get right. But I use them on an image like this where I have a lot of. Work to do to get the image looking better. I leave those a little bit later so that I can really use them to finesse where I want the what, what I want the image to look like.
+
+And honestly, Jeff, it also is a case by case basis. Everything I just said is applies to this image. [00:37:00] Sometimes in other images, I can use the whites and blacks right away or a little bit more, um, a little sooner in the developed process. Okay, so there's a before and there's, or after not a whole lot done yet.
+
+I'm gonna add some. Well, I've adjusted the highlights, shadows, whites, and blacks. Now the secondary tonal adjustments here called presence also adjust tones, but they do it in a local way. So clarity, uh, adds contrast to the mid tones. And you can see that if I zoom in here, we're gaining. Contrast, but only in the midst, not in the absolute or not absolute, but not in the brightest brights or in the darkest darks.
+
+You have to be careful with clarity because clarity can also make your image look a little grungy or kind of add an HDR look to it. And [00:38:00] you notice that when I push this all the way up, it does lose a little bit of its softness or a little bit of its sort of nuance, and I'm not particularly happy with that.
+
+I don't need to bring out this part here through midtone contrast. I want to bring it out through broader, deeper shadows and brighter brights. And so I'm going to leave this clarity just as a kind of a little, a little accent, if you will, to some of the midtones texture just adds texture. So that's really not a tonal adjustment.
+
+But I'll add some here just for now, because I do have these trees in the foreground that I want to kind of maintain their sharpness. And then here's where we get to one of the big bigger tunnel adjustments, which is D Haze, but push this D Haze up. You can see that really starts to do a lot of work to tones.
+
+It is essentially what D Haze does, is that it pulls down on the mids and highlights. [00:39:00] So D Haze is kind of like a stronger version of the highlight slider. It affects this range here and that's really where your fog is, or your haze, that's what they call it, D Haze. So it kind of pulls this apart. It's a little broader or a little, uh, affects more tones than highlights, but it also tends to darken your image a little bit as well.
+
+So I'm gonna stop there with that for now.
+
+Okay.
+
+I think the next thing I wanna do now is I want to adjust to Sky by itself. And to do that, I need to use a local adjustment. So I'm gonna go up here, click local adjustments, and then I'm not going to do a sky mask. I just don't even want to bother with a sky mask. Why? Because I don't want a mass that selects around here.
+
+In fact, let's just try it. Let's see what happens.[00:40:00] 
+
+That's exactly what I don't want because it's selected the sky. But of course I want to darken the atmosphere in the image and the atmosphere extends beyond the sky. This kind of adjustment is going to look very artificial. You can see. So I'm gonna undo that and what I want is a linear gradient and I'm gonna click and drag down run like this, and that gives me a nice soft transition.
+
+To this linear gradient. So whatever effect I apply to the sky now will have a nice soft transition down to the ground. And of course I can adjust this and move this around. And so here now I will, we have now access to our adjustments for our local adjustments. And there almost identical, as I mentioned before, to what we have in the basic panel.
+
+So I'm gonna pull down on highlights, something like that. Uh, and then I'm gonna go down again to d [00:41:00] Haes. Actually I add a little clarity and some d haes.
+
+And you can see the difference that that has now in this part of the image. So there's our before or our original, and there's after. Now you have to be careful with D Haze because as I said, it does tend to darken the image down. So one of the things that I like to do with D Haze is if I use, let's use a little bit more of it, something like that.
+
+12 or 11, doesn't matter. I'm just using my eyes. I'm gonna come back up to the exposure adjustment and push the exposure up a little bit. And that's on this linear ra uh, grad, uh, linear gradient. So [00:42:00] the D haze took away a little bit of that haziness. It gave us some more contrast and definition in the sky, but it also kind of darkened it down.
+
+And so I just pushed this up a little bit like that. Again, just to get a sense of what's happening overall. I may decide later that I want to bring it back where it was and leave the sky a little darker, but just letting you know that's what that does. Now, one very important thing, I want to, uh, uh, an important point I want to make here.
+
+You might be thinking to yourself, well, if you want to lighten the sky, if you want to make it a little brighter, or if I'm saying that the D haze made the sky a little darker and it's the shadows in the clouds that are really creating that darkness, why just not use the shadow slider to push up the shadows?
+
+And that's a. If you're asking that [00:43:00] question, that's a great question. Hopefully you, you're thinking something along those lines, or maybe you've wondered that in the past. But there's a huge difference between brightening an area using exposure and using shadows. Huge difference. And that difference comes back to what I showed you about how the adjustments affect the tonal scale.
+
+So if I come back here again, if I use the exposure slider to brighten something, it is pushing up everything here. And generally speaking, it's maintaining the dynamic range or the difference between the darks and the brighter areas. So when I use exposure, remember exposure, adjust this part of the image and it pushes it this way or that way, but the.
+
+The difference between an area here and an area here remains the same, which means that I'm not affecting the contrast of [00:44:00] that area. If I use shadows to make an area feel or look less dark, yes, I do, uh, uh, eliminate some of the darkness, but I'm also diminishing the contrast because this pushes those darks that way.
+
+But it doesn't change anything here. And remember that contrast is when we push in that direction. Contrast is when we increase the difference between lights and darks. And less contrast is when we decrease the difference between light and darks. So lemme come back to the image again.
+
+If I use exposure, notice how our clouds still have a a sense of definition. Because not only is the dark area getting brighter, but the brighter areas also getting brighter. However, if I use the shadows, okay, notice how our sky now [00:45:00] doesn't have the same definition because it's pushing up the darker areas, but it's not really affecting the brights.
+
+So again, that's the shadow slider. Here's the exposure slider. So the exposure slider maintains the contrast. The shadow slider doesn't. That's not to say that you shouldn't use the shadow slider. Just be aware of when you use a shadow slider, you are removing some of the contrast, if that's exactly, if that's what you want to do.
+
+And in my case, I don't want to do that. I just want to make the sky a little bit brighter. For now.
+
+Here is, here's the, in fact, I can use the shadow slider to come down the other way. So I'm actually pulling down some of the shadows in the sky. While making the sky brighter overall, and that, again, increases a little bit of contrast. I could also use the blacks for that. So for example, instead of the shadow slider, I could pull that on the blacks.
+
+But the blacks is gonna have a bigger [00:46:00] difference. It's gonna have a, a bigger difference in how black or how dark the clouds get versus shadow. And that's again, because they affect different parts of the tonal range. Shadows is here. Blacks is the absolute black. So if you look at the sky, I'm gonna pull down on the shadows
+
+and then I'm gonna pull down on the blacks. And you can see that the blacks really makes it much more dramatic, particularly in this area here. It makes it a lot darker. I am not looking for this kind of darkness and this kind of, um, uh, mood. For the image. I want something a little bit more subtle. So maybe something like that.
+
+Because I am going to, this is another very important point you may be thinking, but, but wow. Um, the sky looked so good when you darkened down those blacks. Sure it did, but that's because we're [00:47:00] not yet, or I haven't yet addressed the foreground and this is where I want the majority or the center of attention to be where the sort of this rainstorm is clearing out.
+
+And we get this beautiful light permeating in here. We haven't done anything with color yet. Okay.
+
+Okay. So we've got our exposure set. There's, before there and after. What I'm gonna do now is I'm going to add in some vibrance because this would be a normal part of the image. So something like that. I'm actually adding quite a bit of vibrance here and. Human little saturation as well. Something like that.
+
+Now I want to add some definition, some uh, energy to the foreground. So I'm going to create another [00:48:00] linear gradient, and this time it's gonna be reverse. I'm going to push it up like this. Now, why do I love linear gradients? Because they have this beautiful transition. I can brush this in as well, of course I could have used the brush, but the linear gradient, uh, is quick and easy.
+
+And of course, we can always modify the linear gradient with a brush. If we wanted to. We want to adjust the transition here. And for here, I'm going to
+
+probably, um, just add some clarity.
+
+And maybe add some, a little bit of warmth that's color. I understand. I can't help it. I'm still looking at the whole image. And I'm gonna push this up a little bit and then, uh, add a little [00:49:00] bit of contrast here,
+
+and also open up the shadows. Notice that when I adjust the shadows here, I'm adjusting the shadows just in the foreground or in the land because this linear gradient is only affecting the land. So adjusting the shadows here doesn't affect my sky. And while it is true that I said that when you use the shadows, you are losing contrast.
+
+But that's fine for now because I'm already thinking. That I'm going to finish the image. When I, when we finish the image, I'm going to use the overall black slider to add the depth in the foreground. And that's because this, here, I want this part of the image to be the darkest part of the image. And because I want this to be the darkest part of the image and this to be the lightest part of the image, I'm going to use [00:50:00] the black and white slider in the basic panel here to get my final adjustment.
+
+And that's why I didn't do it, uh, at the beginning, like Jeffrey asked.
+
+Now, one more thing I'm going to do to I think add more, uh, to add more presence to the images. Now I'm going to use the basic tone curve. And why am I going to the tone curve now? Because now I feel like I have a good balance between the whole image. I feel like everything in the image now is working together.
+
+The sky's in the right place, the ground is in the right place. I feel like the tones are much more unified. It's much more coherent versus what I had at the beginning. And, and the tone curve allows me to adjust different parts of the image in a way that is, um, uh, that is, uh, again, that's gonna gimme that final look that I'm looking [00:51:00] for.
+
+Now Helen is asking, I have, I have heard in the past that it's best to avoid using the contrast slider. What are the advantages, advantage of the slider? Well, if, if Helen means the contrast slider here, um, I will never say, I would never say that it's best to avoid using anything. It's you use the tool that is best for the job.
+
+I could use the contrast slider here to gimme more contrast. That's kind of the effect that I'm looking for. However, I use the contrast slider when I just want to add some basic contrast to an image because all you have is a slider, and so in some cases or in some situations, it's great. You just add some contrast, then you're done.
+
+Right? It's a simple slider that increases contrast, increases or decreases contrast. But notice that you have no control over where the contrast is going, and you don't have control over how much contrast is going to the highlights of the shadows. It's just expanding them equally. In other words. [00:52:00] When you add contrast, it pushes this up and it pushes this down in equal amounts.
+
+You can't say don't touch the highlights, but give me more shadows. You cannot do that with the contrast slider, but you can do that with the tone curve because I don't want to make this cloud much brighter for now. And so the way I control that is by putting a point here. Click a point, and this is my kind of my highlight area, midtones and shadows.
+
+So I'm gonna put a point here, point there, and a point there. If I push this up, that's my highlights and that's decreasing the highlights. But notice when I pull this down, not much is going on down here. And the reason is because I've put a point for the darker areas and it doesn't allow this point to move, and therefore I don't darken or brighten the darker tones in the image.
+
+So these points represent. [00:53:00] The tonal scale that's in the image. This is my shadows, which is kind of this area down here. These are the mids, which is kind of in here, and these are the highlights. So I'm gonna push these back, push this back where it was, and then I can bring this down and notice what it's doing to my foreground.
+
+It's giving me a lot more depth down here and giving me more contrast, but it's not really changing the brightest brights up here. So you see I'm able to add contrast, but in a much more controlled way. It just depends on the image and the situation that you're in. If you want to have more control, then you can use the tone curve.
+
+If you just want some basic contrast, use the other one. There's no, uh, avoid or anything like that. It just depends on what you're trying to do. And my darkest darks here, let's say I wanted to lift these a tiny bit. I can always put a point down here and push this up a little bit. [00:54:00] And you see as I move this point up and down, look at this darkest area here and you see how I'm having a, an adjustment to that.
+
+Okay? So something like that. And Im gonna hide the tone curve now and bring it back. So that's overall contrast, but just in a more controlled way. And now that's our before and now that's our after. And then last thing I would do here is of course, you guys probably know already I'm going to create a brush.
+
+Dodging and burning is exactly that. It is tonal adjustments, lightning and darkening areas. And so, uh, perhaps I will dodge a few areas here. [00:55:00] There's some little subtle highlights down here that I want to adjust or I want to open up again, that word open up means I want to add a little bit of light, maybe a little bit in here, maybe a little bit in here.
+
+Uh, and I think, I think that's pretty much it for now,
+
+and that's what that mask looks like. So just adding a little bit of light in those areas. Uh, maybe a little bit here as well, right there. Now that becomes my center of interest, or at least the eye is gonna go here. That's where the light is hitting the land. That's the thing that I saw when I was standing in this spot and I saw the light come through the clouds and just light up this beautiful valley.
+
+Now this might be a little bit too strong, so I'm gonna hold down the, uh, actually I'm just gonna command Z or control Z to undo. I'm gonna lower my flow [00:56:00] to, uh, 50%, meaning the flow of the brush. I'm gonna lower it so that I'm not applying this brush as much, and then I'll apply a little bit there like that.
+
+I'm gonna press K again. That's the shortcut for creating a brush, and this one is going to be darkening. And I'm gonna pull my exposure down to about minus 35. I'm gonna press zero on my keyboard to bring the flow back up to a hundred percent so that I'm applying this at a hundred percent now. And now I can go in.
+
+And this is really, is the sort of the icing. This is where I'm going to add accents because where, wherever I apply this brush, it's going to create more contrast because it's darkening. And you have to always be careful and sensitive to where you add contrast to make sure that you're not disrupting the flow that you want the viewer to take to your image.
+
+And so, too often I see, oh yes, let's, um, let's just make these clouds really [00:57:00] nice and beautiful. That's too dark. But let me lower the flow down. Um, oops. Don't know what happened there. Let me try this again.
+
+Lower the flow to, there we go. Okay. And get my exposure back.
+
+Make these clouds really dark, but already that adjustment that I just added is too strong for my taste because when I step back or when I look away and look back at the image, this part of the image now looks quite, um, well, it has a lot of visual weight. It's pulling my eye away from here. I want these clouds to just feel kind of unified.
+
+So I'm gonna undo that. And if I want to balance out what's over here, if I want the clouds to have a little more presence, well [00:58:00] I won't add to what's dark already. I'll just maybe darken some other areas so I can add a little bit over here. And I should be in exposure minus sturdy again. Okay.
+
+Maybe something like that.
+
+Maybe and flow is very low because if you use a higher flow with the sky, it just looks too obvious. Maybe in here I added some there, but I'm adding a little bit more. And then here is a very key area. Remember that I lightened these areas here, so I'm going to go in between and just kind of darken where the light isn't
+
+something like that. Um, I think I might have added some here. No, that's fine. And then just a few little more accents here just to really emphasize [00:59:00] the light. So darkened this area right there, and maybe this area here.
+
+Something like that.
+
+And that's my, uh, dodging mask.
+
+So without the masks and with the masks, now that includes the sky mask. So actually, I'm sorry, let me show you the, uh, without the dodging mask. That would be better. That's without it. And that's with it actually. I'm sorry. That's burning. And then dodging is this one here. That's why you should name your masks.
+
+All right. But that's the dodging making [01:00:00] the, uh, light and the sort of the fog and the rain brighter. And this one is the darkening. Darkening or burning. And now I will go in, finally to my basic panel and do a final adjustment on the blacks
+
+and a little bit brighter on the whites.
+
+And I think I'm gonna stop there. I don't want to take the whites to absolute whites because I really don't want this to be absolute white. I want it to have, uh, a little bit of nuance, so I don't want it to be so bright and maybe a little adjustment on the shadows as well overall. And I think that we are done.
+
+So I, that's the before and the after. And you see here how I didn't do really do much with color except for adding [01:01:00] vibrance and saturation. And of course. I have a profile selected that I like. So profile is just, you know, definitely has an impact on color, but it is really the tonal adjustments that I made to the image that really make the image, um, uh, work.
+
+One more thing I will show you this is also related to tone, is if I come down to the color mixer and let's say I want to get a little more separation from the clouds in the sky, I could come over to the mixer and again have, uh, using luminosity luminance, that's brightness or darkness. I can adjust the brightness or darkness of the blue channel, and that makes the sky a little bit brighter or darker back here.
+
+Of course it affects all blues. So notice that if I [01:02:00] pull this down like that, not only is it affecting the blues over here, but also the blues over here as well. So at the moment, we don't have this luminosity channel in the local adjustments. We could use something like point color, but it's not quite the same.
+
+But even if I pull this down a little bit like that, that gives me a little bit more separation between the sky and the clouds. And I think that works. So that's without it, and that's with it. Very subtle, but everything adds up.
+
+All right. And so that's, um, final adjustment there. I was hoping to get through another image or two, but um, as usual, I got carried away with the explanations. But hopefully that, um. Hopefully that gave you a sense of the tonal adjustments [01:03:00] in Lightroom and what the tools do and how they work. Perhaps in the, I'll do another one where before we get to color, I'll go over a little more of the tonal adjustments, but I think the thing I want to stress most to you is that it's not the tools that do the work.
+
+The tools aid us. They are essentially that a tool, but the tool doesn't do the work. It's having a sense of what you want your image to say, a sense of the feel and the mood that you want to have in your image that really is controlled by tonal value and. Having a sense of composition of visual design, right?
+
+What you want the composition to look like, because then that will, in a way, give you a path or a plan for editing your image. One thing that I haven't really talked about too much, because I think for lots of, uh, people that could feel a little overwhelming, but when I edit an image, [01:04:00] when I start to edit an image, I, I start to develop or try to develop a plan in my head of what I want to do.
+
+If you don't have a plan or you feel like you're just kind of guessing, that's fine. That's part of this path of learning. But what I can tell you is that if you, you can imagine that if you start to have a plan or you have a plan in your head of how you want to work with an image, because that plan is based on what you're trying to achieve with the image, what you want the image to say, the story that you want to tell.
+
+It makes the editing much more intuitive. And then the tools that that I showed you become much more, uh, much more of an aid. They actually become a joy to use because you're using them in a way that has given you the results, um, that you want.
+
+Um, Jean Marie says, I actually liked the original originally, but loved the after. Well, yeah, thanks. I [01:05:00] mean, the, the, the original is, uh, is pretty washed out and it doesn't have the same drama, uh, that you know, that I want in the image. And of course, last, you know, I'll end with this. Everything is about interpretation.
+
+Uh, everything is about the story you want to tell. I'm, I think that I'm trying to. Share with you that it's not about what, how I think you should develop your images. It's about trying to give you the tools and the skills and the mindset to be able to develop your images so that you tell your story.
+
+And hopefully I can help you along the way, but it's always about the story you want to tell. And therefore, each of us has a right, I would say, a responsibility to tell the story with our images and not be influenced by, you know, the tools or software manufac, uh, marketing or anything like that. All right, guys.
+
+Well, thanks very much. Uh, there are no more questions. Um, [01:06:00] and, uh, sure if you would like me to talk more about this. Um, again, I wanted to work on a few more images, but we're outta time. Um, I mean, I could stay here all night, but, um, my daughter have a, my 11-year-old daughter has other plans for me. But if you would like me to talk more about this, more about tone, then please let me know.
+
+Um, you know, you can, uh, leave it in the comments for the video or send me an email or whatever. Just reach out to me and I'll be happy to talk more about this. The academy is here for you. It's here to help you with what you need, uh, in terms of, uh, growth as a photographer. And, uh, so finally, I just wanna say have a great holiday.
+
+Uh, if you're in North America, enjoy your Thanksgiving, and I am extremely grateful to have you as a member of the academy. So thanks very much and, uh, thanks for watching. See you next time. [01:07:00] [01:08:00] Take.
+

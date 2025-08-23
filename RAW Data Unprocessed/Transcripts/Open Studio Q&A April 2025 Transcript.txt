@@ -1,0 +1,980 @@
+WEBVTT
+
+00:00:47.000 --> 00:00:48.000
+Mildred Salas Yip: Hello, Robert!
+
+00:00:48.000 --> 00:00:53.000
+Robert Rodriguez Jr: Welcome. Everyone. Hello! Mildred, how are you?
+
+00:00:53.000 --> 00:00:54.000
+Mildred Salas Yip: Good, good.
+
+00:00:56.000 --> 00:00:57.000
+Robert Rodriguez Jr: Hey, Jerry, how are you?
+
+00:00:57.000 --> 00:00:59.000
+Jerry Stachowski: Pretty good. How about you?
+
+00:00:58.000 --> 00:01:07.000
+Robert Rodriguez Jr: Awesome. I'm doing great. Thank you. It was a nice, sunny 57 degree day today, so I was pretty happy.
+
+00:01:07.000 --> 00:01:13.000
+Jerry Stachowski: Yeah, well, it was a nice 72 degree day, and tomorrow we're gonna get snow. So.
+
+00:01:13.000 --> 00:01:14.000
+Robert Rodriguez Jr: Oh!
+
+00:01:13.000 --> 00:01:14.000
+Jerry Stachowski: We'll find out.
+
+00:01:14.000 --> 00:01:20.000
+Robert Rodriguez Jr: Wow! All right. Well, it's that time of year. We had some snow over the weekend, and then today was like beautiful. So.
+
+00:01:22.000 --> 00:01:24.000
+Karen Kerwick: Pretty warm in California.
+
+00:01:24.000 --> 00:01:25.000
+Robert Rodriguez Jr: Is it.
+
+00:01:25.000 --> 00:01:29.000
+Karen Kerwick: Yeah. Except we have a windy day today. So.
+
+00:01:29.000 --> 00:01:32.000
+Robert Rodriguez Jr: What's what's warm? What's your temperature?
+
+00:01:31.000 --> 00:01:34.000
+Karen Kerwick: Uh, it's been in the seventies to eighties.
+
+00:01:34.000 --> 00:01:35.000
+Robert Rodriguez Jr: Okay.
+
+00:01:35.000 --> 00:01:38.000
+Karen Kerwick: In the valley. I'm up in the mountains so. It's cooler up here.
+
+00:01:38.000 --> 00:01:44.000
+Robert Rodriguez Jr: Okay. I like seventies and eighties.
+
+00:01:44.000 --> 00:02:00.000
+Karen Kerwick: I have a question, but I didn't get it submitted yet. Um, you know, when you're using like the brush. And then you you um do a function, and then you decide to go and and change the values of it. Does that affect what you've already done, or just what new stuff you're doing.
+
+00:02:00.000 --> 00:02:21.000
+Robert Rodriguez Jr: Correct. Yeah, correct. That's a great question. In fact, I can. I can show that. But yeah, it the the values of the brush. Think of it like. You know, like an actual brush. Right? So you change the values it only affects what you then apply with the brush. What you've put down already? Has the. Valleys, from before.
+
+00:02:21.000 --> 00:02:22.000
+Karen Kerwick: Oh, okay.
+
+00:02:22.000 --> 00:02:43.000
+Robert Rodriguez Jr: Yeah. Yeah, you can imagine if. If it did change what you put down, then it would be kind of chaotic, you know, like. You would be changing things that you wouldn't want. So yeah, it's it's. You can apply the brush, and then you can change some values and then apply apply it again, and then you can change some more and apply it again, so you can keep changing it as you, as you develop your image.
+
+00:02:43.000 --> 00:02:51.000
+Karen Kerwick: Yeah. Well, I've been making a new brush every time, because I would. Doesn't sure how it worked, really. So I polka dotted all over the place.
+
+00:02:48.000 --> 00:03:13.000
+Robert Rodriguez Jr: Yeah. Yeah, yeah, yeah, there are actually 2. There are actually 2 brushes, an A and a B brush. So you can actually. Depending, depending on what you're doing, you can actually. Set them each with different. Settings or different yeah, different settings. And then you can switch between the 2, which makes it a lot easier. I'll show you very quickly in lightroom once once everybody.
+
+00:03:11.000 --> 00:03:17.000
+Karen Kerwick: Yeah. I don't. I don't think my version of lightroom has. I have a really old one.
+
+00:03:16.000 --> 00:03:19.000
+Robert Rodriguez Jr: Okay, what? Uh?
+
+00:03:18.000 --> 00:03:23.000
+Karen Kerwick: It's 5.7 point something, because that's runs on windows 7. So.
+
+00:03:23.000 --> 00:03:24.000
+Robert Rodriguez Jr: Yeah, I don't.
+
+00:03:24.000 --> 00:03:25.000
+Karen Comstock: Cool.
+
+00:03:24.000 --> 00:03:33.000
+Robert Rodriguez Jr: I honestly don't know. If you don't, I mean if you don't see a and brushed, then you don't have it. I don't remember when they added that, or what have you? Yeah.
+
+00:03:31.000 --> 00:03:38.000
+Karen Kerwick: I don't think so. Thank you. Now, I won't have to have so many polka dots.
+
+00:03:37.000 --> 00:04:06.000
+Robert Rodriguez Jr: Yeah. All right, waiting for a few more folks to join Welcome. Karen Comstock. And of course Karen already spoke. Carl. Helen! Hello, Howard! Steve. And also you don't the the. The request for questions in the email was, that's just if you're not going to attend or you're not sure if you're going to make it. But.
+
+00:04:04.000 --> 00:04:05.000
+Karen Kerwick: Oh!
+
+00:04:06.000 --> 00:04:10.000
+Robert Rodriguez Jr: You're more than welcome to just show up and ask whatever question you like, so you don't have to submit ahead of time.
+
+00:04:10.000 --> 00:04:11.000
+Karen Kerwick: Okay.
+
+00:04:18.000 --> 00:04:45.000
+Robert Rodriguez Jr: At least at least for now. If we get to the point where there are just too many questions, then, you know, then then we'll we'll. We'll deal with that, I guess, when that when that time comes. Yeah. So I will. Um. I'll jump into lightroom real quick, and just show you that. Very quickly, in case you want to take a look at that.
+
+00:04:45.000 --> 00:04:45.000
+Karen Kerwick: Okay.
+
+00:04:45.000 --> 00:05:04.000
+Robert Rodriguez Jr: Um. But uh. If I just go into a. A brush. Here. So. I'm going to press K. And K. Is the shortcut to create a brush in lightroom. And so you see here in the brush panel, right? We have A and B.
+
+00:05:02.000 --> 00:05:04.000
+Karen Kerwick: Yeah. Oh!
+
+00:05:04.000 --> 00:05:10.000
+Robert Rodriguez Jr: So a is one brush. So look how big my brush is. Right, that's a and let's make it a little bit smaller.
+
+00:05:08.000 --> 00:05:09.000
+Karen Kerwick: Yeah.
+
+00:05:11.000 --> 00:05:28.000
+Robert Rodriguez Jr: And. You know it could be. This size and. It's got a large feather, and then if I switch over to B. This brush can be small, and it can have maybe a really small. I'm sorry, a really small feather. So that would be that brush, and you can just switch between the 2 like that.
+
+00:05:26.000 --> 00:05:29.000
+Karen Kerwick: Yeah. Oh!
+
+00:05:28.000 --> 00:05:45.000
+Robert Rodriguez Jr: And use that. To brush in, but. If I switch to B. And. I add an effect. So. I'm just going to add anything here. If I'm darkening this area here like that. And then I go and change the brush size. See? That has no effect on what I added.
+
+00:05:45.000 --> 00:05:46.000
+Karen Kerwick: Right.
+
+00:05:46.000 --> 00:05:54.000
+Robert Rodriguez Jr: So this is just to. Now create a larger brush right? And then I can make a smaller one and do something on a smaller scale. So yeah. Okay.
+
+00:05:54.000 --> 00:06:08.000
+Karen Kerwick: What I'm in mind. If you go down to the next panel on your right underneath the brush there, it says, you know. Uh, you wanna exposure contrast. That's. That's what I think.
+
+00:06:07.000 --> 00:06:29.000
+Robert Rodriguez Jr: Yeah, so. Yeah, that. So. The. This brush panel up here is. As I said, for. The brush that you're about to apply. Once you apply the brush. Once you create a mask, that's what we're doing. Once we create a mask. Then. The effect that this mask.
+
+00:06:29.000 --> 00:06:47.000
+Robert Rodriguez Jr: Has, or the effect that you apply to the image where this mask is. Is controlled by everything down here, and so. This is always going to. You know, if I apply it here, let's say I apply it there and then I change the brush. To a different size, and I apply it to the sky like that.
+
+00:06:47.000 --> 00:06:48.000
+Karen Kerwick: Huh!
+
+00:06:48.000 --> 00:06:52.000
+Robert Rodriguez Jr: When I change the exposure, it's going to change both places.
+
+00:06:51.000 --> 00:06:54.000
+Karen Kerwick: Oh, okay, so that's what I meant. Yeah.
+
+00:06:52.000 --> 00:07:23.000
+Robert Rodriguez Jr: Okay. Yeah, so. Um. If you want to have independent control over different areas, and you want to create different masks, so each mask can be, each mask can be independent, and you can have whatever settings you want. So in this case, for example, what I just did here. If I want something for the foreground, and then I want something for the sky. I would just create another mask for the sky, and then. Now I can. Adjust the sky independently, and I can have another mask for the foreground, or wherever else you want.
+
+00:07:23.000 --> 00:07:26.000
+Karen Kerwick: Okay, I have to keep my polka dots. Then.
+
+00:07:26.000 --> 00:08:05.000
+Robert Rodriguez Jr: Yeah, I mean. When you see me editing images. That's 1 of the reasons why. I guess it's a. It's a best practice to create masks for whatever different areas of the image one you want to adjust. I tend to. Um use. A mask in as many places as I can. If if I want the same effect, I don't know that that's. The best thing to do, or at least the best thing to show you, because I tend and I'm using flow and things like that. But really, if you're learning and you're getting started, or you want to have a little more sense of what's going on, I would just create a different.
+
+00:08:05.000 --> 00:08:12.000
+Robert Rodriguez Jr: Mask. There's no cost, you know. In other words, it's not going to hurt your performance, and it's not going to slow down lightroom.
+
+00:08:09.000 --> 00:08:10.000
+Karen Kerwick: Like.
+
+00:08:12.000 --> 00:08:31.000
+Robert Rodriguez Jr: Create a different mask for. Each. I would say, each part of the image that you want to adjust. So don't you know? Don't create a mask for this area here and this area here. But if you want to do something to the water, create a mask for that, you want to do something for the sky, create a mask for that. You want to do something for maybe this rock over here and a few other rocks create a mask for that.
+
+00:08:31.000 --> 00:08:32.000
+Karen Kerwick: Okay.
+
+00:08:31.000 --> 00:09:08.000
+Robert Rodriguez Jr: And this way you can. You can name your masks. So, for example, this mask here. It's in the sky and in the foreground. But let's. Erase what's in the sky and. I'm just going to call up an erase brush. You can also press option. And then I'm going to erase what I did in the sky. And now this mask is in the foreground. I'm going to double. Click the mask. One name right here, and I can just name this, you know. Water all right, and then if I press K. And now I have another brush, and I'm using this for the sky. Like that, and maybe I'm making some other effect here. Then.
+
+00:09:08.000 --> 00:09:29.000
+Robert Rodriguez Jr: Here's the other mass that I just created the new one double click. And I'll call this sky. And you can just keep naming your masks and. I think that's a very good thing that I am even trying to remind myself to do, because. When you come back to an image over a period of time, maybe a few weeks later. What have you? It's very easy to forget what the masks are. I find myself.
+
+00:09:28.000 --> 00:09:33.000
+Karen Kerwick: Yeah. Yeah, me, too.
+
+00:09:29.000 --> 00:09:55.000
+Robert Rodriguez Jr: Hovering over them to see what they are. Um. Yeah. So naming them, you know, it's a little bit of more work up front, but it will definitely um. Help you later on in the future, to identify where the masks are, particularly if you start adding things to the mask. For example, if you start. Adding or subtracting from them, or. Where the masks get more complex in terms of additions or subtractions or intersections. Even so.
+
+00:09:57.000 --> 00:10:04.000
+steve guercia: Rob does the amount Slider. Affect areas you've already brushed.
+
+00:10:03.000 --> 00:10:30.000
+Robert Rodriguez Jr: Yeah, yeah, that's. The the amount Slider affects. Wherever that mask is. So the way to think about it is that. Each mask here. Okay, I'm going to pull this panel out. So if you click on this tab at the top, you can pull this mask panel out. And. You can see the masks on their own. So let's open this up here. Um. Think that's about as big as I can make it. Okay.
+
+00:10:31.000 --> 00:11:05.000
+Robert Rodriguez Jr: So here's our mask panel. Every every mask has its. Adjustments here, but the adjustments apply to the mask. So. If on this sky mask. Wherever I apply the wherever I create a mask. In this sky mass, it's going to be affected by the controls. So that's why I said, break out your mask into different areas, because. If I darken the exposure on this mask, it's just going to darken it on the sky. But if I use that same mask. And the water is going to darken that as well. Is, that.
+
+00:11:05.000 --> 00:11:11.000
+steve guercia: Yeah. But but my, my question is on the amount. Slider. So like. If you have your water mask.
+
+00:11:10.000 --> 00:11:12.000
+Robert Rodriguez Jr: Oh, you mean the amount, Slider! Here.
+
+00:11:12.000 --> 00:11:13.000
+steve guercia: Yeah.
+
+00:11:13.000 --> 00:11:48.000
+Robert Rodriguez Jr: Yeah. Well, that's per mask again. That's per mask. So here's the sky mask. And I'll pull this way down on the sky. And let's say I decide. The purpose of the amount. Slider here is that if you just used exposure. On your mask. Then you can just pull down or pull up the exposure. But let's say you had a combination of things like you pull down. Let me do something a little more realistic because this isn't too realistic. So let me delete this mask. Um. I'm going to press um. Actually, let's just create a sky mask. So.
+
+00:11:52.000 --> 00:12:28.000
+Robert Rodriguez Jr: All right. So there's a mask for the sky. And let's say, with this image, I was going to pull that highlights a little bit. And let's say I was going to warm it up a little bit. To get more of that glow in the back. Let's say I'm going to come down to. D Hayes. And. Um. Let's do a little more so. A little more exposure, a little more pulling down in the highlights. A little more cooling, all right. So I've got various controls now on that sky mask. And the purpose of the amount is, if you just want to back off on everything at once, so I can take this amount and just.
+
+00:12:28.000 --> 00:12:46.000
+Robert Rodriguez Jr: Pull it back. Or push it forward. That's easier than. Adjusting each of the individual controls and trying to do it in a way where you keep the kind of the balance of all 3. So you know. That's what it's for. Now, if you, if you only want to do exposure and leave the others the way they are, then you can do that. So.
+
+00:12:46.000 --> 00:13:02.000
+steve guercia: So. So my question is. A lot of times when you're dodging and burning, say in the foreground to create depth. You'll frequently have a brush that is, at a 3, rd roughly, overexposure or underexposure.
+
+00:13:02.000 --> 00:13:02.000
+Robert Rodriguez Jr: Mhm.
+
+00:13:03.000 --> 00:13:23.000
+steve guercia: If you get to an area. Where, for that particular spot. You want more than a 3.rd You want a half a stop. Can you use. The amount Slider. To increase it. Just for that additional area. Or do you have to create a whole new brush.
+
+00:13:23.000 --> 00:13:48.000
+Robert Rodriguez Jr: Uh. Number 2. You know. So the way I think of it is um. The way. The way I think of it is when I create a dodging brush or a burning brush. Um. I will set an exposure amount that I think will. On average, give me the most amount of exposure that I want. Anywhere, with that brush.
+
+00:13:48.000 --> 00:14:20.000
+Robert Rodriguez Jr: If I need to back it off, then I use the flow. But if I feel like I need more than that. Number one. I typically won't know that until I actually applied. And I say, you know what I did, the dodging or the burning. And actually, I need a little more in this area. I'm not really sure about that before I start. So I kind of set. That's why I set like a 3rd of a stop or. You know, point 3 5, or whatever it is. Typically that gets me through 80% of. Situations, and then. When there's a situation where I need more. Then I'll just create another.
+
+00:14:20.000 --> 00:15:06.000
+Robert Rodriguez Jr: Brush and use that as an accent for one area that I need to either darken or lighten. So here, let's let's try that. Here. So I'm going to press K. And let's say I want to darken a few spots right. I want to do some dodging here, so I'm not sure whether I'm going to need a 3rd or. Whatever it is. So I'm going to start with. Minus 0 point 3 5, and that is not arbitrary. You'll see that at minus 3, 5, with a flow of a hundred. It's noticeable, right? So that's a noticeable change. That's actually too strong. So it depends on the image. Already. I know that I'm probably never going to want it. That dark, almost never. So I have 2 options here.
+
+00:15:06.000 --> 00:15:29.000
+Robert Rodriguez Jr: I can lower my flow now and apply it all. With a reduced flow, and then increase it if I need it to be darker. Or. I can. Reduce the exposure right now. Or I should say. Reduce the amount that I'm darkening. So I'm going to raise the exposure up to minus. Point 1 5. So that's the most amount of darkening that I want.
+
+00:15:29.000 --> 00:16:10.000
+Robert Rodriguez Jr: In general, and right now I can darken some of these spots here. All right, something like that. And this is not a good example. Water is a very tricky thing, because reflections change. As we move up into the image, so down here it works. But as I move up. It's going to be way too strong. But I'm happy with that. And let's say that that right here. I say, you know what I still think. It's too strong everywhere. Again I could pull the amount down. I will probably be more likely to just. Adjust my exposure again. Okay. And now I can turn that off. And that's on.
+
+00:16:10.000 --> 00:16:37.000
+Robert Rodriguez Jr: And that's back on again. All right. I'm happy with that. Now, if there's 1 spot that I say, I want this spot to be just a lot darker. Then I'll just press K. Again. Pretty fast to do that, pull down the exposure. A certain amount. And just. Add that one accent there, to make that darker. I find. Thinking, in the. Broadest terms. Easier than having brushes where you're.
+
+00:16:38.000 --> 00:17:06.000
+Robert Rodriguez Jr: Doing a lot of. Uh. Individual adjustments between the feathering and the flow, because it makes your mask. More variable, and I like. I shouldn't say like I think it's a bit easier when your masks are more. Consistent. Because. Then I can have several masks here, and I can just easily say, you know, that one area that I added here. Where I darkened it because it's a separate mask. I can say. I wonder what it would look like without that, and I just turn that mask off.
+
+00:17:06.000 --> 00:18:03.000
+Robert Rodriguez Jr: Okay, whereas if you've got it all in one mask, you have to go in now and do an erase or do an adjustment. So. The more masks you have in general, the more easier it is to make further adjustments in the future and kind of. And I love this eyeball thing because it instantly shows you. Well, what does it look like with it without it? What about the sky? Well, the sky is on its own mask, and I can just turn that on, or turn that off. And if I feel that that mask in the sky is a little too strong overall, then I can just go in and pull back on the amount. Okay. All right. Um. So I did get a question from Jerry, and I'm glad you're here, Jerry. So Jerry asked about the differences between. The or the. I should say your question specifically was contrast. The use of.
+
+00:18:03.000 --> 00:18:35.000
+Robert Rodriguez Jr: Hands on rag. Photographique. With cants on arch 88, or versus cants on arch 88. So that's a great question. In a. Recent. Webinar for Canson that I did. I really talked about, and I. When we talk about papers again in the print lab in the Academy, I'm going to talk about this as well, but. I talked about um. 2, specific. Ways of manufacturing paper.
+
+00:18:35.000 --> 00:19:20.000
+Robert Rodriguez Jr: One is, and it's based on the type of machine used to make papers. There's a modern machine, a more modern machine. It's still, it's still been around for about, you know, 75 years or so. But it's a more modern machine called the Ford Rinier Machine, where. The fibers of the paper. So when paper is made it's made as a pulp. With cotton and water, and a bunch of chemicals. And then the fibers are put together in a certain way. The way that the fibers are combined determines not so much the quality in terms of how good it is, but. The actual physical appearance of the. Texture, and the paper itself. One machine. A more modern machine is called the Ford Ringier machine, and it has a very. Consistent and structured.
+
+00:19:20.000 --> 00:19:54.000
+Robert Rodriguez Jr: Way of putting the fibers together. Another kind of machine is called a cylinder mold machine. This is a more traditional way of making paper. It's a cylinder that rotates, and the. The thing to know is that the fibers are always put together in a random fashion. They're never structured the way they are in a Ford vernier machine. Okay. So what does that? What does that have to do with this? Well. Some of Canson's papers are made on a Ford linear machine, and some are made on a mold machine. Rag Photographique is made on the more modern machine. Arch 88 is made on the mold machine.
+
+00:19:54.000 --> 00:20:24.000
+Robert Rodriguez Jr: And the difference is that the if you look at the surface very carefully of rag Photographique versus arch 88. Rag photographic is going to be very smooth and very. Ah, predictable. You know it's barely no texture at all, and. If you had texture it would be very. Ordered or very patterned. Whereas on a mold machine. And that's where papers like Archie 88 are made, or Bfk. Reeves. The texture is a little more random, and that.
+
+00:20:24.000 --> 00:20:51.000
+Robert Rodriguez Jr: Just imbues the paper with more of a fine art kind of feel. Has more of a traditional look and feel to it. So that's 1 difference between the 2 is that arch 88. Definitely, has a slight. Uh. Very slight. Texture to it versus rag Photographique. Although. You know. Non-photographers won't notice that, because you'll be looking at it on the wall. It's only when we're like staring at it very closely.
+
+00:20:51.000 --> 00:21:24.000
+Robert Rodriguez Jr: The other difference between the 2 papers which you can see on the. On the Canson site, and this is something you can look at for other papers as well. So here we're looking at Arch 88, and. The other difference is that. Arch, 88. Has a whiteness of 95.8 5, so Cie whiteness is a measure of the brightness of the paper. It's 95.8 5. Relatively speaking, that's brighter than. Rag, Photographique.
+
+00:21:24.000 --> 00:21:45.000
+Robert Rodriguez Jr: Right for graphique. In the 300 weight. Go up to tech specs here. CIA whiteness. In, the. 3 10. Gram is 89. So that means that you're going to get a little bit more white out of the arch, which translates into a little bit more of a perceived contrast. Perceived contrast. This is a little bit wider.
+
+00:21:43.000 --> 00:21:44.000
+Jerry Stachowski: Okay.
+
+00:21:45.000 --> 00:22:11.000
+Robert Rodriguez Jr: So. That's basically the difference. I will tell you, although don't tell Canson. I told you this, but. For me. I don't really see. Outside of one. Well. Outside of one specific case. I don't use rag photographiq. I use R. Shady 8. Because I just think that it does. What rag Photographique does. It just does it better.
+
+00:22:12.000 --> 00:22:49.000
+Robert Rodriguez Jr: The 2 cases where I have to use rag is number one. If I want a 210 weight, because the Archa 88 doesn't come in 210. So if you want a lighter weight paper, I don't really use lighter weight paper. So that's not a problem for me. But the other thing about rag, which is rag photography, which is kind of cool, is that it actually comes in a dual side. It's 1 of the few papers that has comes in a duo, so you can print on both sides. If that's not something you need, then that's fine, it is useful. If you're making, let's say some kind of a book where you're binding it, and you want to be able to have. Prints on both sides. But outside of those 2 areas, I think Arch does everything Rag does. And I just think it looks and feels a little bit nicer.
+
+00:22:50.000 --> 00:22:59.000
+Helen Marriott: Could I? Could I ask a follow-up question, please, about comparing the papers? How would you compare Canson's edition etching.
+
+00:22:50.000 --> 00:22:51.000
+Jerry Stachowski: Thank you.
+
+00:22:53.000 --> 00:22:54.000
+Robert Rodriguez Jr: Sure.
+
+00:22:59.000 --> 00:23:02.000
+Helen Marriott: To red photographic.
+
+00:23:04.000 --> 00:23:26.000
+Robert Rodriguez Jr: And I should have shared my screen. So. Here is the. Rag, Photographique. And you can see here, and I will answer your question. Helen. Here's the Cie whiteness. You have to come to tech specs here, Cie whiteness. You can see it's 89, and if we come over to. Arch, 88. Tech specs. Here. You can see.
+
+00:23:27.000 --> 00:23:35.000
+Robert Rodriguez Jr: 95 Rcd. 8. So it's a little bit brighter. Now your question was addition etching. And.
+
+00:23:34.000 --> 00:23:35.000
+Helen Marriott: Yes.
+
+00:23:35.000 --> 00:23:50.000
+Robert Rodriguez Jr: Canton just released an addition. The addition, etching. Rag. 2. And the only difference usually is going to be. Um. So here's the whiteness on addition. Etching is 89.
+
+00:23:51.000 --> 00:23:51.000
+Helen Marriott: Hmm.
+
+00:23:51.000 --> 00:24:20.000
+Robert Rodriguez Jr: And if we come to addition etching the 1st one. And the tech specs here are. 89. So they're pretty much. The same. Usually when they release a new paper is just because. They've just. You know. Maybe the texture is refined. A tiny bit. But the difference between addition, etching and rag Photographique is what you asked.
+
+00:24:21.000 --> 00:24:22.000
+Helen Marriott: Yes.
+
+00:24:22.000 --> 00:24:31.000
+Robert Rodriguez Jr: Yeah, the big difference there is that. For all intensive purposes Rag Photographique has no texture. Whereas addition etching definitely has a texture.
+
+00:24:31.000 --> 00:24:33.000
+Helen Marriott: Yes. Yeah.
+
+00:24:32.000 --> 00:24:57.000
+Robert Rodriguez Jr: So that's the that's the main difference. Again. If you like, addition, etching. And you like a type of paper that has a very. Slight texture to it. What I would like to call. Surface dimension, or it adds. A little bit of dimensionality to your print, which I love, and it's always a beautiful thing. I would definitely recommend you. Look at Bfk. Reeves, so.
+
+00:24:57.000 --> 00:25:32.000
+Robert Rodriguez Jr: Bfk, Reeves. Is to addition etching what arch 88 is to rag Photographique. So addition, etching is a non-mold made. Paper is made in the Ford Rainier machine. The Bfk. Reeves is made. On a mold made machine, and so the. That the texture pattern. Is much less a pattern. It's more random, it's more non-uniform. And I think that just lends gives it a very. Um. Artistic look and feel to it. So check out bfk, Reeves.
+
+00:25:32.000 --> 00:25:53.000
+Robert Rodriguez Jr: Now you might ask. Um. Why? Ah! You know, if if bfk and Arsh are potentially. Nicer papers. Why do they have the other ones. Well, the reason is because, as I mentioned before, the papers are made on different at different mills. And Canson has. A mill with a Ford rainier machine.
+
+00:25:53.000 --> 00:26:14.000
+Robert Rodriguez Jr: And. They need a different mill to make the mold made papers. So it's a question of manufacturing and so forth. And it's very, very, very expensive to have a cylinder. Uh mill. And so most people, most companies, or most paper manufacturers, go for the Ford, render machine, which is a little. But. Less expensive.
+
+00:26:15.000 --> 00:26:16.000
+Helen Marriott: Thank you.
+
+00:26:16.000 --> 00:26:50.000
+Robert Rodriguez Jr: I also think that the Ford render machine is more versatile, so you can make many different kinds of papers on it. So Canson is making papers on their mill that. Are that become edition etching and rag, Photographique, and so forth. But. Remember, those are papers that get coded for us as photographers. The papers that don't get coded. Those become art papers that you can find in Michael's. Um. So they have many, many different. Purposes. The papers that come off the mill, and any mill that have to be sent to a further to another processing plant, where they add.
+
+00:26:50.000 --> 00:27:23.000
+Robert Rodriguez Jr: This, micro. Porous coating on it. This inkjet coating that is proprietary. And that's what really gives a paper its color gamut. How many colors it can reproduce. It also gives the paper its ability to hold. Detail. Which is a critical thing, and that's what separates different papers apart, I think, because. Even on a paper like Bfk or addition etching. Where you've got some texture, you can print something that has a very, very fine tech has a lot of detail in it. Sand, grasses.
+
+00:27:23.000 --> 00:27:29.000
+Robert Rodriguez Jr: You know um. Buildings whatever, and it still maintains the texture really, really well.
+
+00:27:31.000 --> 00:27:32.000
+Helen Marriott: Thank you.
+
+00:27:32.000 --> 00:27:35.000
+Robert Rodriguez Jr: Like I don't. I never really worry about.
+
+00:27:34.000 --> 00:27:35.000
+Karen Comstock: Oh!
+
+00:27:35.000 --> 00:28:26.000
+Robert Rodriguez Jr: And back to paper. Um. Generally speaking, when I'm thinking about using a textured paper, I never really worry about the texture. Affecting the detailed parts of the image. What I'm thinking about is, are there any smooth areas in the image. That I want to prevent from having any texture, because if you add texture to a smooth area, well, guess what. It's not going to be that smooth anymore. So if you've got glass. In your image. Let's say big areas of glass, and you add, and you use a textured paper you're going to actually. Give the impression that the glass has some texture to it, a very smooth paper, or even something even smoother, like a gloss paper brighter. It maintains that super smooth, flat feel and finish to the, to the image, so to the print. Did that get to your question, Jerry?
+
+00:28:26.000 --> 00:28:28.000
+Helen Marriott: Yes, yes, thank you.
+
+00:28:27.000 --> 00:28:29.000
+Robert Rodriguez Jr: All right, Helen. Yeah. And Jerry.
+
+00:28:29.000 --> 00:28:31.000
+Jerry Stachowski: Yes, it did. Thank you.
+
+00:28:30.000 --> 00:28:35.000
+Robert Rodriguez Jr: Okay. Great do you have? Do you use? Are you using both? Are you trying, arch now, or.
+
+00:28:36.000 --> 00:28:53.000
+Jerry Stachowski: Um. Yeah, I've got the arch, and I've been watching your printmaker class. And you're referring to the rag photographic. And I'm going like, Hmm. Is it worth considering? And it sounds like, unless I have a special purpose. I should just stay with the arch.
+
+00:28:53.000 --> 00:29:32.000
+Robert Rodriguez Jr: Yeah, yeah, yeah. Yeah. Also, when I made that um. The arch. 88 has only been around for 2 years or so. So when I made that video, the arch wasn't available at the time. And I am going to. I have planned in. At the beginning of May to. Not redo, but to add a few more videos to the course. Specifically talking about these new papers that arch papers that Canson has. Also the Somerset papers that they recently released. So the Somerset velvet. And Somerset enhance, which are also cylinder-made papers made at a different mill in England, so.
+
+00:29:35.000 --> 00:29:38.000
+Jerry Stachowski: They just sent me a sample pack of the Somerset, so.
+
+00:29:38.000 --> 00:29:44.000
+Robert Rodriguez Jr: Awesome. Oh, great. Yeah. Yeah. Awesome. All right. Any. Ah, any other questions, anyone.
+
+00:29:44.000 --> 00:29:45.000
+Mildred Salas Yip: Yes.
+
+00:29:45.000 --> 00:29:46.000
+Karen Comstock: Yes.
+
+00:29:46.000 --> 00:29:47.000
+Mildred Salas Yip: I have a question.
+
+00:29:47.000 --> 00:29:48.000
+Robert Rodriguez Jr: Sure.
+
+00:29:48.000 --> 00:30:12.000
+Mildred Salas Yip: Um. I'm I'm a little confused, and so I lost all my profiles on my laptop. All my paper, profiles. Unfortunately, the printer that I have. Um. I think it's been discontinued. That should not. Prevent me from downloading. Profile papers.
+
+00:30:14.000 --> 00:30:15.000
+Mildred Salas Yip: Will that.
+
+00:30:16.000 --> 00:30:28.000
+Robert Rodriguez Jr: Um. Well, the printer that you have connected to your laptop has nothing to do with profiles, right? Or what profiles you have installed. You're you're on a Mac on your laptop.
+
+00:30:28.000 --> 00:30:35.000
+Mildred Salas Yip: Yes, I have no profiles down. When I went in I went to print something. Um, because I had to reinstall.
+
+00:30:28.000 --> 00:30:29.000
+Robert Rodriguez Jr: Okay.
+
+00:30:35.000 --> 00:30:37.000
+Mildred Salas Yip: The operating system.
+
+00:30:37.000 --> 00:30:38.000
+Robert Rodriguez Jr: Okay.
+
+00:30:38.000 --> 00:30:42.000
+Mildred Salas Yip: Realized. I lost all my presets. I lost everything in my group.
+
+00:30:41.000 --> 00:30:47.000
+Robert Rodriguez Jr: Yeah, okay. So that makes. I was just wondering, how did you lose your property? Yes, if you reinstall Mac OS.
+
+00:30:47.000 --> 00:30:48.000
+Mildred Salas Yip: Yes.
+
+00:30:48.000 --> 00:31:13.000
+Robert Rodriguez Jr: Yeah. Then you have to go. Um. To the you know, if it's Canson, or whatever paper you're using. You have to download the profiles from. Their site up here. Profiles. You pick your printer. Let's just go with any printer now doesn't really matter. Um. Well, it does matter, because. These are in.
+
+00:31:12.000 --> 00:31:21.000
+Mildred Salas Yip: Yes. Well, that's the problem I'm having, because I have an Epson and art. What is it? An Epson stylus photo? 3,000.
+
+00:31:16.000 --> 00:31:22.000
+Robert Rodriguez Jr: Yep. Okay.
+
+00:31:21.000 --> 00:31:23.000
+Mildred Salas Yip: R. 3,000.
+
+00:31:22.000 --> 00:31:23.000
+Robert Rodriguez Jr: Well, let's try that.
+
+00:31:23.000 --> 00:31:28.000
+Mildred Salas Yip: And that one's been discontinued, I says, oh, no! How am I going to get all my profiles back.
+
+00:31:29.000 --> 00:31:31.000
+Robert Rodriguez Jr: Well, it's here right.
+
+00:31:31.000 --> 00:31:32.000
+Mildred Salas Yip: Oh, okay.
+
+00:31:32.000 --> 00:31:35.000
+Robert Rodriguez Jr: So this stylus, R. 3,000.
+
+00:31:36.000 --> 00:31:37.000
+Mildred Salas Yip: Yes.
+
+00:31:36.000 --> 00:31:50.000
+Robert Rodriguez Jr: And. All the profiles are here, as I I mean, as far as I can tell, they're all here. So maybe I mean, it's possible that if when you say discontinued you, maybe you mean that Epson discontinued the printer.
+
+00:31:50.000 --> 00:31:52.000
+Mildred Salas Yip: Correct. Yes.
+
+00:31:51.000 --> 00:32:18.000
+Robert Rodriguez Jr: Okay, yeah. But Canson is, Canson is going to keep supporting printers that are discontinued because a lot of people like yourself, they have them. So yeah. Um. Again. If you're using cants on paper, I would imagine that the other. Major paper manufacturers like Hanamula or Red River, still have our 3,000. Profiles. Anyway, you download them from here. And then on your Mac. Um. So on the Mac.
+
+00:32:19.000 --> 00:32:38.000
+Robert Rodriguez Jr: I actually, I'll show you what I've done here. On my desktop. You see, right here I have a folder called. Oops! What happened here? You guys can still see my. Yes. Okay. You can still see my desktop right.
+
+00:32:40.000 --> 00:32:40.000
+Mildred Salas Yip: No.
+
+00:32:41.000 --> 00:32:42.000
+Robert Rodriguez Jr: You can, or you can't.
+
+00:32:42.000 --> 00:32:44.000
+Jerry Stachowski: It's just gray.
+
+00:32:44.000 --> 00:32:48.000
+Robert Rodriguez Jr: Oh, it's just gray. Okay. Um. I wonder if um.
+
+00:32:44.000 --> 00:32:45.000
+Mildred Salas Yip: Right.
+
+00:32:50.000 --> 00:33:02.000
+Robert Rodriguez Jr: I think I have a setting where it doesn't show. Give me one second here, see if I can find that. Screen, sharing. Okay. Now you see, my icons correct.
+
+00:33:04.000 --> 00:33:05.000
+Mildred Salas Yip: Yeah.
+
+00:33:04.000 --> 00:33:05.000
+Jerry Stachowski: Yes, sir.
+
+00:33:05.000 --> 00:33:06.000
+Robert Rodriguez Jr: Okay. Great.
+
+00:33:05.000 --> 00:33:05.000
+Karen Comstock: Yeah.
+
+00:33:06.000 --> 00:33:37.000
+Robert Rodriguez Jr: So, anyway, I have a folder here called Profiles, alias so an alias in Mac OS is like a shortcut, and the reason why I have. This here is because it's very easy to install profiles this way. I don't have to be digging through my. Ah! Operating system. But when you download the profiles you want to open up your hard drive. And. You want to make sure you go to your. You know, to the root of your hard drive. And then. You should typically see these folders, applications, library system and users. You want to go into library.
+
+00:33:39.000 --> 00:34:12.000
+Robert Rodriguez Jr: I go to icons here. And inside library you're going to see a folder called Color Sync. And inside color sync. You're going to see a profile called a folder called profiles. All right, and this is. The shortcut that I created. That's right here. But inside profiles is where you need to put your. Paper, profiles. And the cool thing is that you can actually, you can. Like. If you've got more than one printer, if you do, you can actually create a folder in here and call it Epson, and call it canon, so you can keep your profiles separate.
+
+00:34:12.000 --> 00:34:33.000
+Robert Rodriguez Jr: I don't have that. But you can see here if I go to a list view. Here are my. Cans, on profiles. Now what I did was. I, instead of having to do this every time I want to install a profile, I just right click on this profiles folder, and I. Did um. Make, alias. That's a shortcut on windows. And then.
+
+00:34:33.000 --> 00:35:05.000
+Robert Rodriguez Jr: I copied that to my desktop. So now all I got to do on my desktop is. Open that up to see my profiles. But even easier is if I come back to the. Kenton website. So if I. Let's say I grab any profile here. This parada. And I click on download. Okay. So it just downloaded the profile. I'll go into my profiles, folder my downloads, folder. Here is the. Profile here. Actually, it's inside this folder. Icc. This is just a Pdf that.
+
+00:35:05.000 --> 00:35:31.000
+Robert Rodriguez Jr: Tells you how to install it, and so forth. But inside here is my, that's the actual profile. So what I'm going to do here is let me close my browser. All I do is I take this, and I drag it right on top of this folder. Because this folder goes into my. Uh. Profiles where it needs to be. Usually you have to type in your password. Because it's part of a system, part of the system.
+
+00:35:31.000 --> 00:36:15.000
+Robert Rodriguez Jr: Right, and it's installed. So I just installed the. R. 3,000 profile for prestige. 340. Now that's step number one, step number 2 is. I don't know if Lightroom has updated this. But let's find out. Usually for me. You have to quit lightroom and open it again. So, but let's see. But without quitting it. So if I go to the print module. And I want to use that profile. Then I'm going to come down here to color management profile. Click here and you have to do this, no matter what you have to click on other. Because this only shows you profiles that you have. That you have enabled inside of lightroom, even though they may be on your system, you have to enable them inside of lightroom. So I want to enable that new profile that we just downloaded. So I'm going to click on other and.
+
+00:36:15.000 --> 00:36:47.000
+Robert Rodriguez Jr: I want to see if it's going to be in this list. That's what I'm not sure about. And so. We're looking for. Yeah. So see, I don't see it here. And that's probably because lightroom only reads this folder when it launches. So as. As before. What you want to do is. If you have lightroom running, you want to quit lightroom or. Install the profile when lightroom isn't running. Then I'll open lightroom again.
+
+00:36:52.000 --> 00:37:11.000
+Robert Rodriguez Jr: Now we can come down to the profile section again. And click on other. And. Now we should see. The. Uh. Profile in here somewhere there. We are right there. So here's. Uh.
+
+00:37:11.000 --> 00:37:19.000
+Robert Rodriguez Jr: Cancel infinity. Fine art. For the Epson. 3,000. Click that! And now. Now it's available here.
+
+00:37:19.000 --> 00:37:20.000
+Mildred Salas Yip: Okay.
+
+00:37:19.000 --> 00:37:33.000
+Robert Rodriguez Jr: Okay. Also, just just in case. Just so, you know. You can actually install a profile in 2 different places. Of course it's. It's. I guess. More.
+
+00:37:33.000 --> 00:37:34.000
+Karen Comstock: Oops!
+
+00:37:34.000 --> 00:37:55.000
+Robert Rodriguez Jr: Straightforward to install it here. In, the. Print, module. But you can also install it in the develop module. When you go into solveproof. When you go into solve proof, you're also going to have that same. Window here to select the profile, and that's this is identical to the window in the print module, so you can also do it. Here you can see you can click on other. You can check it, and you can see that it's. But we've already installed it.
+
+00:37:55.000 --> 00:37:56.000
+Mildred Salas Yip: Okay.
+
+00:37:55.000 --> 00:38:17.000
+Robert Rodriguez Jr: But it's more straightforward in the print module, I suppose. It, you know. Um. So, yeah, that's how you would install the profile. So. Just download them all again, whatever ones you need, or in in on the on the Canson page, you can actually. Check them all and download them all. So you at least have them on your system, and you can install them when you need them.
+
+00:38:16.000 --> 00:38:19.000
+Mildred Salas Yip: Okay. Okay. Great. Thank you.
+
+00:38:19.000 --> 00:38:24.000
+Robert Rodriguez Jr: Yeah. Anyone else.
+
+00:38:24.000 --> 00:38:28.000
+steve guercia: Rob. I have a another and a long list of paper questions.
+
+00:38:24.000 --> 00:38:25.000
+Karen Comstock: Yeah.
+
+00:38:27.000 --> 00:38:29.000
+Robert Rodriguez Jr: Sure, absolutely.
+
+00:38:28.000 --> 00:38:55.000
+steve guercia: Um. I've just started to learn. How to print the last couple months. So one of the things that I've been doing. Is taking. Um, a photograph. And printing it on 2 or 3 different papers. To start, to learn. What to look for and identify which type of. Paper works best best, with which type of photo.
+
+00:38:55.000 --> 00:39:21.000
+steve guercia: So. If the picture's gonna look a little different. Printed on different papers. When we edit the picture. Should we be editing. With the paper we're considering in mind. In the print class that you did. You showed a flow process. Which had all the editing done before you picked the paper.
+
+00:39:21.000 --> 00:39:41.000
+steve guercia: And as I've done this um, so what I've been doing is. Printing the picture exactly the same way on different papers. But now I'm thinking. Well, if I know some papers have. Emphasize some things and de-emphasize some things. Should we edit with the paper in mind.
+
+00:39:43.000 --> 00:39:44.000
+Helen Marriott: Interesting.
+
+00:39:44.000 --> 00:39:46.000
+Robert Rodriguez Jr: Well um.
+
+00:39:45.000 --> 00:39:45.000
+Karen Comstock: Oh!
+
+00:39:49.000 --> 00:40:07.000
+Robert Rodriguez Jr: So that's a good question. And. My answer is that. Um. My approach, I should say, is. Uh. Well, no, so that's my, that's my straightforward answer. The reason for that is a couple of reasons. Now.
+
+00:39:59.000 --> 00:39:59.000
+Karen Comstock: Oh!
+
+00:40:07.000 --> 00:40:38.000
+Robert Rodriguez Jr: I will admit. That I haven't used. Every single paper out there, so I can't tell you that I've used every paper from every manufacturer. That is to say. In a sense that I am. Um. I don't want to use the word biased, but I'm a bit. Isolated in terms of what the papers that I am using. I was going to say the word spoiled, but I don't want to. Imply that Canson is the very, very best, but I am a bit spoiled because.
+
+00:40:38.000 --> 00:41:02.000
+Robert Rodriguez Jr: One of the things that I love about cants on papers. From my experience in what you just said. Is, that. When I. Edit an image for the way I want it to look on screen. Based on what I'm trying to. You know, convey in the image. I love the fact that the paper. And again, I'm specifically talking about cants on paper here.
+
+00:41:02.000 --> 00:41:07.000
+Robert Rodriguez Jr: The paper will. Give me back what I have on screen.
+
+00:41:06.000 --> 00:41:06.000
+Karen Comstock: Okay.
+
+00:41:07.000 --> 00:41:18.000
+Robert Rodriguez Jr: Plus. Add. The paper's personality, and that's what I want. I want the paper's personality. If I compensate for the paper's personality, then I'm basically.
+
+00:41:19.000 --> 00:41:20.000
+Karen Comstock: Uh.
+
+00:41:19.000 --> 00:41:42.000
+Robert Rodriguez Jr: You know, I'm basically, in a sense, negating what the paper is going to do. If I. Print on a paper that. I know is going to give me softer blacks and softer highlights. Well. Um. That's what I want. Right? That's what I want from the paper. I'm not. Even.
+
+00:41:42.000 --> 00:41:51.000
+Robert Rodriguez Jr: Uh. I'm not even assuming that when I look at the print that I should have a duplicate of what I see on my monitor.
+
+00:41:51.000 --> 00:41:51.000
+Karen Comstock: One sec.
+
+00:41:51.000 --> 00:42:22.000
+Robert Rodriguez Jr: Right. And this is something that I'm actually writing an article on this right now, this idea that. Um. A lot of photographers feel. I'm not suggesting. This is you. Or anyone here. But I have heard this sentiment or this idea, that when you look at the print. If it doesn't reflect what you have on your screen. Then, you know, then something is amiss, or something is missing, or something is not quite right, and I don't actually see how that could ever be possible. Because. 2 completely different mediums.
+
+00:42:22.000 --> 00:42:50.000
+Robert Rodriguez Jr: And if I've got a good paper. That actually adds something to the image. Well, then, I want to see what it adds. I want to actually incorporate that into. The finished piece. So. Um. Keeping my image. Consistent or standardized, if you will, for lack of a better word, or keeping my image. True to what I want on screen. Then allows me to explore.
+
+00:42:50.000 --> 00:43:04.000
+Robert Rodriguez Jr: What the papers add to the image, and if one paper. I feel doesn't really give me the darks that I want or gives me. The. It doesn't give me the richness of the color that I want. Perhaps. Then I switched to a different paper. Now.
+
+00:43:04.000 --> 00:43:04.000
+Karen Comstock: Come on!
+
+00:43:04.000 --> 00:43:21.000
+Robert Rodriguez Jr: What I just said. There. Actually wouldn't really happen in my experience. What I just said was that if a paper doesn't give me the riches and colors that I want. That's 1 of the things that I'm spoiled about is that. I don't lack for richness of colors with any of Canson's papers. It has to do with the. Amount of.
+
+00:43:21.000 --> 00:43:22.000
+Karen Comstock: Awesome.
+
+00:43:22.000 --> 00:43:50.000
+Robert Rodriguez Jr: Um. The quality of the statement, and that has to do with whether it's. High contrast or low contrast, whether it is. More aggressive or less aggressive, whether it gives a feel of a photographic, very literal interpretation of the image. Or whether it gives a very. Um suggestive. Artistic. Quiet. More nuanced look to the image.
+
+00:43:50.000 --> 00:44:25.000
+Robert Rodriguez Jr: And. That's what the paper's doing. I can't do that on screen. I can't do that with the with the Monitor. That's done by the paper, simply because it's. It's a physical thing that is not. You can't really. Emulate with what you see on screen. So that's I mean, that's what I would. That's what I would suggest. Now, the reason why I suggested, or with the caveat being that you have to be using a really good paper or a range of papers is because I can imagine. With perhaps other papers that aren't as good quality, where you would have a.
+
+00:44:22.000 --> 00:44:22.000
+Karen Comstock: Mhm.
+
+00:44:25.000 --> 00:44:44.000
+Robert Rodriguez Jr: Bigger difference in color or. Things, and you would feel like, well. This is the paper that I have, and I know that it's weak in this area. So I have to. Make up for that with my editing. Um. But then you run into the problem of. Multiple. Files for different purposes, etcetera. So.
+
+00:44:45.000 --> 00:44:51.000
+Robert Rodriguez Jr: Is, that. Close to what you're. What you're thinking.
+
+00:44:50.000 --> 00:45:14.000
+steve guercia: Yeah, yeah, that that's essentially what I wanted to get up. A feel for, because, like I say, I've been. Editing, a photo. And then, without making any changes in it, printing it on 2 or 3 different. Papers. To then look at them and see which one I feel. This represents what I saw.
+
+00:45:14.000 --> 00:45:15.000
+Robert Rodriguez Jr: Yeah.
+
+00:45:14.000 --> 00:45:19.000
+steve guercia: And that's when that thought occurred to me is to, am I doing this right?
+
+00:45:19.000 --> 00:45:21.000
+Robert Rodriguez Jr: Yeah, no, you're absolutely doing it right? Because.
+
+00:45:19.000 --> 00:45:21.000
+steve guercia: Sounds like. That's what I should be doing.
+
+00:45:21.000 --> 00:45:45.000
+Robert Rodriguez Jr: You're absolutely doing it right, because the way you're doing it means that you are relying on the the full effect. The full. Addition of the paper to the image. To um. To guide your judgment. And so now you really get a sense of what the paper is doing. You're you're. Your you know your um. Controlling for every other variable except for the paper. And that's where you really get to see what a paper can do.
+
+00:45:41.000 --> 00:45:42.000
+Karen Comstock: Cool.
+
+00:45:45.000 --> 00:46:18.000
+Robert Rodriguez Jr: I'm suggesting that if you do this enough and you do this across manufacturers you will see drastic differences, same image exactly the way you like it on screen, and yet different papers and different paper manufacturers. We'll give you. Slightly different results. Um, sometimes not so slight. And so. And and you know, this is one of those things where it's, of course, easier to, you know, to see in person. But when I used to do my printing workshop here. Where I had students come into the studio, I would. Have. Um Prince. The same image.
+
+00:46:19.000 --> 00:46:43.000
+Robert Rodriguez Jr: With the same, you know no adjustment in the editing, but I would print it onto Epson. Ah! Ultra premium matte. I'd print it onto, you know, some other manufacturer that was sort of on the low end, and then I'd print it onto some better papers, and I would line them all up. And people could instantly tell which paper was better. Because the image. Seem to just be. That the print.
+
+00:46:43.000 --> 00:46:43.000
+Karen Comstock: It's.
+
+00:46:43.000 --> 00:47:30.000
+Robert Rodriguez Jr: The printed image. Just seem to. Be much richer in every. In every area. Whether it was the darks, the lights, the texture, the detail. The color, the separation, the gradation, everything. Yeah. The only thing that I would. The only thing that I've mentioned, and I think I talked about this in the print lab recently was that I will sometimes add a little bit of extra clarity. For images that I'm printing onto a matte paper, and I think we discussed that. But that's just a little extra clarity is really not changing. Anything drastic in the image is just to get a little more bite out of a matte paper that apparently it's going to not have the same bite that a gloss paper does, because.
+
+00:47:30.000 --> 00:47:48.000
+Robert Rodriguez Jr: The surfaces. Is uneven, right? So the clarity just gives you a little more. And again we're talking about 8. Ticks in the clarity. So if it's 15, I bring it up to 23, or 24, it's a very, very subtle thing. It could be. Placebo, but there it is.
+
+00:47:51.000 --> 00:47:52.000
+Karen Comstock: I have a question.
+
+00:47:52.000 --> 00:47:53.000
+Robert Rodriguez Jr: Sure.
+
+00:47:53.000 --> 00:48:16.000
+Karen Comstock: Um. I have. I'm gonna be in Arizona. In a week or so, and. I'm going to spend a day at the Grand Canyon. And. I have this question down here in Maryland, too, because. The Great Falls. You have to photograph. From an overlook. So if I'm photographing from an overlook.
+
+00:48:17.000 --> 00:48:37.000
+Karen Comstock: To something like the Grand Cannon. Or the Great Falls in Virginia. Is there. I've sometimes. Get confused as to. The focusing to make my focus because it's. So expansive. You know, aware, to focus. And that you can't.
+
+00:48:37.000 --> 00:48:43.000
+Karen Comstock: It's hard to do the hyperfocal. I think. So. Do you have any suggestions.
+
+00:48:44.000 --> 00:48:46.000
+Robert Rodriguez Jr: Sure um.
+
+00:48:44.000 --> 00:48:46.000
+Karen Comstock: Or just the way here.
+
+00:48:46.000 --> 00:48:52.000
+Robert Rodriguez Jr: Yeah, I mean, anything like that where you're photographing something. At a great distance.
+
+00:48:52.000 --> 00:48:53.000
+Karen Comstock: Yeah.
+
+00:48:52.000 --> 00:49:28.000
+Robert Rodriguez Jr: Whether it's waterfalls or Grand Canyon particularly. Then. I, you know, and if it has some depth to it, in other words, there are things that are different distances away from you. Then I just rely on. You know the basic, a 3rd of the way in. As a as a general guide, and that seems to work pretty well. So you know, if you're. If you're if you're looking at a scene, if you've got a scene framed for the Grand Canyon, and you've got. The majority of the stuff in the picture is really far away. And then there's some things that are a little bit closer. You know. Again. It's hard to. Show you without seeing a specific example, but.
+
+00:49:29.000 --> 00:49:31.000
+Karen Comstock: Go to weigh in. Okay?
+
+00:49:30.000 --> 00:49:52.000
+Robert Rodriguez Jr: Yeah. A 3rd of the way in use a. You know, if you're if you're in a relatively wide angle lens, that's the other factor to think about is what focal length you're at. But if you're. You know anything up to 35 mm a 3rd of the way in at F. 11. You should be perfectly fine. It's only when you start to. Use longer and longer focal lengths. Um.
+
+00:49:52.000 --> 00:49:53.000
+Mildred Salas Yip: Heck!
+
+00:49:52.000 --> 00:50:19.000
+Robert Rodriguez Jr: 7,100 150 mm. Where, then, you have to be a little more careful with focal, with, you know, with your depth of field. You can still focus a 3rd of the way in, but I would make your aperture smaller. Remember that hyperfocal distance as a general. As a general rule. Is. Really only applicable when you have things that are very close to your lens. That's when you want to use hyperfocal distance. So.
+
+00:50:16.000 --> 00:50:17.000
+Karen Comstock: Excellent.
+
+00:50:19.000 --> 00:50:28.000
+Robert Rodriguez Jr: You know anything closer than. I don't know uh. 4 or 5 feet something like that. Once you start to get more than 4 or 5 feet away from your.
+
+00:50:25.000 --> 00:50:26.000
+Karen Comstock: It will.
+
+00:50:29.000 --> 00:50:33.000
+Robert Rodriguez Jr: Um 8 feet 10 feet 20, you know greater than that.
+
+00:50:32.000 --> 00:50:33.000
+Karen Comstock: 3rd way, in.
+
+00:50:33.000 --> 00:50:41.000
+Robert Rodriguez Jr: Then you can start to rely a little bit more on focusing a 3rd of the way in. But once you start getting close, then that's where hyperfocal distance becomes very useful.
+
+00:50:39.000 --> 00:50:40.000
+Karen Comstock: Okay.
+
+00:50:41.000 --> 00:50:47.000
+Robert Rodriguez Jr: So it sounds like in the situations you're talking about. Nothing is going to be, you know, 8 or 10 feet away from your lens.
+
+00:50:47.000 --> 00:50:48.000
+Karen Comstock: No.
+
+00:50:48.000 --> 00:51:18.000
+Robert Rodriguez Jr: Yeah, so go. If you're, you know. 2430, 35 mm, f. 11, and a 3rd of the way in and. Once you start to zoom in more, then slowly make your aperture a little bit smaller. And also, if if in doubt, right, if in doubt. Look at your. Usually, if I'm not sure of a situation. I'll take one picture. And then I'll preview it, and I'll zoom in like, you know. Make sure you know how to zoom in on your preview on your camera.
+
+00:51:18.000 --> 00:51:34.000
+Robert Rodriguez Jr: I zoom in to check. How sharp things are, and if they look good, then I just then I know that my settings are okay. If they, if I'm a little bit. Not sure. Then I'll maybe go a 3rd of a step smaller in my aperture. Okay.
+
+00:51:35.000 --> 00:51:36.000
+Karen Comstock: Okay.
+
+00:51:38.000 --> 00:51:41.000
+Hillel Brandes: Hey, Robert? Just a quick question.
+
+00:51:40.000 --> 00:51:41.000
+Robert Rodriguez Jr: Sure.
+
+00:51:42.000 --> 00:51:55.000
+Hillel Brandes: I haven't played with this yet, and so I just thought I'd ask you, in case you might. Know that, know that answer. So in the, you know, in the basic panel. You know the the exposure is controlling midtowns. Right.
+
+00:51:54.000 --> 00:51:57.000
+Robert Rodriguez Jr: Right. More, more or less. Yeah.
+
+00:51:56.000 --> 00:52:23.000
+Hillel Brandes: So what's up? Yeah, more or less. So what's the difference between that. And adjusting the luminance of the mid-tones in the color, grading. Panel. Color grading you have. You have highlights, midtones, and shadows. And then for any one of those you can adjust luminance. So for the mid-tones justing luminance. What's the difference between that and the exposure Slider in the basic panel. Again. I I haven't played with it yet to see. I just didn't know if you might.
+
+00:52:23.000 --> 00:52:30.000
+Robert Rodriguez Jr: Yeah, yeah, I would. I would. So I would guess that I mean a guess making an educated guess here.
+
+00:52:23.000 --> 00:52:25.000
+Hillel Brandes: Have done something similar.
+
+00:52:31.000 --> 00:52:59.000
+Robert Rodriguez Jr: But. Your question, halal is. For those who, not sure if here in the. Let's go to a different image that maybe has a better spread of like it. Tongs. Um. Let's go to something like this. This might be a little bit clearer. So I've got my exposure Slider here, and the exposure. It's more than just mid-tones. Okay. So you see that.
+
+00:52:59.000 --> 00:53:23.000
+Robert Rodriguez Jr: It's really the the. You know the a big section of. The mid-tones. Here. You can call them mid-tones, but it's. It's really like the broadest. Sense of midtones you could think of, I mean, that's why that's. That's also how we control exposure in your camera. And if you remember that if you set your exposure too high you can blow the highlights.
+
+00:53:23.000 --> 00:53:24.000
+Hillel Brandes: You're right.
+
+00:53:23.000 --> 00:53:34.000
+Robert Rodriguez Jr: So it kind of extends out to the edges, but when we get out to the edges, both in the shadows and the highlights. It is much reduced in its. Amplitude, if you will, in its ability, right.
+
+00:53:33.000 --> 00:53:35.000
+Hillel Brandes: A month. Right.
+
+00:53:34.000 --> 00:53:48.000
+Robert Rodriguez Jr: So you can see the exposure has a. And we'll try this. We'll we'll take a look. So I want I want to. I'm doing this myself. We'll see. As I adjust exposure, we are adjusting a big part of the image like you can see we get pretty bright here.
+
+00:53:45.000 --> 00:53:47.000
+Hillel Brandes: Right. Yeah.
+
+00:53:48.000 --> 00:54:13.000
+Robert Rodriguez Jr: And we get. Pretty. Dark. Here. Okay. Now you're talking about the color grading which is here. And in the color grading we not only have. The ability to introduce a tint. Into shadows, mid-tones, and highlights. But you also got this. Slider here that adjusts luminosity. So here's mid-tones. Okay. And I think you can already see.
+
+00:54:13.000 --> 00:54:17.000
+Robert Rodriguez Jr: That it's nowhere near as. Broad as the exposure Slider is.
+
+00:54:17.000 --> 00:54:18.000
+Hillel Brandes: Yeah.
+
+00:54:19.000 --> 00:54:27.000
+Robert Rodriguez Jr: All right. So this one is more refined. And the reason why I said Guess, but I had an educated guess is because there's 3 of them.
+
+00:54:25.000 --> 00:54:26.000
+Hillel Brandes: That's. Yeah, please.
+
+00:54:27.000 --> 00:54:33.000
+Robert Rodriguez Jr: And because there's 3 of them, I doubted that this mid this one, they're probably dividing it into 3 ranges.
+
+00:54:27.000 --> 00:54:33.000
+Hillel Brandes: Right. Mhm.
+
+00:54:33.000 --> 00:54:45.000
+Robert Rodriguez Jr: So this is mid-tones. You can see that it's. Much more refined, much more isolated to the mid-tones. And then we got the shadows. And then we got the highlights.
+
+00:54:45.000 --> 00:54:45.000
+Hillel Brandes: Yeah.
+
+00:54:45.000 --> 00:54:46.000
+Helen Marriott: Mm. Mm.
+
+00:54:48.000 --> 00:54:49.000
+Hillel Brandes: Yeah.
+
+00:54:49.000 --> 00:54:50.000
+Robert Rodriguez Jr: Okay.
+
+00:54:50.000 --> 00:54:50.000
+Hillel Brandes: Yeah.
+
+00:54:50.000 --> 00:55:15.000
+Robert Rodriguez Jr: Now. Again. I'm. Exploring with you guys as well. So let's let's do this together, because I've never done this before, at least not in practice, or even though I can sort of imagine it. Let's say. We use these. The shadow here. Okay. So if I pull the shadow down, notice what's happening to the image. We're getting a lot of darks here. And.
+
+00:55:15.000 --> 00:55:47.000
+Robert Rodriguez Jr: It kind of comes up to around this area here. But that's all you got. Okay. So in other words, if we want to make further refinements to the shadows. We can't. At least not with this adjustment. Now, if I come back to the basic panel. I can pull my blacks down. And that's doing the same thing as that shadow as the shadow luminosity Slider. Right. But we also have. The shadow slider that allows us to.
+
+00:55:47.000 --> 00:56:06.000
+Robert Rodriguez Jr: Make further refinements in that area. So. Notice. I pulled the blacks all the way down, but then I pushed the shadows all the way up. And that gives us more separation here than we had when I pulled the shadows down. Only in the. Color grading. Okay.
+
+00:56:07.000 --> 00:56:07.000
+Hillel Brandes: Yep.
+
+00:56:08.000 --> 00:56:15.000
+Robert Rodriguez Jr: And I assume that the same is. For the other side. So the other side we've got the. The whites.
+
+00:56:14.000 --> 00:56:15.000
+Hillel Brandes: Yeah. Sure.
+
+00:56:15.000 --> 00:56:37.000
+Robert Rodriguez Jr: But I can push the whites up and pull the highlights down. And. So we have more separation. There's a graphic that I've used before that. I think I it was in the. We did a an Academy session. Maybe a. Maybe a month and a half 2 months ago, where I talked about tonal adjustments in lightroom. I don't know if many of you remember that.
+
+00:56:35.000 --> 00:56:37.000
+Hillel Brandes: Yeah. Yes. Yep.
+
+00:56:37.000 --> 00:57:05.000
+Robert Rodriguez Jr: So there was a graphic in that that showed. The full. Gradation of tones from black to white, and I showed you. Where each of these adjustments what they control, and it was much more fine-tuned than you do in the. In, the. In the color, grading. The interesting thing about the color grading is that. This was only added to lightroom. Very recently. And this color, grading, panel.
+
+00:57:06.000 --> 00:57:33.000
+Robert Rodriguez Jr: Is. Very. Familiar to anyone that does video editing. So in video editing, this is a. These colour wheels are. How you add color adjustments to your video. And I found that. Interesting. That adobe added this to lightroom. Maybe they're borrowing the technology or the. Algorithm from premiere. That's their video editing software and using and adding it to lightroom.
+
+00:57:33.000 --> 00:58:07.000
+Robert Rodriguez Jr: Maybe they're trying to get folks to use lightroom more for video, because. You can import videos into it, although I've never. Done that. So I generally use this. Myself more for the color aspect, particularly because if you convert to black and white, you still have. Access to the colors. So now you can add. Toning to your image. But that's a good question. I had a question come in through email.
+
+00:58:07.000 --> 00:58:30.000
+Robert Rodriguez Jr: Um. And the question was. Well, this question. Is probably going to become a complete. Complete 1 h presentation. But the question is, how do you balance. How do you balance simplicity and complexity? When making an image. So. As I said, this will probably.
+
+00:58:30.000 --> 00:59:06.000
+Robert Rodriguez Jr: Um. Become, a complete. Live session, but. I can share at least a little bit of a. Preview to that. And. Because immediately, when I think of that question, a few things pop into my mind right away, which relate to our last session. So if I think about that quickly and again, I'd have to give this some more thought. I'm sure I'll come up with some other things as I think about it, and maybe do some research on it as well. But. If I think about myself when I'm out shooting, and when I'm thinking about simplifying an image. And this is something that I have to do.
+
+00:59:07.000 --> 00:59:43.000
+Robert Rodriguez Jr: Constantly. Have to do. Well, I don't have to do it, but it's something that I. That I focus on very. Systematically and very specifically right. I'm constantly thinking about how to make the image as simple as possible. Well, maybe that's 1 little clue right there. There was a time. In the past, I suppose, when that thought wasn't really in my mind all that much I would go out, and I wanted to make pictures, and I saw things that I was interested in, and I. I did all the things that I'm doing now. But the.
+
+00:59:43.000 --> 01:00:10.000
+Robert Rodriguez Jr: Hierarchy, of. Um. Of the most important things on my mind wasn't making it as simple as possible. It was perhaps. Getting the best exposure, or making it as interesting as possible, or capturing the best light. Any of those things. And. While those things are important. Somehow, over time. In my mind. It seems like this idea of simplifying the image has risen very, very high to the top.
+
+01:00:10.000 --> 01:00:47.000
+Robert Rodriguez Jr: And so that's probably what I think about most often is given what I'm seeing. Given. What's in the picture. Given that, I think there's a potential here. How can I. Capture, that. Idea that essence that I'm seeing as simply as possible that. Part of the question is always there, and it wasn't there before, and I think that. When I ask myself that question, then I say, Oh. Maybe you should get rid of this stuff on the outside. Maybe you should zoom in a little bit more. Maybe you can move forward. Maybe you can move your. You see, all of a sudden all these ideas about how to simplify the image start to bubble up, whereas before they didn't, because.
+
+01:00:47.000 --> 01:01:22.000
+Robert Rodriguez Jr: They just weren't on the top of my mind. So. That's 1 thing, and a lot of that has to do with, for example, using a narrower field of view. So zooming in more. Um. It's I will, I will share one thing, and that is that boy. I was like always in the 16 to 18 mm range when I was 1st doing landscapes, I mean I lived there. And now I have a hard time going below. 24. I really do. When I go below 24, I just feel like. Like. I'm just adding way more ingredients to the cake than it needs.
+
+01:01:22.000 --> 01:01:57.000
+Robert Rodriguez Jr: So it has to be. A particular reason why you need to go much wider. Typically. Maybe I want to get really close to something. And so I need that extra width. Or you know, it's or it's a simple image to begin with, and I don't mind getting more of that simplicity. But that's different from adding more ingredients. To, the. Cake, as it were. The other thing which relates to Wednesday is that I'm constantly looking for ways to create. Um. To create a motif and a motif is created using patterns.
+
+01:01:57.000 --> 01:02:38.000
+Robert Rodriguez Jr: So if I can repeat something in an image, even if it's not repeated in a way that looks. Systematic. But it's something that even this image here. Okay, here's a good example, right? Here's my motif. I'm looking for things that I can repeat. And by repeating them. That simplifies the image. Aside from taking all those things out. But the problem with taking all those things out is that now I have. Just plain water. Right. And so. I'm looking for things that I can repeat in a way where your eye doesn't need to explore, to say, Oh, that's a little bit different. Oh, that's something else. You can easily see here that this is all part of the same.
+
+01:02:38.000 --> 01:03:12.000
+Robert Rodriguez Jr: Thing. It's part of the. Part of the, you know. It's something that connects you don't have to think about. Well, wait a second. That's not a rock that's something else, and wait a second. This is not. You know that this is all part of the same area. You know. Here's another example of the same. Area, right? The same scene. But again. Trying to. Simplify it, so that. There is not a lot for you to. You can take it all in very, very easily, because you're not looking over here and saying.
+
+01:03:12.000 --> 01:04:02.000
+Robert Rodriguez Jr: Oh, that's a totally different object than what's over here. You can see that there's a pattern here not necessarily a numerical pattern or a pattern where you repeat things in a certain interval. But a pattern in terms of the color and the texture, and the shape or the luminosity or the tones. Any of those things create patterns. All right. So a pattern in tone means that you've got lots of different things in the image that have the same tonality, and that. Already simplifies it for the brain, because the brain is always looking for things that are different. That's why. You know, if you've got a scene like this, and over here you've got super bright sunshine, and it's lighting up this whole back. That's different. That's an exception to what's happening in the image. And that's going to be something that your eye or the viewer's eye is going to immediately go to. And so you have to make sure that you know you can control the viewer's path. Even with that highlight there.
+
+01:04:02.000 --> 01:04:39.000
+Robert Rodriguez Jr: So. Here's an example right here. Maybe the reason why I have these foreground elements. I don't remember what I was thinking about at the time. It could be because. You have all this bright sunshine up here. And. If I take all this out, imagine this scene without any of these rocks or these foregone elements. Well, your eye is really not going to be interested in any of this, because the excitement is up here. This is the reward, right. This is the payoff. And so I'm slowing you down a little bit by placing these elements in the foreground. Honestly, very honestly. It's irrelevant to me. It almost is irrelevant to me whether this image works, whether it doesn't work.
+
+01:04:39.000 --> 01:05:16.000
+Robert Rodriguez Jr: Whether it's 1 of my best or not. One of my best. What matters to me is that I was thinking of ways to compose an image. I was exercising. Different ways to put the image together, and. Like writing. Okay, Stephen King writes 10 different drafts, and then he finally decides on the one that he thinks is the best one, and that's the one that becomes a hit. But he didn't start with the 1st draft. He probably rewrote it a hundred times. Every rewriting process is a way for him to. Get closer to his idea and. You know, I think the same thing happens in in photography as well. Um.
+
+01:05:16.000 --> 01:05:42.000
+Robert Rodriguez Jr: So I think that's those are some of the basic ideas how to balance these 2 things. Complexity and simplicity. Um. I think it's. Making the story as clear and as. Um. Unambiguous as possible. And if you can do that. And keep a lot of notes. Right now I'm moving to. Another medium. If you can do that with a lot of notes, then good for you, right.
+
+01:05:43.000 --> 01:06:04.000
+Robert Rodriguez Jr: Not every musician can do that. So. You know I'm always reminded of Miles, he used to say. Miles Davis used to say. If you can say it in 2, then if you can say something in 2 notes, don't use 5. Okay. I always contrast that. With. One of my other. You know um. Favorite musicians.
+
+01:06:04.000 --> 01:06:39.000
+Robert Rodriguez Jr: Mozart right where he would use an infinite number of notes, and yet. The sentiment is as simple and as clear as can possibly be. You know exactly what he's trying to tell you, even though he's using many, many notes. Because. The theme is underlying. The story is underlying everything so many different ways to get to the same place. Um. I think landscapes are a particular example of. Um of a. More vape. Classical music approach, because there are lots of quote unquote notes, right? There are lots of things in the landscape.
+
+01:06:39.000 --> 01:07:18.000
+Robert Rodriguez Jr: Lots of things that you have to get all to work together. That's what makes landscape photography so challenging, I think, is that there's so many. There's so many elements to mix. When you get down to more abstract images, right? Some of the stuff that we showed that I've shown you in the class where it's just a color or shape, or a very simple thing. That's more like, you know, Miles, where it's just. 2 or 3 things that work beautifully together in a very simplistic way. And that's the beautiful, beautiful thing about art is that. We can mix and match right? That's by the way, this is a complete segue here. But it's 1 of the reasons why I'm not so worried about AI and creativity, because I think that. That's.
+
+01:07:19.000 --> 01:07:59.000
+Robert Rodriguez Jr: Something that we still pretty much have. Complete control over, or we are the only ones as humans. So far. That have that ability to create something that didn't exist before. Whereas AI is basically predicting it off of data that's been fed. So it's a iterative process, whereas humans can. I mean, sure, we're basing it on. What's been done in the past as well, but we can combine it in a totally new way. That hasn't been done before. So. All right, everyone. If there aren't any more questions. I think that's already the hour gone. Time flies when you're having fun. Anyone else before we sign off for tonight.
+
+01:08:01.000 --> 01:08:03.000
+Robert Rodriguez Jr: Anyone else.
+
+01:08:03.000 --> 01:08:05.000
+Karen Kerwick: No, thank you, Robert.
+
+01:08:04.000 --> 01:08:15.000
+Robert Rodriguez Jr: All right. That was great. Next week is our regular feedback session. So, please, that'll be a chance to submit an image and get some feedback and share it with everyone else, and.
+
+01:08:06.000 --> 01:08:07.000
+Karen Comstock: Thank you.
+
+01:08:15.000 --> 01:08:26.000
+Robert Rodriguez Jr: And we have a. Um always an enjoyable session for me, so that'll be next. Wednesday I'll send an email with the upload link and all that good stuff. So.
+
+01:08:27.000 --> 01:08:28.000
+Karen Comstock: Thank you.
+
+01:08:28.000 --> 01:08:29.000
+Hillel Brandes: Thank you.
+
+01:08:28.000 --> 01:08:29.000
+Robert Rodriguez Jr: All right. Everyone.
+
+01:08:28.000 --> 01:08:29.000
+Jerry Stachowski: And.
+
+01:08:29.000 --> 01:08:30.000
+Hillel Brandes: Yep.
+
+01:08:29.000 --> 01:08:33.000
+Robert Rodriguez Jr: Have a good night. Thanks for thanks for joining me tonight. Thanks for the great questions.
+
+01:08:29.000 --> 01:08:31.000
+Jerry Stachowski: In terms of the images.
+
+01:08:30.000 --> 01:08:31.000
+Hillel Brandes: Got it.
+
+01:08:34.000 --> 01:08:37.000
+Jerry Stachowski: In terms of the images. What size do you want them.
+
+01:08:38.000 --> 01:08:41.000
+Robert Rodriguez Jr: Um, I typically like raw files.
+
+01:08:41.000 --> 01:08:41.000
+Jerry Stachowski: Okay.
+
+01:08:42.000 --> 01:09:04.000
+Robert Rodriguez Jr: So the because the raw file allows me to. Show. Or see what your edits were, and if I you know, I can make an adjustment or show you a different way of editing it. So if you. Can submit the raw file. There's instruction in the site. Just send me a Dng. Because a Dng file means that I have access to your adjustments and.
+
+01:09:00.000 --> 01:09:00.000
+Jerry Stachowski: Okay.
+
+01:09:04.000 --> 01:09:14.000
+Robert Rodriguez Jr: If you don't want to send the rough out, then, you know, then send a good enough size. I have a 4 k. Monitor, so send me something that I can that I can see. Um. So. Alrighty!
+
+01:09:14.000 --> 01:09:16.000
+Jerry Stachowski: Okay. Thank you.
+
+01:09:16.000 --> 01:09:18.000
+Robert Rodriguez Jr: Alright guys! Take care! Good night.
+

@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# KB vector index (rebuild locally)
+data/index/*
+!data/index/.keep
+
+# Secrets
+.env
+
+# Node (Raycast extension)
+node_modules/
+dist/
+.vscode/
+
+# OS
+.DS_Store
