@@ -1,251 +1,238 @@
-# app/main.py
 import os
 import sys
-import json
+import pathlib
+import threading
 import subprocess
+import sqlite3
 from datetime import datetime
-from threading import Lock
-
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from dotenv import load_dotenv
+from typing import List, Optional, Dict, Any
 from openai import OpenAI
-
+from dotenv import load_dotenv
 import chromadb
-from llama_index.core import Settings, VectorStoreIndex
-from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.vector_stores.chroma import ChromaVectorStore
+from chromadb.config import Settings
 
-# -------------- setup --------------
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Use the same embed model as your indexer
-Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+# === Setup ===
+BASE_DIR = pathlib.Path(__file__).resolve().parents[1]
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "supersecret123")
 
-# MUST match scripts/build_index.py
-PERSIST_DIR = "./chroma_db"
-COLLECTION = "academy_kb"
-LAST_INDEXED_PATH = os.path.join(PERSIST_DIR, ".last_indexed")
+# ChromaDB settings (matching your build_index.py)
+CHROMA_DIR = os.getenv("CHROMA_DIR", str(BASE_DIR / "data" / "chroma"))
+COLLECTION_NAME = os.getenv("CHROMA_COLLECTION", "academy_kb")
+EMBED_MODEL = os.getenv("OPENAI_EMBED_MODEL", "text-embedding-3-small")
+METRICS_DB = os.getenv("METRICS_DB", str(BASE_DIR / "data" / "telemetry.db"))
 
-# Miss logging
-MISS_LOG_DIR = "data/logs"
-MISS_LOG_PATH = os.path.join(MISS_LOG_DIR, "misses.jsonl")
+# Initialize OpenAI client
+client = OpenAI(api_key=OPENAI_API_KEY)
 
-# Strict mode threshold: if top score < this, we do NOT answer
-SIMILARITY_THRESHOLD = float(os.getenv("KB_SIM_THRESHOLD", "0.78"))
+# Initialize ChromaDB
+chroma_client = chromadb.PersistentClient(
+    path=CHROMA_DIR,
+    settings=Settings(allow_reset=True)
+)
 
-app = FastAPI()
-reindex_lock = Lock()
+app = FastAPI(title="Academy KB API")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-def get_index() -> VectorStoreIndex:
-    db = chromadb.PersistentClient(path=PERSIST_DIR)
-    coll = db.get_or_create_collection(COLLECTION)
-    vs = ChromaVectorStore(chroma_collection=coll)
-    return VectorStoreIndex.from_vector_store(vector_store=vs)
+# === Models ===
+class QueryIn(BaseModel):
+    query: str
+    top_k: Optional[int] = 5
 
+class Source(BaseModel):
+    title: Optional[str] = None
+    path: Optional[str] = None
+    url: Optional[str] = None
+    source: Optional[str] = None
 
-def _read_last_indexed() -> str | None:
+class QueryOut(BaseModel):
+    answer: str
+    sources: List[Source]
+
+# === Utils ===
+def _require_admin(req: Request):
+    auth = req.headers.get("authorization", "")
+    if not auth.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing token")
+    token = auth.split(" ", 1)[1].strip()
+    if token != ADMIN_TOKEN:
+        raise HTTPException(status_code=403, detail="Forbidden")
+
+def get_collection():
+    """Get or create the ChromaDB collection"""
     try:
-        with open(LAST_INDEXED_PATH, "r", encoding="utf-8") as f:
-            return f.read().strip() or None
+        return chroma_client.get_collection(COLLECTION_NAME)
+    except Exception:
+        # Collection doesn't exist yet
+        return None
+
+def embed_query(text: str) -> List[float]:
+    """Embed a query using OpenAI"""
+    try:
+        response = client.embeddings.create(
+            model=EMBED_MODEL,
+            input=text
+        )
+        return response.data[0].embedding
+    except Exception as e:
+        print(f"Embedding error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create embedding")
+
+def get_last_indexed():
+    """Get the last indexed timestamp from the metrics DB"""
+    try:
+        if not os.path.exists(METRICS_DB):
+            return None
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("SELECT MAX(last_indexed) FROM documents")
+        result = cur.fetchone()
+        con.close()
+        return result[0] if result else None
     except Exception:
         return None
 
-
-def _write_last_indexed() -> None:
-    os.makedirs(PERSIST_DIR, exist_ok=True)
-    ts = datetime.now().isoformat(timespec="seconds")
-    try:
-        with open(LAST_INDEXED_PATH, "w", encoding="utf-8") as f:
-            f.write(ts)
-    except Exception:
-        pass
-
-
-def _log_miss(payload: dict) -> None:
-    try:
-        os.makedirs(MISS_LOG_DIR, exist_ok=True)
-        with open(MISS_LOG_PATH, "a", encoding="utf-8") as f:
-            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
-    except Exception:
-        pass
-
-
-# -------------- models --------------
-class QueryRequest(BaseModel):
-    query: str
-
-
-# -------------- routes --------------
-@app.get("/")
-def root():
-    return {"status": "ok", "message": "Academy KB API running"}
-
-
-@app.post("/query")
-def query_kb(body: QueryRequest):
-    index = get_index()
-    retriever = index.as_retriever(similarity_top_k=10)
-    nodes = retriever.retrieve(body.query)
-
-    # Pull top score (if present)
-    top_score = 0.0
-    if nodes:
-        try:
-            # LlamaIndex NodeWithScore.score: higher is better (similarity/cos sim)
-            top_score = float(nodes[0].score or 0.0)
-        except Exception:
-            top_score = 0.0
-
-    def pick(m: dict) -> dict:
-        return {
-            "title": m.get("title"),
-            "source_url": m.get("source_url"),
-            "tags": m.get("tags"),
-            "category": m.get("category"),
-            "last_updated": m.get("last_updated"),
-            "relpath": m.get("relpath"),
-            "filename": m.get("filename"),
-            "ext": m.get("ext"),
-        }
-
-    # If below threshold → strict fallback (no answer)
-    if top_score < SIMILARITY_THRESHOLD:
-        # Build suggestions (closest 3 titles + short snippet)
-        suggestions = []
-        for n in nodes[:3]:
-            m = n.metadata or {}
-            text = (n.text or "").strip().split("\n", 1)[0]
-            suggestions.append(
-                {
-                    "title": m.get("title") or m.get("filename") or "Untitled",
-                    "source_url": m.get("source_url"),
-                    "last_updated": m.get("last_updated"),
-                    "snippet": text[:200],
-                    **pick(m),
-                }
-            )
-
-        # Generate 3 alternate phrasings (lightweight)
-        rephrases = []
-        try:
-            prompt = (
-                "You are helping a user rewrite a question for better retrieval in a knowledge base. "
-                "Suggest three concise alternative phrasings that might match similar concepts, "
-                "without adding new information.\n\n"
-                f"Original question: {body.query}\n\n"
-                "Return as a simple numbered list."
-            )
-            r = client.chat.completions.create(
-                model="gpt-4o-mini",
-                temperature=0.2,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            text = r.choices[0].message.content or ""
-            # Split on lines that look like a list
-            for line in text.splitlines():
-                line = line.strip(" -\t")
-                if not line:
-                    continue
-                # strip leading numbers like "1. "
-                if line[:2].isdigit() or (len(line) > 2 and line[1] == "."):
-                    line = line.split(".", 1)[-1].strip()
-                rephrases.append(line)
-            rephrases = [p for p in rephrases if p][:3]
-        except Exception:
-            rephrases = []
-
-        # Log the miss
-        _log_miss(
-            {
-                "ts": datetime.utcnow().isoformat() + "Z",
-                "query": body.query,
-                "top_score": top_score,
-                "suggestions": [s.get("title") for s in suggestions],
-            }
+# === Endpoints ===
+@app.post("/query", response_model=QueryOut)
+async def query(data: QueryIn):
+    """Query the knowledge base"""
+    collection = get_collection()
+    
+    if not collection:
+        return QueryOut(
+            answer="The knowledge base has not been indexed yet. Please run the indexer first.",
+            sources=[]
         )
-
-        return {
-            "answer": None,             # <-- strict: no general fallback
-            "sources": [],              # nothing authoritative to cite
-            "suggestions": suggestions, # nearby titles/snippets
-            "rephrases": rephrases,     # 3 alternates
-            "strict": True,
-            "top_score": top_score,
-            "threshold": SIMILARITY_THRESHOLD,
-        }
-
-    # Otherwise → build context & answer from KB
-    def meta_block(m: dict) -> str:
-        return (
-            f"Title: {m.get('title','')}\n"
-            f"URL: {m.get('source_url','')}\n"
-            f"Tags: {', '.join(m.get('tags', []) or [])}\n"
-            f"Category: {m.get('category','')}\n"
-            f"Last Updated: {m.get('last_updated','')}\n"
-            f"File: {m.get('relpath') or m.get('filename','')}\n"
+    
+    try:
+        # Embed the query
+        query_embedding = embed_query(data.query)
+        
+        # Search ChromaDB
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=data.top_k,
+            include=["documents", "metadatas", "distances"]
         )
+        
+        if not results["documents"] or not results["documents"][0]:
+            return QueryOut(
+                answer="I couldn't find any relevant information in the knowledge base for your query.",
+                sources=[]
+            )
+        
+        # Extract context from results
+        contexts = []
+        sources_dict = {}  # Use dict to deduplicate by title
+        
+        for doc, metadata in zip(results["documents"][0], results["metadatas"][0]):
+            contexts.append(doc)
+            
+            # Track unique sources by title
+            title = metadata.get("title", "Unknown")
+            if title not in sources_dict:
+                sources_dict[title] = Source(
+                    title=title,
+                    path=metadata.get("path"),
+                    url=metadata.get("url"),
+                    source=metadata.get("source", "doc")
+                )
+        
+        # Build context for the LLM
+        context_text = "\n\n---\n\n".join(contexts[:data.top_k])
+        
+        # Generate answer using GPT with custom style guide
+        from prompts import STYLE_GUIDE
+        
+        system_prompt = STYLE_GUIDE
+        
+        user_prompt = f"""Question: {data.query}
 
-    blocks = []
-    for n in nodes:
-        m = n.metadata or {}
-        blocks.append(meta_block(m) + "—\n" + (n.text or ""))
+Context from Academy Knowledge Base:
+{context_text}
 
-    context = "\n\n".join(blocks) if blocks else "No context retrieved."
-    prompt = (
-        "You are Robert Rodriguez Jr’s Academy KB assistant. "
-        "Answer clearly and practically for photographers. "
-        "Only use the provided context; if the context is insufficient, say you don’t know. "
-        "Prefer citing specific titles in natural language.\n\n"
-        f"Context:\n{context}\n\n"
-        f"Question: {body.query}\n"
-        "Answer:"
-    )
+Provide an answer following the format guidelines (summary, how to apply, sources)."""
 
-    resp = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=0.2,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    answer = resp.choices[0].message.content
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",  # You can change this to gpt-4 if you prefer
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.7,
+            max_tokens=500
+        )
+        
+        answer = response.choices[0].message.content
+        
+        return QueryOut(
+            answer=answer,
+            sources=list(sources_dict.values())
+        )
+        
+    except Exception as e:
+        print(f"Query error: {e}")
+        raise HTTPException(status_code=500, detail=f"Query failed: {str(e)}")
 
-    sources = [pick(n.metadata or {}) for n in nodes]
-    return {
-        "answer": answer,
-        "sources": sources,
-        "strict": True,
-        "top_score": top_score,
-        "threshold": SIMILARITY_THRESHOLD,
-    }
-
+@app.get("/index-status")
+async def index_status():
+    """Get the status of the vector index"""
+    collection = get_collection()
+    
+    if not collection:
+        return {
+            "vector_count": 0,
+            "last_indexed": None,
+            "status": "No index found - please run indexer"
+        }
+    
+    try:
+        count = collection.count()
+        last_indexed = get_last_indexed()
+        
+        return {
+            "vector_count": count,
+            "last_indexed": last_indexed,
+            "status": "Index ready" if count > 0 else "Index empty"
+        }
+    except Exception as e:
+        return {
+            "vector_count": 0,
+            "last_indexed": None,
+            "status": f"Error: {str(e)}"
+        }
 
 @app.post("/reindex")
-def reindex(background_tasks: BackgroundTasks):
-    if not reindex_lock.acquire(blocking=False):
-        return {"status": "already_running"}
+async def reindex(request: Request):
+    """Trigger a reindex of the knowledge base"""
+    _require_admin(request)
 
     def _run():
         try:
-            subprocess.run([sys.executable, "scripts/build_index.py"], check=False)
-            _write_last_indexed()
-        finally:
-            try:
-                reindex_lock.release()
-            except Exception:
-                pass
+            script_path = BASE_DIR / "scripts" / "build_index.py"
+            subprocess.run(
+                [sys.executable, str(script_path)],
+                cwd=str(BASE_DIR),
+                check=True,
+                capture_output=True,
+                text=True
+            )
+            print("Reindex completed successfully")
+        except subprocess.CalledProcessError as e:
+            print(f"Reindex failed: {e.stderr}")
+        except Exception as e:
+            print(f"Reindex error: {repr(e)}")
 
-    background_tasks.add_task(_run)
-    return {"status": "started"}
-
-
-@app.get("/stats")
-def stats():
-    db = chromadb.PersistentClient(path=PERSIST_DIR)
-    coll = db.get_or_create_collection(COLLECTION)
-    return {
-        "count": coll.count(),
-        "last_indexed": _read_last_indexed(),
-        "similarity_threshold": SIMILARITY_THRESHOLD,
-    }
+    threading.Thread(target=_run, daemon=True).start()
+    return {"status": "started", "message": "Reindexing in background"}

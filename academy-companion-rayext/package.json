@@ -1,0 +1,96 @@
+{
+  "name": "academy-companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Raycast extension for querying your local Academy Companion server.",
+  "license": "MIT",
+  "author": "Robert Rodriguez Jr",
+  "scripts": {
+    "dev": "ray develop",
+    "build": "ray build",
+    "lint": "ray lint",
+    "fix": "ray lint --fix"
+  },
+  "dependencies": {
+    "@raycast/api": "^1.102.5",
+    "@raycast/utils": "^1.18.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.0.5",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.11",
+    "eslint": "^9.10.0",
+    "typescript": "^5.6.3"
+  },
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "icon": "icon.png",
+  "title": "Academy Companion",
+  "commands": [
+    {
+      "name": "academy-companion",
+      "title": "Ask Academy Companion",
+      "description": "Ask a question against your local Academy KB",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "serverUrl",
+          "title": "Server URL",
+          "type": "textfield",
+          "required": false,
+          "default": "http://127.0.0.1:8002",
+          "description": "URL of your Academy Companion server"
+        },
+        {
+          "name": "apiToken",
+          "title": "Server API Token",
+          "type": "password",
+          "required": false,
+          "description": "Optional API token for authentication"
+        }
+      ]
+    },
+    {
+      "name": "reindex",
+      "title": "Reindex KB",
+      "description": "Trigger a full reindex on the local server",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "serverUrl",
+          "title": "Server URL",
+          "type": "textfield",
+          "required": false,
+          "default": "http://127.0.0.1:8002",
+          "description": "URL of your Academy Companion server"
+        },
+        {
+          "name": "apiToken",
+          "title": "Server API Token",
+          "type": "password",
+          "required": false,
+          "description": "Optional API token for authentication"
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "title": "Index Status",
+      "description": "Show vector count and last indexed time",
+      "mode": "view",
+      "preferences": [
+        {
+          "name": "serverUrl",
+          "title": "Server URL",
+          "type": "textfield",
+          "required": false,
+          "default": "http://127.0.0.1:8002",
+          "description": "URL of your Academy Companion server"
+        }
+      ]
+    }
+  ],
+  "categories": ["Productivity"],
+  "keywords": ["academy", "companion", "kb", "knowledge"]
+}

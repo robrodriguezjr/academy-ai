@@ -1,23 +1,25 @@
-# Python
+# Environment
+.env
 .venv/
+venv/
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
 
-# KB vector index (rebuild locally)
-data/index/*
-!data/index/.keep
-
-# Secrets
-.env
-
-# Node (Raycast extension)
-node_modules/
-dist/
-.vscode/
+# Data - don't commit these
+data/
+chroma_db/
+storage/
+*.sqlite3
+*.db
 
 # OS
 .DS_Store
 
-# Never commit SSH keys
+# Node modules
+node_modules/
+
+# Keys
 key
-key.pub	

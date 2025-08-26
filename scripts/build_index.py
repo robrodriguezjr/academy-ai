@@ -1,208 +1,361 @@
+#!/usr/bin/env python3
 # scripts/build_index.py
-import os, re, time, shutil, csv
-from typing import Dict, Any, Tuple, List
+#
+# Academy KB indexer with metrics:
+# - Splits long docs into chunks for embeddings
+# - Parses YAML front matter to metadata
+# - Normalizes metadata to Chroma-safe scalars
+# - Retries on 429 rate limits
+# - Logs per-document stats to SQLite: data/telemetry.db
+# - Supports: .md .txt .html .pdf .docx .csv
 
+import os, re, time, json, glob, hashlib, csv, sys, sqlite3
+from datetime import datetime, UTC
+from typing import List, Dict, Tuple
 from dotenv import load_dotenv
+
+# Load environment variables from .env file
 load_dotenv()
 
+# ---------------- Config (env-overridable) ----------------
+RAW_ROOT       = os.getenv("RAW_ROOT", "data/raw")
+CHROMA_DIR     = os.getenv("CHROMA_DIR", "data/chroma")
+COLLECTION     = os.getenv("CHROMA_COLLECTION", "academy_kb")
+EMBED_MODEL    = os.getenv("OPENAI_EMBED_MODEL", "text-embedding-3-small")
+CHUNK_TOKENS   = int(os.getenv("CHUNK_TOKENS", "1000"))
+CHUNK_OVERLAP  = int(os.getenv("CHUNK_OVERLAP", "100"))
+BATCH_SIZE     = int(os.getenv("EMBED_BATCH_SIZE", "64"))
+EMBED_RETRIES  = int(os.getenv("EMBED_RETRIES", "5"))
+EMBED_BACKOFF  = float(os.getenv("EMBED_BACKOFF", "1.0"))  # seconds base
+
+# metrics DB
+METRICS_DB     = os.getenv("METRICS_DB", "data/telemetry.db")
+
+# ---------------- Third-party libs ----------------
 import chromadb
-from llama_index.core import Document, VectorStoreIndex
-from llama_index.core.storage import StorageContext
-from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.vector_stores.chroma import ChromaVectorStore
-
-import yaml
-from markdownify import markdownify as md_from_html
+from chromadb.config import Settings
 from pypdf import PdfReader
-import docx  # python-docx
+from docx import Document as DocxDocument
+try:
+    from markdownify import markdownify as html_to_md
+except Exception:
+    html_to_md = None
 
-# ----- paths (MUST match app/main.py for PERSIST_DIR/COLLECTION) -----
-PERSIST_DIR = "./chroma_db"
-COLLECTION  = "academy_kb"
-RAW_ROOT    = "data/raw"          # <- we index EVERYTHING under here
-IGNORE_DIR_NAMES = {"_assets"}     # folders to skip anywhere in the tree
+import tiktoken
+from openai import OpenAI
 
-# ----- helpers -----
-def read_text(path: str) -> str:
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+# ---------------- Utilities ----------------
+FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n?", re.DOTALL)
 
-def parse_front_matter(text: str) -> Tuple[Dict[str, Any], str]:
-    """Parse YAML front matter if present and return (meta, body)."""
-    if text.startswith("---\n"):
-        m = re.search(r"^---\n(.*?)\n---\n", text, flags=re.DOTALL)
-        if m:
-            meta_raw = m.group(1)
-            try:
-                meta = yaml.safe_load(meta_raw) or {}
-            except Exception:
-                meta = {}
-            body = text[m.end():]
-            return meta, body
+def now_iso() -> str:
+    return datetime.now(UTC).isoformat(timespec="seconds")
+
+def ensure_metrics_db():
+    os.makedirs(os.path.dirname(METRICS_DB), exist_ok=True)
+    con = sqlite3.connect(METRICS_DB)
+    cur = con.cursor()
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS documents (
+      doc_id TEXT PRIMARY KEY,
+      title TEXT,
+      path TEXT,
+      source TEXT,
+      tags TEXT,
+      categories TEXT,
+      url TEXT,
+      video_url TEXT,
+      last_updated TEXT,
+      chars INTEGER,
+      tokens INTEGER,
+      chunk_count INTEGER,
+      last_indexed TEXT
+    )
+    """)
+    con.commit()
+    con.close()
+
+def upsert_document_row(row: Dict):
+    con = sqlite3.connect(METRICS_DB)
+    cur = con.cursor()
+    cur.execute("""
+    INSERT INTO documents
+      (doc_id, title, path, source, tags, categories, url, video_url, last_updated, chars, tokens, chunk_count, last_indexed)
+    VALUES
+      (:doc_id, :title, :path, :source, :tags, :categories, :url, :video_url, :last_updated, :chars, :tokens, :chunk_count, :last_indexed)
+    ON CONFLICT(doc_id) DO UPDATE SET
+      title=excluded.title,
+      path=excluded.path,
+      source=excluded.source,
+      tags=excluded.tags,
+      categories=excluded.categories,
+      url=excluded.url,
+      video_url=excluded.video_url,
+      last_updated=excluded.last_updated,
+      chars=excluded.chars,
+      tokens=excluded.tokens,
+      chunk_count=excluded.chunk_count,
+      last_indexed=excluded.last_indexed
+    """, row)
+    con.commit()
+    con.close()
+
+def parse_front_matter(text: str) -> Tuple[Dict, str]:
+    """Return (meta, body) with permissive YAML (key: value, [a, b])."""
+    m = FRONT_MATTER_RE.match(text)
+    meta: Dict = {}
+    if m:
+        raw = m.group(1)
+        for line in raw.splitlines():
+            s = line.strip()
+            if not s or s.startswith("#") or ":" not in s:
+                continue
+            k, v = s.split(":", 1)
+            key = k.strip()
+            val = v.strip()
+            if (val.startswith("'") and val.endswith("'")) or (val.startswith('"') and val.endswith('"')):
+                val = val[1:-1]
+            if val.startswith("[") and val.endswith("]"):
+                inner = val[1:-1].strip()
+                meta[key] = [x.strip().strip("'").strip('"') for x in inner.split(",")] if inner else []
+            else:
+                meta[key] = val
+        return meta, text[m.end():]
     return {}, text
 
-def load_md_or_txt(path: str) -> Tuple[Dict[str, Any], str]:
-    meta, body = parse_front_matter(read_text(path))
-    return meta, body
-
-def load_html(path: str) -> Tuple[Dict[str, Any], str]:
-    meta, body = parse_front_matter(read_text(path))
+def normalize_scalar(v):
+    """Chroma requires scalar metadata; we also store scalars in SQLite."""
+    if v is None or isinstance(v, (str, int, float, bool)):
+        return v
+    if isinstance(v, (list, tuple, set)):
+        return ", ".join(str(x) for x in v)
     try:
-        body_md = md_from_html(body or "")
+        return json.dumps(v, ensure_ascii=False)
     except Exception:
-        body_md = body
-    return meta, body_md
+        return str(v)
 
-def load_pdf(path: str) -> Tuple[Dict[str, Any], str]:
+def normalize_metadata(meta: Dict) -> Dict:
+    return {k: normalize_scalar(v) for k, v in meta.items()}
+
+def read_txt(path: str) -> str:
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        return f.read()
+
+def read_pdf(path: str) -> str:
     reader = PdfReader(path)
-    parts: List[str] = []
+    out = []
     for p in reader.pages:
         try:
-            parts.append(p.extract_text() or "")
+            out.append(p.extract_text() or "")
         except Exception:
-            parts.append("")
-    return {}, "\n\n".join(parts)
+            pass
+    return "\n".join(out).strip()
 
-def load_docx(path: str) -> Tuple[Dict[str, Any], str]:
-    d = docx.Document(path)
-    parts = [p.text for p in d.paragraphs]
-    return {}, "\n\n".join(parts)
+def read_docx(path: str) -> str:
+    doc = DocxDocument(path)
+    return "\n".join(p.text for p in doc.paragraphs)
 
-def load_csv(path: str) -> Tuple[Dict[str, Any], str]:
-    """Turn CSV into a readable markdown block.
-       If columns are exactly ['question','answer'] (case-insensitive), format as Q&A.
-       Otherwise render a simple markdown table.
-    """
-    with open(path, "r", encoding="utf-8", newline="") as f:
-        reader = csv.reader(f)
-        rows = list(reader)
+def read_html(path: str) -> str:
+    raw = read_txt(path)
+    if html_to_md:
+        try:
+            return html_to_md(raw)
+        except Exception:
+            pass
+    return re.sub(r"<[^>]+>", "", raw)
 
-    if not rows:
-        return {}, ""
+def read_csv_text(path: str) -> str:
+    rows = []
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        r = csv.DictReader(f)
+        rows.extend(r)
+    return json.dumps(rows, ensure_ascii=False, indent=2)
 
-    headers = [h.strip() for h in rows[0]]
-    lower = [h.lower() for h in headers]
-    body = ""
-
-    if lower == ["question", "answer"]:
-        lines = []
-        for r in rows[1:]:
-            if not any(r):
-                continue
-            q = (r[0] or "").strip()
-            a = (r[1] or "").strip()
-            if q or a:
-                lines.append(f"### Q: {q}\nA: {a}\n")
-        body = "\n".join(lines)
-    else:
-        # simple markdown table
-        sep = "|" + "|".join([" --- " for _ in headers]) + "|\n"
-        head = "|" + "|".join(headers) + "|\n"
-        body_rows = []
-        for r in rows[1:]:
-            body_rows.append("|" + "|".join((cell or "").strip() for cell in r) + "|")
-        body = head + sep + "\n".join(body_rows)
-
-    return {}, body
-
-LOADERS = {
-    ".md":   load_md_or_txt,
-    ".txt":  load_md_or_txt,
-    ".html": load_html,
-    ".htm":  load_html,
-    ".pdf":  load_pdf,
-    ".docx": load_docx,
-    ".csv":  load_csv,
+READERS = {
+    ".md":   read_txt,
+    ".txt":  read_txt,
+    ".html": read_html,
+    ".htm":  read_html,
+    ".pdf":  read_pdf,
+    ".docx": read_docx,
+    ".csv":  read_csv_text,
 }
 
-def iso_date_from_mtime(path: str) -> str:
-    # YYYY-MM-DD
-    return time.strftime("%Y-%m-%d", time.localtime(os.path.getmtime(path)))
+def file_id(path: str) -> str:
+    return hashlib.sha1(path.encode("utf-8")).hexdigest()
 
-def should_ignore_path(path: str) -> bool:
-    parts = os.path.normpath(path).split(os.sep)
-    if any(p.startswith(".") for p in parts):
-        return True
-    if any(p in IGNORE_DIR_NAMES for p in parts):
-        return True
-    return False
+def title_from_meta_or_path(meta: Dict, path: str) -> str:
+    if str(meta.get("title", "")).strip():
+        return str(meta["title"]).strip()
+    return os.path.splitext(os.path.basename(path))[0].replace("-", " ").strip()
 
-def make_source_url(full_path: str) -> str:
-    rel = os.path.relpath(full_path, RAW_ROOT).replace(os.sep, "/")
-    return f"/raw/{rel}"
-
-def make_document(path: str) -> Document:
-    ext = os.path.splitext(path)[1].lower()
-    loader = LOADERS.get(ext)
-    if not loader:
-        raise SystemExit(f"Unsupported file type encountered: {path}")
-
-    meta, text = loader(path)
-
-    name = os.path.basename(path)
-    title = meta.get("title") or os.path.splitext(name)[0]
-    tags = meta.get("tags") or []
-    category = meta.get("category") or None
-    source_url = meta.get("source_url") or make_source_url(path)
-    last_updated = meta.get("last_updated") or iso_date_from_mtime(path)
-
-    metadata = {
-        "title": title,
-        "tags": tags,
-        "category": category,
-        "source_url": source_url,
-        "last_updated": last_updated,
-        "filename": name,
-        "ext": ext,
-        # where it came from, relative to RAW_ROOT (handy for debugging)
-        "relpath": os.path.relpath(path, RAW_ROOT).replace(os.sep, "/"),
-    }
-    return Document(text=text, metadata=metadata)
-
-# ----- main -----
-def main():
-    # Walk everything under RAW_ROOT; include specific extensions only
+def gather_files(root: str) -> List[str]:
     paths: List[str] = []
-    exts = set(LOADERS.keys())
+    for ext in READERS.keys():
+        paths += glob.glob(os.path.join(root, "**", f"*{ext}"), recursive=True)
+    return sorted(paths)
 
-    for root, dirs, files in os.walk(RAW_ROOT):
-        # prune dirs so os.walk skips ignored ones
-        dirs[:] = [d for d in dirs if not should_ignore_path(os.path.join(root, d))]
-        for fn in files:
-            fp = os.path.join(root, fn)
-            if should_ignore_path(fp):
+def read_file_text(path: str) -> Tuple[Dict, str]:
+    ext = os.path.splitext(path)[1].lower()
+    reader = READERS.get(ext)
+    if not reader:
+        return {}, ""
+    text = reader(path)
+    if ext in (".md", ".txt"):
+        meta, body = parse_front_matter(text)
+        return meta, body
+    return {}, text
+
+# ---------------- Chunking ----------------
+def get_encoder():
+    return tiktoken.get_encoding("cl100k_base")
+
+ENC = None
+def tokenize(text: str) -> List[int]:
+    global ENC
+    if ENC is None:
+        ENC = get_encoder()
+    return ENC.encode(text)
+
+def detokenize(tokens: List[int]) -> str:
+    return ENC.decode(tokens)
+
+def chunk_text(text: str, chunk_tokens: int, overlap_tokens: int) -> List[str]:
+    toks = tokenize(text)
+    n = len(toks)
+    if n == 0:
+        return []
+    chunks: List[str] = []
+    start = 0
+    while start < n:
+        end = min(start + chunk_tokens, n)
+        chunks.append(detokenize(toks[start:end]))
+        if end == n:
+            break
+        start = max(0, end - overlap_tokens)
+    return chunks
+
+def make_chunk_id(doc_id: str, idx: int) -> str:
+    return f"{doc_id}_{idx:05d}"
+
+# ---------------- OpenAI embeddings (retry) ----------------
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def embed_batch(texts: List[str]) -> List[List[float]]:
+    delay = EMBED_BACKOFF
+    for attempt in range(1, EMBED_RETRIES + 1):
+        try:
+            resp = client.embeddings.create(model=EMBED_MODEL, input=texts)
+            return [d.embedding for d in resp.data]
+        except Exception as e:
+            msg = str(e).lower()
+            transient = ("429" in msg) or ("rate limit" in msg) or ("temporar" in msg)
+            if transient and attempt < EMBED_RETRIES:
+                time.sleep(delay)
+                delay *= 2
                 continue
-            if os.path.splitext(fn)[1].lower() in exts:
-                paths.append(fp)
+            raise
 
-    paths.sort()
-    if not paths:
-        raise SystemExit(f"No supported files found under {RAW_ROOT}")
+def embed_all(texts: List[str], batch_size: int = BATCH_SIZE) -> List[List[float]]:
+    out: List[List[float]] = []
+    for i in range(0, len(texts), batch_size):
+        vecs = embed_batch(texts[i:i + batch_size])
+        out.extend(vecs)
+        time.sleep(0.05)
+    return out
 
-    docs = [make_document(p) for p in paths]
-
-    # Clean, idempotent rebuild
+# ---------------- Chroma helpers ----------------
+def get_collection():
+    client = chromadb.PersistentClient(path=CHROMA_DIR, settings=Settings(allow_reset=True))
     try:
-        if os.path.exists(PERSIST_DIR):
-            shutil.rmtree(PERSIST_DIR, ignore_errors=True)
-        os.makedirs(PERSIST_DIR, exist_ok=True)
+        return client.get_collection(COLLECTION)
+    except Exception:
+        return client.create_collection(COLLECTION)
+
+def clear_collection():
+    coll = get_collection()
+    try:
+        coll.delete(where={})
     except Exception:
         pass
 
-    client = chromadb.PersistentClient(path=PERSIST_DIR)
-    coll = client.get_or_create_collection(COLLECTION)
+def guess_source_from_path(path: str) -> str:
+    p = path.replace("\\", "/").lower()
+    if "/sessions/" in p: return "live-session"
+    if "/blog_cpa/" in p or "/blog/cpa/" in p: return "blog-cpa"
+    if "/blog_rrjr/" in p or "/blog/rrjr/" in p: return "blog-rrjr"
+    return "doc"
 
-    vs = ChromaVectorStore(chroma_collection=coll)
-    storage = StorageContext.from_defaults(vector_store=vs)
-    embed = OpenAIEmbedding(model="text-embedding-3-small")
+# ---------------- Indexing ----------------
+def index():
+    ensure_metrics_db()
 
-    VectorStoreIndex.from_documents(docs, storage_context=storage, embed_model=embed)
+    print("Indexing from:", RAW_ROOT)
+    files = gather_files(RAW_ROOT)
+    print(f"Found {len(files)} files to index.")
+    coll = get_collection()
 
-    print(f"Indexed {len(docs)} files")
-    print("Chroma count:", coll.count())
-    sample = coll.get(limit=5, include=["metadatas"])
-    titles = [m.get("title") for m in (sample.get("metadatas") or [])]
-    print("Sample titles:", titles)
+    total_chunks = 0
+    for path in files:
+        meta, body = read_file_text(path)
+        if not body.strip():
+            continue
 
+        title = title_from_meta_or_path(meta, path)
+        doc_id = file_id(path)
+
+        base_meta = {
+            "title":        normalize_scalar(title),
+            "path":         normalize_scalar(path),
+            "source":       normalize_scalar(meta.get("source", guess_source_from_path(path))),
+            "last_indexed": normalize_scalar(now_iso()),
+        }
+        for k in ("tags", "categories", "url", "video_url", "last_updated", "role"):
+            if k in meta:
+                base_meta[k] = normalize_scalar(meta[k])
+
+        # chunk & simple stats
+        chunks = chunk_text(body, CHUNK_TOKENS, CHUNK_OVERLAP)
+        if not chunks:
+            continue
+        chars  = len(body)
+        tokens = len(tokenize(body))
+        chunk_count = len(chunks)
+
+        # embed and upsert to Chroma
+        _ = embed_all(chunks, batch_size=BATCH_SIZE)
+        ids = [make_chunk_id(doc_id, i) for i in range(len(chunks))]
+        metadatas = [{**base_meta, "chunk_index": i} for i in range(len(chunks))]
+        coll.upsert(ids=ids, documents=chunks, metadatas=[normalize_metadata(m) for m in metadatas])
+
+        # upsert to metrics DB
+        upsert_document_row({
+            "doc_id":       doc_id,
+            "title":        base_meta["title"],
+            "path":         base_meta["path"],
+            "source":       base_meta["source"],
+            "tags":         normalize_scalar(meta.get("tags")),
+            "categories":   normalize_scalar(meta.get("categories")),
+            "url":          normalize_scalar(meta.get("url")),
+            "video_url":    normalize_scalar(meta.get("video_url")),
+            "last_updated": normalize_scalar(meta.get("last_updated")),
+            "chars":        chars,
+            "tokens":       tokens,
+            "chunk_count":  chunk_count,
+            "last_indexed": base_meta["last_indexed"],
+        })
+
+        total_chunks += len(chunks)
+        print(f"Indexed: {title}  ({len(chunks)} chunks)")
+
+    print(f"\nDone. Total chunks: {total_chunks}")
+    try:
+        print("Chroma count:", get_collection().count())
+    except Exception:
+        pass
+
+# ---------------- Main ----------------
 if __name__ == "__main__":
-    main()
+    if "--no-clear" not in sys.argv:
+        print("Clearing existing vectors …")
+        clear_collection()
+    index()

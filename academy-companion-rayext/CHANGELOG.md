@@ -1,3 +1,3 @@
-# Academy kb ext Changelog
+# Academy Companion Changelog
 
 ## [Initial Version] - {PR_MERGE_DATE}
