@@ -4,8 +4,9 @@ import pathlib
 import threading
 import subprocess
 import sqlite3
-from datetime import datetime
-from fastapi import FastAPI, Request, HTTPException
+import json
+from datetime import datetime, timedelta
+from fastapi import FastAPI, Request, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
@@ -13,6 +14,8 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import chromadb
 from chromadb.config import Settings
+import hashlib
+import time
 
 load_dotenv()
 
@@ -45,10 +48,77 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# === Initialize Database Tables ===
+def init_database():
+    """Initialize all required database tables"""
+    os.makedirs(os.path.dirname(METRICS_DB), exist_ok=True)
+    con = sqlite3.connect(METRICS_DB)
+    cur = con.cursor()
+    
+    # Documents table (existing)
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS documents (
+      doc_id TEXT PRIMARY KEY,
+      title TEXT,
+      path TEXT,
+      source TEXT,
+      tags TEXT,
+      categories TEXT,
+      url TEXT,
+      video_url TEXT,
+      last_updated TEXT,
+      chars INTEGER,
+      tokens INTEGER,
+      chunk_count INTEGER,
+      last_indexed TEXT,
+      status TEXT DEFAULT 'indexed'
+    )
+    """)
+    
+    # Query logs for analytics
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS query_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id TEXT,
+      query TEXT,
+      response_time REAL,
+      tokens_used INTEGER,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+    
+    # Text training data
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS text_training (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      content TEXT,
+      character_count INTEGER,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+    
+    # Q&A pairs
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS qa_pairs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      question TEXT,
+      answer TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      used_count INTEGER DEFAULT 0
+    )
+    """)
+    
+    con.commit()
+    con.close()
+
+# Initialize database on startup
+init_database()
+
 # === Models ===
 class QueryIn(BaseModel):
     query: str
     top_k: Optional[int] = 5
+    user_id: Optional[str] = None
 
 class Source(BaseModel):
     title: Optional[str] = None
@@ -59,6 +129,13 @@ class Source(BaseModel):
 class QueryOut(BaseModel):
     answer: str
     sources: List[Source]
+
+class TextTrainingIn(BaseModel):
+    content: str
+
+class QAPairIn(BaseModel):
+    question: str
+    answer: str
 
 # === Utils ===
 def _require_admin(req: Request):
@@ -74,7 +151,6 @@ def get_collection():
     try:
         return chroma_client.get_collection(COLLECTION_NAME)
     except Exception:
-        # Collection doesn't exist yet
         return None
 
 def embed_query(text: str) -> List[float]:
@@ -89,24 +165,25 @@ def embed_query(text: str) -> List[float]:
         print(f"Embedding error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create embedding")
 
-def get_last_indexed():
-    """Get the last indexed timestamp from the metrics DB"""
+def log_query(user_id: str, query: str, response_time: float, tokens_used: int = 0):
+    """Log a query for analytics"""
     try:
-        if not os.path.exists(METRICS_DB):
-            return None
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
-        cur.execute("SELECT MAX(last_indexed) FROM documents")
-        result = cur.fetchone()
+        cur.execute("""
+            INSERT INTO query_logs (user_id, query, response_time, tokens_used)
+            VALUES (?, ?, ?, ?)
+        """, (user_id, query, response_time, tokens_used))
+        con.commit()
         con.close()
-        return result[0] if result else None
-    except Exception:
-        return None
+    except Exception as e:
+        print(f"Failed to log query: {e}")
 
-# === Endpoints ===
+# === Original Endpoints ===
 @app.post("/query", response_model=QueryOut)
 async def query(data: QueryIn):
     """Query the knowledge base"""
+    start_time = time.time()
     collection = get_collection()
     
     if not collection:
@@ -116,10 +193,24 @@ async def query(data: QueryIn):
         )
     
     try:
-        # Embed the query
-        query_embedding = embed_query(data.query)
+        # Check Q&A pairs first
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("""
+            SELECT answer FROM qa_pairs 
+            WHERE LOWER(question) = LOWER(?)
+            LIMIT 1
+        """, (data.query,))
+        qa_result = cur.fetchone()
+        con.close()
         
-        # Search ChromaDB
+        if qa_result:
+            response_time = time.time() - start_time
+            log_query(data.user_id or "anonymous", data.query, response_time)
+            return QueryOut(answer=qa_result[0], sources=[])
+        
+        # Regular ChromaDB search
+        query_embedding = embed_query(data.query)
         results = collection.query(
             query_embeddings=[query_embedding],
             n_results=data.top_k,
@@ -132,14 +223,11 @@ async def query(data: QueryIn):
                 sources=[]
             )
         
-        # Extract context from results
         contexts = []
-        sources_dict = {}  # Use dict to deduplicate by title
+        sources_dict = {}
         
         for doc, metadata in zip(results["documents"][0], results["metadatas"][0]):
             contexts.append(doc)
-            
-            # Track unique sources by title
             title = metadata.get("title", "Unknown")
             if title not in sources_dict:
                 sources_dict[title] = Source(
@@ -149,14 +237,10 @@ async def query(data: QueryIn):
                     source=metadata.get("source", "doc")
                 )
         
-        # Build context for the LLM
         context_text = "\n\n---\n\n".join(contexts[:data.top_k])
         
-        # Generate answer using GPT with custom style guide
         from prompts import STYLE_GUIDE
-        
         system_prompt = STYLE_GUIDE
-        
         user_prompt = f"""Question: {data.query}
 
 Context from Academy Knowledge Base:
@@ -165,7 +249,7 @@ Context from Academy Knowledge Base:
 Provide an answer following the format guidelines (summary, how to apply, sources)."""
 
         response = client.chat.completions.create(
-            model="gpt-4o-mini",  # You can change this to gpt-4 if you prefer
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
@@ -175,11 +259,10 @@ Provide an answer following the format guidelines (summary, how to apply, source
         )
         
         answer = response.choices[0].message.content
+        response_time = time.time() - start_time
+        log_query(data.user_id or "anonymous", data.query, response_time, 500)
         
-        return QueryOut(
-            answer=answer,
-            sources=list(sources_dict.values())
-        )
+        return QueryOut(answer=answer, sources=list(sources_dict.values()))
         
     except Exception as e:
         print(f"Query error: {e}")
@@ -199,7 +282,12 @@ async def index_status():
     
     try:
         count = collection.count()
-        last_indexed = get_last_indexed()
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("SELECT MAX(last_indexed) FROM documents")
+        result = cur.fetchone()
+        con.close()
+        last_indexed = result[0] if result else None
         
         return {
             "vector_count": count,
@@ -236,3 +324,254 @@ async def reindex(request: Request):
 
     threading.Thread(target=_run, daemon=True).start()
     return {"status": "started", "message": "Reindexing in background"}
+
+# === New Dashboard Endpoints ===
+
+@app.get("/admin/documents")
+async def get_documents(request: Request):
+    """Get all indexed documents"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("""
+            SELECT doc_id, title, path, chunk_count, last_indexed, status
+            FROM documents
+            ORDER BY last_indexed DESC
+        """)
+        rows = cur.fetchall()
+        con.close()
+        
+        documents = []
+        for row in rows:
+            documents.append({
+                "id": row[0],
+                "title": row[1],
+                "path": row[2],
+                "chunk_count": row[3] or 0,
+                "last_indexed": row[4],
+                "status": row[5] or "indexed"
+            })
+        
+        return {"documents": documents}
+    except Exception as e:
+        print(f"Error fetching documents: {e}")
+        return {"documents": []}
+
+@app.delete("/admin/document/{doc_id}")
+async def delete_document(doc_id: str, request: Request):
+    """Delete a document from the index"""
+    _require_admin(request)
+    
+    try:
+        # Remove from ChromaDB
+        collection = get_collection()
+        if collection:
+            # Delete all chunks for this document
+            collection.delete(where={"doc_id": doc_id})
+        
+        # Remove from database
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("DELETE FROM documents WHERE doc_id = ?", (doc_id,))
+        con.commit()
+        con.close()
+        
+        return {"status": "deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/admin/metrics")
+async def get_metrics(request: Request):
+    """Get usage metrics for the dashboard"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        
+        # Get today's queries
+        today = datetime.now().strftime('%Y-%m-%d')
+        cur.execute("""
+            SELECT COUNT(*) FROM query_logs 
+            WHERE DATE(timestamp) = ?
+        """, (today,))
+        queries_today = cur.fetchone()[0]
+        
+        # Get this week's queries
+        week_ago = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
+        cur.execute("""
+            SELECT COUNT(*) FROM query_logs 
+            WHERE DATE(timestamp) >= ?
+        """, (week_ago,))
+        queries_week = cur.fetchone()[0]
+        
+        # Get total queries
+        cur.execute("SELECT COUNT(*) FROM query_logs")
+        total_queries = cur.fetchone()[0]
+        
+        # Get active users
+        cur.execute("""
+            SELECT COUNT(DISTINCT user_id) FROM query_logs 
+            WHERE DATE(timestamp) = ?
+        """, (today,))
+        active_users = cur.fetchone()[0]
+        
+        # Get average response time
+        cur.execute("SELECT AVG(response_time) FROM query_logs")
+        avg_response_time = cur.fetchone()[0] or 0
+        
+        # Get daily usage for chart
+        cur.execute("""
+            SELECT DATE(timestamp) as date, COUNT(*) as count
+            FROM query_logs
+            WHERE DATE(timestamp) >= ?
+            GROUP BY DATE(timestamp)
+            ORDER BY date
+        """, (week_ago,))
+        daily_usage = [{"date": row[0], "count": row[1]} for row in cur.fetchall()]
+        
+        # Get popular topics (simplified - just count query keywords)
+        cur.execute("""
+            SELECT query, COUNT(*) as count
+            FROM query_logs
+            GROUP BY query
+            ORDER BY count DESC
+            LIMIT 10
+        """)
+        popular_topics = [{"topic": row[0][:30], "count": row[1]} for row in cur.fetchall()]
+        
+        con.close()
+        
+        return {
+            "total_queries": total_queries,
+            "queries_today": queries_today,
+            "queries_week": queries_week,
+            "active_users": active_users,
+            "avg_response_time": avg_response_time,
+            "daily_usage": daily_usage,
+            "popular_topics": popular_topics,
+            "messages_sent": total_queries
+        }
+    except Exception as e:
+        print(f"Error fetching metrics: {e}")
+        return {
+            "total_queries": 0,
+            "queries_today": 0,
+            "queries_week": 0,
+            "active_users": 0,
+            "avg_response_time": 0,
+            "daily_usage": [],
+            "popular_topics": [],
+            "messages_sent": 0
+        }
+
+@app.post("/admin/text-training")
+async def add_text_training(data: TextTrainingIn, request: Request):
+    """Add text training data"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("""
+            INSERT INTO text_training (content, character_count)
+            VALUES (?, ?)
+        """, (data.content, len(data.content)))
+        con.commit()
+        con.close()
+        
+        # TODO: Actually index this content into ChromaDB
+        
+        return {"status": "saved", "characters": len(data.content)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/admin/qa-pairs")
+async def get_qa_pairs(request: Request):
+    """Get all Q&A pairs"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("""
+            SELECT id, question, answer, created_at, used_count
+            FROM qa_pairs
+            ORDER BY created_at DESC
+        """)
+        rows = cur.fetchall()
+        con.close()
+        
+        qa_pairs = []
+        for row in rows:
+            qa_pairs.append({
+                "id": row[0],
+                "question": row[1],
+                "answer": row[2],
+                "created_at": row[3],
+                "used_count": row[4]
+            })
+        
+        return {"qa_pairs": qa_pairs}
+    except Exception as e:
+        print(f"Error fetching Q&A pairs: {e}")
+        return {"qa_pairs": []}
+
+@app.post("/admin/qa-pairs")
+async def add_qa_pair(data: QAPairIn, request: Request):
+    """Add a Q&A pair"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("""
+            INSERT INTO qa_pairs (question, answer)
+            VALUES (?, ?)
+        """, (data.question, data.answer))
+        con.commit()
+        con.close()
+        
+        return {"status": "saved"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/admin/qa-pairs/{qa_id}")
+async def delete_qa_pair(qa_id: int, request: Request):
+    """Delete a Q&A pair"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        cur.execute("DELETE FROM qa_pairs WHERE id = ?", (qa_id,))
+        con.commit()
+        con.close()
+        
+        return {"status": "deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/admin/upload-document")
+async def upload_document(request: Request, file: UploadFile = File(...)):
+    """Upload and index a document"""
+    _require_admin(request)
+    
+    try:
+        # Save the file
+        upload_dir = BASE_DIR / "data" / "uploads"
+        upload_dir.mkdir(exist_ok=True, parents=True)
+        
+        file_path = upload_dir / file.filename
+        content = await file.read()
+        
+        with open(file_path, "wb") as f:
+            f.write(content)
+        
+        # TODO: Trigger indexing for this specific file
+        
+        return {"status": "uploaded", "filename": file.filename}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
