@@ -16,6 +16,7 @@ import chromadb
 from chromadb.config import Settings
 import hashlib
 import time
+import importlib.util
 
 load_dotenv()
 
@@ -113,6 +114,96 @@ def init_database():
 
 # Initialize database on startup
 init_database()
+
+# === Indexing Functions ===
+def load_indexing_module():
+    """Dynamically load the indexing module to avoid circular imports"""
+    script_path = BASE_DIR / "scripts" / "build_index.py"
+    spec = importlib.util.spec_from_file_location("build_index", script_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+def index_single_file(file_path: str, filename: str) -> Dict:
+    """Index a single uploaded file"""
+    try:
+        # Load indexing functions
+        indexer = load_indexing_module()
+        
+        # Read and parse the file
+        meta, text = indexer.read_file_text(file_path)
+        if not text.strip():
+            return {"status": "error", "message": "File appears to be empty"}
+        
+        # Generate document ID and metadata
+        doc_id = indexer.file_id(file_path)
+        title = indexer.title_from_meta_or_path(meta, filename)
+        
+        # Tokenize and chunk
+        tokens = indexer.tokenize(text)
+        chunk_texts = indexer.chunk_text(text, indexer.CHUNK_TOKENS, indexer.CHUNK_OVERLAP)
+        
+        if not chunk_texts:
+            return {"status": "error", "message": "Could not create chunks from file"}
+        
+        # Create embeddings
+        embeddings = indexer.embed_all(chunk_texts)
+        
+        # Get collection
+        collection = indexer.get_collection()
+        
+        # Prepare data for ChromaDB
+        chunk_ids = [indexer.make_chunk_id(doc_id, i) for i in range(len(chunk_texts))]
+        
+        # Base metadata for all chunks
+        base_meta = {
+            "doc_id": doc_id,
+            "title": title,
+            "path": f"uploads/{filename}",
+            "source": "upload",
+            "last_indexed": indexer.now_iso(),
+        }
+        
+        # Normalize metadata
+        normalized_meta = indexer.normalize_metadata({**meta, **base_meta})
+        chunk_metas = [normalized_meta for _ in range(len(chunk_texts))]
+        
+        # Add chunk index to each metadata
+        for i, chunk_meta in enumerate(chunk_metas):
+            chunk_meta["chunk_index"] = i
+        
+        # Upsert to ChromaDB
+        collection.upsert(
+            ids=chunk_ids,
+            documents=chunk_texts,
+            embeddings=embeddings,
+            metadatas=chunk_metas
+        )
+        
+        # Update document tracking database
+        indexer.upsert_document_row({
+            "doc_id": doc_id,
+            "title": title,
+            "path": f"uploads/{filename}",
+            "source": "upload",
+            "chars": len(text),
+            "tokens": len(tokens),
+            "chunk_count": len(chunk_texts),
+            "last_indexed": base_meta["last_indexed"],
+            "status": "indexed"
+        })
+        
+        return {
+            "status": "indexed",
+            "doc_id": doc_id,
+            "title": title,
+            "chunks": len(chunk_texts),
+            "tokens": len(tokens)
+        }
+        
+    except Exception as e:
+        print(f"Error indexing file {filename}: {e}")
+        return {"status": "error", "message": str(e)}
 
 # === Models ===
 class QueryIn(BaseModel):
@@ -560,6 +651,15 @@ async def upload_document(request: Request, file: UploadFile = File(...)):
     _require_admin(request)
     
     try:
+        # Validate file type
+        allowed_extensions = {'.md', '.txt', '.pdf', '.docx', '.html', '.csv'}
+        file_ext = pathlib.Path(file.filename).suffix.lower()
+        if file_ext not in allowed_extensions:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Unsupported file type: {file_ext}. Allowed: {', '.join(allowed_extensions)}"
+            )
+        
         # Save the file
         upload_dir = BASE_DIR / "data" / "uploads"
         upload_dir.mkdir(exist_ok=True, parents=True)
@@ -570,8 +670,33 @@ async def upload_document(request: Request, file: UploadFile = File(...)):
         with open(file_path, "wb") as f:
             f.write(content)
         
-        # TODO: Trigger indexing for this specific file
+        # Index the uploaded file
+        result = index_single_file(str(file_path), file.filename)
         
-        return {"status": "uploaded", "filename": file.filename}
+        if result["status"] == "error":
+            # Clean up the file if indexing failed
+            try:
+                os.unlink(file_path)
+            except:
+                pass
+            raise HTTPException(status_code=500, detail=f"Indexing failed: {result['message']}")
+        
+        return {
+            "status": "uploaded_and_indexed",
+            "filename": file.filename,
+            "doc_id": result["doc_id"],
+            "title": result["title"],
+            "chunks": result["chunks"],
+            "tokens": result["tokens"]
+        }
+        
+    except HTTPException:
+        raise
     except Exception as e:
+        # Clean up file if something went wrong
+        try:
+            if 'file_path' in locals():
+                os.unlink(file_path)
+        except:
+            pass
         raise HTTPException(status_code=500, detail=str(e))
