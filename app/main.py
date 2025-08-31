@@ -335,10 +335,23 @@ async def query(data: QueryIn):
         
         context_text = "\n\n---\n\n".join(contexts[:data.top_k])
         
+        # Use a default style guide if prompts module isn't available
         try:
             from prompts import STYLE_GUIDE
         except ImportError:
-            from app.prompts import STYLE_GUIDE
+            try:
+                from app.prompts import STYLE_GUIDE
+            except ImportError:
+                # Fallback style guide
+                STYLE_GUIDE = """
+You are Robert Rodriguez Jr's Academy Assistant. Tone: clear, practical, encouraging.
+Answer ONLY from provided context. If missing, say you don't know and suggest the closest lesson.
+Format:
+1) Summary (3–6 sentences)
+2) How to apply (bulleted steps)
+3) Sources (title + deep link + timestamp/page if present)
+Keep citations precise.
+"""
         system_prompt = STYLE_GUIDE
         user_prompt = f"""Question: {data.query}
 
