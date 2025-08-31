@@ -721,3 +721,80 @@ async def upload_document(request: Request, file: UploadFile = File(...)):
         except:
             pass
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/admin/sync-documents")
+async def sync_documents(request: Request):
+    """Sync document tracking database with ChromaDB contents"""
+    _require_admin(request)
+    
+    try:
+        collection = get_collection()
+        if not collection:
+            return {"status": "error", "message": "ChromaDB collection not found"}
+        
+        # Get all documents from ChromaDB
+        result = collection.get(include=["metadatas"])
+        
+        if not result["ids"]:
+            return {"status": "success", "message": "No documents found in ChromaDB", "synced": 0}
+        
+        # Group chunks by document ID
+        doc_groups = {}
+        for chunk_id, metadata in zip(result["ids"], result["metadatas"]):
+            doc_id = metadata.get("doc_id")
+            if doc_id:
+                if doc_id not in doc_groups:
+                    doc_groups[doc_id] = {
+                        "chunks": [],
+                        "metadata": metadata
+                    }
+                doc_groups[doc_id]["chunks"].append(chunk_id)
+        
+        # Update document tracking database
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        
+        synced_count = 0
+        for doc_id, doc_info in doc_groups.items():
+            meta = doc_info["metadata"]
+            chunk_count = len(doc_info["chunks"])
+            
+            # Calculate estimated character count (rough estimate)
+            estimated_chars = chunk_count * 800  # rough estimate
+            estimated_tokens = chunk_count * 200  # rough estimate
+            
+            cur.execute("""
+                INSERT OR REPLACE INTO documents 
+                (doc_id, title, path, source, tags, categories, url, video_url, last_updated, chars, tokens, chunk_count, last_indexed, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                doc_id,
+                meta.get("title", "Unknown Document"),
+                meta.get("path", ""),
+                meta.get("source", "unknown"),
+                meta.get("tags", ""),
+                meta.get("categories", ""),
+                meta.get("url", ""),
+                meta.get("video_url", ""),
+                meta.get("last_updated", ""),
+                estimated_chars,
+                estimated_tokens,
+                chunk_count,
+                meta.get("last_indexed", ""),
+                "indexed"
+            ))
+            synced_count += 1
+        
+        con.commit()
+        con.close()
+        
+        return {
+            "status": "success", 
+            "message": f"Synced {synced_count} documents from {len(result['ids'])} chunks",
+            "synced": synced_count,
+            "total_chunks": len(result["ids"])
+        }
+        
+    except Exception as e:
+        print(f"Error syncing documents: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
