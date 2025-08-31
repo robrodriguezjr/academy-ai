@@ -186,6 +186,11 @@ def index_single_file(file_path: str, filename: str) -> Dict:
             "title": title,
             "path": f"uploads/{filename}",
             "source": "upload",
+            "tags": indexer.normalize_scalar(meta.get("tags")),
+            "categories": indexer.normalize_scalar(meta.get("categories")),
+            "url": indexer.normalize_scalar(meta.get("url")),
+            "video_url": indexer.normalize_scalar(meta.get("video_url")),
+            "last_updated": indexer.normalize_scalar(meta.get("last_updated")),
             "chars": len(text),
             "tokens": len(tokens),
             "chunk_count": len(chunk_texts),
@@ -330,7 +335,10 @@ async def query(data: QueryIn):
         
         context_text = "\n\n---\n\n".join(contexts[:data.top_k])
         
-        from prompts import STYLE_GUIDE
+        try:
+            from prompts import STYLE_GUIDE
+        except ImportError:
+            from app.prompts import STYLE_GUIDE
         system_prompt = STYLE_GUIDE
         user_prompt = f"""Question: {data.query}
 
