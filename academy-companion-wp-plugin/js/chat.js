@@ -91,6 +91,17 @@
                 const loadingMsg = document.getElementById('loading');
                 if (loadingMsg) loadingMsg.remove();
                 
+                // Check for API errors
+                if (data.detail || !data.answer) {
+                    const errorMsg = data.detail || 'Sorry, I encountered an error processing your request.';
+                    messages.innerHTML += `
+                        <div class="message assistant">
+                            <div class="content">I'm experiencing some technical difficulties right now. Please try again in a few moments. If the issue persists, the system may be undergoing maintenance.</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 // Add assistant response
                 let sourcesHtml = '';
                 if (data.sources && data.sources.length > 0) {
