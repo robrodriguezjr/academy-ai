@@ -6,20 +6,20 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-  background: #0a0e27;
+  background: #1a1a1a;
   color: #ffffff;
 }
 
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
 }
 
 /* Sidebar */
 .sidebar {
   width: 260px;
-  background: rgba(20, 24, 44, 0.95);
+  background: rgba(35, 35, 35, 0.95);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@ body {
 .logo-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -109,9 +109,9 @@ body {
 }
 
 .nav-item.active {
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
-  border-left: 3px solid #667eea;
+  background: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+  border-left: 3px solid #ff6b35;
 }
 
 .nav-item .icon {
@@ -133,7 +133,7 @@ body {
 }
 
 .main-header {
-  background: rgba(20, 24, 44, 0.5);
+  background: rgba(35, 35, 35, 0.5);
   padding: 20px 40px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
@@ -173,7 +173,7 @@ body {
 }
 
 .metric-card {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -223,8 +223,8 @@ body {
 
 .metric-badge {
   display: inline-block;
-  background: rgba(102, 126, 234, 0.2);
-  color: #667eea;
+  background: rgba(255, 107, 53, 0.2);
+  color: #ff6b35;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -242,7 +242,7 @@ body {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, #ff6b35, #f7931e);
   border-radius: 3px;
   transition: width 0.3s ease;
 }
@@ -257,7 +257,7 @@ body {
 
 .chart-card,
 .world-map-card {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -301,8 +301,8 @@ body {
 }
 
 .country-count {
-  background: rgba(102, 126, 234, 0.2);
-  color: #667eea;
+  background: rgba(255, 107, 53, 0.2);
+  color: #ff6b35;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 12px;
@@ -310,7 +310,7 @@ body {
 
 /* Chat Interface */
 .chat-interface {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -356,8 +356,8 @@ body {
 }
 
 .message-content {
-  background: rgba(102, 126, 234, 0.2);
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  background: rgba(255, 107, 53, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.3);
   border-radius: 12px;
   padding: 12px 16px;
   color: white;
@@ -401,7 +401,7 @@ body {
   padding: 10px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  border-left: 3px solid #667eea;
+  border-left: 3px solid #ff6b35;
 }
 
 .sources-header {
@@ -418,7 +418,7 @@ body {
 }
 
 .source-item a {
-  color: #667eea;
+  color: #ff6b35;
   text-decoration: none;
   font-weight: 500;
 }
@@ -453,12 +453,12 @@ body {
 
 .chat-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #ff6b35;
   background: rgba(255, 255, 255, 0.08);
 }
 
 .chat-send-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -474,7 +474,7 @@ body {
 
 .chat-send-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
 }
 
 .chat-send-btn:disabled {
@@ -495,8 +495,8 @@ body {
 }
 
 .dropzone {
-  background: rgba(20, 24, 44, 0.6);
-  border: 2px dashed rgba(102, 126, 234, 0.5);
+  background: rgba(45, 45, 45, 0.6);
+  border: 2px dashed rgba(255, 107, 53, 0.5);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
@@ -506,8 +506,8 @@ body {
 }
 
 .dropzone:hover {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.1);
+  border-color: #ff6b35;
+  background: rgba(255, 107, 53, 0.1);
 }
 
 .dropzone-icon {
@@ -526,12 +526,12 @@ body {
 }
 
 .uploading {
-  color: #667eea;
+  color: #ff6b35;
   font-weight: 500;
 }
 
 .documents-table {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -578,7 +578,7 @@ body {
 
 /* Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -591,7 +591,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
 }
 
 .btn-small {
@@ -697,7 +697,7 @@ body {
 }
 
 .doc-title {
-  color: #667eea;
+  color: #ff6b35;
   cursor: pointer;
 }
 
@@ -706,8 +706,8 @@ body {
 }
 
 .type-badge {
-  background: rgba(102, 126, 234, 0.2);
-  color: #667eea;
+  background: rgba(255, 107, 53, 0.2);
+  color: #ff6b35;
   padding: 2px 6px;
   border-radius: 3px;
   font-size: 10px;
@@ -742,7 +742,7 @@ body {
 }
 
 .training-content {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -818,7 +818,7 @@ body {
 }
 
 .qa-list {
-  background: rgba(20, 24, 44, 0.6);
+  background: rgba(45, 45, 45, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 20px;
@@ -880,7 +880,7 @@ body {
 }
 
 .modal-content {
-  background: rgba(20, 24, 44, 0.95);
+  background: rgba(45, 45, 45, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 30px;

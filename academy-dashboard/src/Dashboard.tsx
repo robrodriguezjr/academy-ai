@@ -242,7 +242,7 @@ export const Dashboard: React.FC = () => {
     { name: 'Used', value: 75 },
     { name: 'Remaining', value: 25 }
   ];
-  const COLORS = ['#667eea', '#e0e7ff'];
+  const COLORS = ['#ff6b35', '#f7931e'];
 
   return (
     <div className="dashboard-container">
@@ -406,7 +406,7 @@ export const Dashboard: React.FC = () => {
                       <XAxis dataKey="date" />
                       <YAxis />
                       <Tooltip />
-                      <Line type="monotone" dataKey="count" stroke="#667eea" strokeWidth={2} />
+                      <Line type="monotone" dataKey="count" stroke="#ff6b35" strokeWidth={2} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
