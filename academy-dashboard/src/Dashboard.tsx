@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useDropzone } from 'react-dropzone';
@@ -27,6 +27,14 @@ interface Metrics {
   training_characters: number;
 }
 
+interface ChatMessage {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+  sources?: { title: string; url?: string; source?: string }[];
+}
+
 export const Dashboard: React.FC = () => {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -35,12 +43,32 @@ export const Dashboard: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [activeView, setActiveView] = useState<'overview' | 'chat-history' | 'leads' | 'documents' | 'training' | 'qa'>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  
+  // Chat state
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      text: 'Hello! I\'m Academy Companion, your AI learning assistant from Creative Path Academy. How can I help you with your photography journey today?',
+      isUser: false,
+      timestamp: new Date()
+    }
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [chatLoading, setChatLoading] = useState(false);
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchStatus();
     fetchDocuments();
     fetchMetrics();
   }, []);
+
+  // Auto-scroll to bottom when new messages are added
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  }, [chatMessages, chatLoading]);
 
   const fetchStatus = async () => {
     try {
@@ -127,6 +155,85 @@ export const Dashboard: React.FC = () => {
       alert('Reindexing started. Check back in a few minutes.');
     } catch (error) {
       alert('Failed to start reindexing');
+    }
+  };
+
+  // Chat functionality
+  const formatResponse = (text: string): string => {
+    // Convert **bold** to <strong>
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Convert numbered sections like "1) Summary" to bold headers
+    text = text.replace(/^(\d+\)\s*\*\*.*?\*\*)/gm, '<div style="font-weight:600;color:#ffffff;margin:15px 0 8px 0;font-size:15px;">$1</div>');
+    
+    // Convert bullet points to proper list items
+    text = text.replace(/^\s*[-•]\s+(.+)$/gm, '<li style="margin:4px 0;line-height:1.5;color:rgba(255,255,255,0.9);">$1</li>');
+    
+    // Wrap consecutive list items in <ul>
+    text = text.replace(/(<li.*?<\/li>\s*)+/g, function(match) {
+      return '<ul style="margin:8px 0;padding-left:20px;">' + match + '</ul>';
+    });
+    
+    // Convert line breaks to <br> for better spacing
+    text = text.replace(/\n\n/g, '<br><br>');
+    text = text.replace(/\n/g, '<br>');
+    
+    // Make links clickable
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#667eea;text-decoration:none;font-weight:500;">$1</a>');
+    
+    // Remove source citations that appear in the text
+    text = text.replace(/3\)\s*\*\*Sources\*\*:?\s*[\s\S]*$/, '');
+    text = text.replace(/Sources:\s*[\s\S]*$/, '');
+    
+    return text;
+  };
+
+  const sendChatMessage = async () => {
+    if (!chatInput.trim() || chatLoading) return;
+
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      text: chatInput,
+      isUser: true,
+      timestamp: new Date()
+    };
+
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatInput('');
+    setChatLoading(true);
+
+    try {
+      const response = await axios.post(`${API_URL}/query`, {
+        query: chatInput,
+        top_k: 5
+      });
+
+      const aiMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        text: response.data.answer || 'Sorry, I encountered an error. Please try again.',
+        isUser: false,
+        timestamp: new Date(),
+        sources: response.data.sources || []
+      };
+
+      setChatMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        text: 'Sorry, I encountered an error connecting to the API. Please try again.',
+        isUser: false,
+        timestamp: new Date()
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setChatLoading(false);
+    }
+  };
+
+  const handleChatKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChatMessage();
     }
   };
 
@@ -318,11 +425,65 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div className="chat-preview">
-                <h3>Live Chat</h3>
-                <div className="chat-widget">
-                  <div className="chat-message assistant">
-                    Hello! I'm Academy Companion, your AI learning assistant from Creative Path Academy. How can I help you with your photography journey today?
+              <div className="chat-interface">
+                <h3>Live Chat Interface</h3>
+                <div className="chat-container">
+                  <div className="chat-messages" ref={chatMessagesRef}>
+                    {chatMessages.map((message) => (
+                      <div key={message.id} className={`chat-message ${message.isUser ? 'user' : 'assistant'}`}>
+                        <div className="message-content">
+                          {message.isUser ? (
+                            <span>{message.text}</span>
+                          ) : (
+                            <div dangerouslySetInnerHTML={{ __html: formatResponse(message.text) }} />
+                          )}
+                          {message.sources && message.sources.length > 0 && (
+                            <div className="message-sources">
+                              <div className="sources-header">📚 Sources:</div>
+                              {message.sources.map((source, index) => (
+                                <div key={index} className="source-item">
+                                  • <strong>{source.title || `Document ${index + 1}`}</strong>
+                                  {source.url && (
+                                    <> - <a href={source.url} target="_blank" rel="noopener noreferrer">View Article</a></>
+                                  )}
+                                  {source.source && !source.url && (
+                                    <> - <em>{source.source}</em></>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        <div className="message-time">
+                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </div>
+                      </div>
+                    ))}
+                    {chatLoading && (
+                      <div className="chat-message assistant loading">
+                        <div className="message-content">
+                          <span>Thinking...</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="chat-input-container">
+                    <textarea
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      onKeyPress={handleChatKeyPress}
+                      placeholder="Ask about photography, business, or creative techniques..."
+                      className="chat-input"
+                      rows={2}
+                      disabled={chatLoading}
+                    />
+                    <button 
+                      onClick={sendChatMessage}
+                      disabled={chatLoading || !chatInput.trim()}
+                      className="chat-send-btn"
+                    >
+                      {chatLoading ? '⏳' : '→'}
+                    </button>
                   </div>
                 </div>
               </div>
