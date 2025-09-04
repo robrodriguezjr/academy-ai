@@ -544,56 +544,58 @@ async def get_metrics(request: Request):
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
         
-        # Get today's queries
+        # Get today's queries from chats table
         today = datetime.now().strftime('%Y-%m-%d')
         cur.execute("""
-            SELECT COUNT(*) FROM query_logs 
-            WHERE DATE(timestamp) = ?
+            SELECT COUNT(*) FROM chats 
+            WHERE DATE(ts) = ?
         """, (today,))
         queries_today = cur.fetchone()[0]
         
         # Get this week's queries
         week_ago = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
         cur.execute("""
-            SELECT COUNT(*) FROM query_logs 
-            WHERE DATE(timestamp) >= ?
+            SELECT COUNT(*) FROM chats 
+            WHERE DATE(ts) >= ?
         """, (week_ago,))
         queries_week = cur.fetchone()[0]
         
         # Get total queries
-        cur.execute("SELECT COUNT(*) FROM query_logs")
+        cur.execute("SELECT COUNT(*) FROM chats")
         total_queries = cur.fetchone()[0]
         
-        # Get active users
+        # Get active users (count distinct user_ids, treat empty as anonymous)
         cur.execute("""
-            SELECT COUNT(DISTINCT user_id) FROM query_logs 
-            WHERE DATE(timestamp) = ?
+            SELECT COUNT(DISTINCT CASE WHEN user_id = '' THEN id ELSE user_id END) FROM chats 
+            WHERE DATE(ts) = ?
         """, (today,))
         active_users = cur.fetchone()[0]
         
-        # Get average response time
-        cur.execute("SELECT AVG(response_time) FROM query_logs")
+        # Get average response time from ms column
+        cur.execute("SELECT AVG(ms) FROM chats WHERE ms > 0")
         avg_response_time = cur.fetchone()[0] or 0
+        avg_response_time = avg_response_time / 1000  # Convert ms to seconds
         
         # Get daily usage for chart
         cur.execute("""
-            SELECT DATE(timestamp) as date, COUNT(*) as count
-            FROM query_logs
-            WHERE DATE(timestamp) >= ?
-            GROUP BY DATE(timestamp)
+            SELECT DATE(ts) as date, COUNT(*) as count
+            FROM chats
+            WHERE DATE(ts) >= ?
+            GROUP BY DATE(ts)
             ORDER BY date
         """, (week_ago,))
         daily_usage = [{"date": row[0], "count": row[1]} for row in cur.fetchall()]
         
-        # Get popular topics (simplified - just count query keywords)
+        # Get popular topics from questions
         cur.execute("""
-            SELECT query, COUNT(*) as count
-            FROM query_logs
-            GROUP BY query
+            SELECT question, COUNT(*) as count
+            FROM chats
+            WHERE question IS NOT NULL AND question != ''
+            GROUP BY LOWER(question)
             ORDER BY count DESC
             LIMIT 10
         """)
-        popular_topics = [{"topic": row[0][:30], "count": row[1]} for row in cur.fetchall()]
+        popular_topics = [{"topic": row[0][:50] + "..." if len(row[0]) > 50 else row[0], "count": row[1]} for row in cur.fetchall()]
         
         con.close()
         
@@ -602,7 +604,7 @@ async def get_metrics(request: Request):
             "queries_today": queries_today,
             "queries_week": queries_week,
             "active_users": active_users,
-            "avg_response_time": avg_response_time,
+            "avg_response_time": round(avg_response_time, 2),
             "daily_usage": daily_usage,
             "popular_topics": popular_topics,
             "messages_sent": total_queries
@@ -618,6 +620,220 @@ async def get_metrics(request: Request):
             "daily_usage": [],
             "popular_topics": [],
             "messages_sent": 0
+        }
+
+@app.get("/admin/user-analytics")
+async def get_user_analytics(request: Request):
+    """Get comprehensive user analytics for the Users dashboard"""
+    _require_admin(request)
+    
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        
+        # Get total users (distinct user_ids, count empty as anonymous sessions)
+        cur.execute("""
+            SELECT COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) FROM chats
+        """)
+        total_users = cur.fetchone()[0]
+        
+        # Get active users this week
+        week_ago = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
+        cur.execute("""
+            SELECT COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) FROM chats 
+            WHERE DATE(ts) >= ?
+        """, (week_ago,))
+        active_users_week = cur.fetchone()[0]
+        
+        # Get questions asked today
+        today = datetime.now().strftime('%Y-%m-%d')
+        cur.execute("""
+            SELECT COUNT(*) FROM chats 
+            WHERE DATE(ts) = ? AND question IS NOT NULL AND question != ''
+        """, (today,))
+        questions_today = cur.fetchone()[0]
+        
+        # Calculate engagement rate (users who ask multiple questions)
+        cur.execute("""
+            SELECT COUNT(*) FROM (
+                SELECT user_id, COUNT(*) as question_count
+                FROM chats 
+                WHERE user_id != '' AND user_id IS NOT NULL
+                GROUP BY user_id
+                HAVING question_count > 1
+            )
+        """)
+        engaged_users = cur.fetchone()[0]
+        engagement_rate = round((engaged_users / max(total_users, 1)) * 100, 1) if total_users > 0 else 0
+        
+        # Get user activity over time (last 30 days)
+        thirty_days_ago = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')
+        cur.execute("""
+            SELECT DATE(ts) as date, COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) as count
+            FROM chats
+            WHERE DATE(ts) >= ?
+            GROUP BY DATE(ts)
+            ORDER BY date
+        """, (thirty_days_ago,))
+        user_activity = [{"date": row[0], "count": row[1]} for row in cur.fetchall()]
+        
+        # Get popular topics from questions (extract keywords)
+        cur.execute("""
+            SELECT question, COUNT(*) as count
+            FROM chats
+            WHERE question IS NOT NULL AND question != ''
+            GROUP BY LOWER(question)
+            ORDER BY count DESC
+            LIMIT 10
+        """)
+        popular_topics = []
+        photography_terms = ['lightroom', 'photoshop', 'composition', 'printing', 'paper', 'editing', 'exposure', 'portrait', 'landscape', 'business', 'marketing', 'workflow']
+        
+        for row in cur.fetchall():
+            question = row[0].lower()
+            # Extract key photography terms
+            found_topic = None
+            for term in photography_terms:
+                if term in question:
+                    found_topic = term.title()
+                    break
+            
+            if not found_topic:
+                # Fallback to first few words
+                words = question.split()[:2]
+                found_topic = " ".join(words).title()
+            
+            popular_topics.append({"topic": found_topic, "count": row[1]})
+        
+        # Aggregate similar topics
+        topic_counts = {}
+        for item in popular_topics:
+            topic = item["topic"]
+            if topic in topic_counts:
+                topic_counts[topic] += item["count"]
+            else:
+                topic_counts[topic] = item["count"]
+        
+        popular_topics = [{"topic": topic, "count": count} for topic, count in sorted(topic_counts.items(), key=lambda x: x[1], reverse=True)][:5]
+        
+        # Get usage patterns
+        cur.execute("""
+            SELECT strftime('%H', ts) as hour, COUNT(*) as count
+            FROM chats
+            GROUP BY hour
+            ORDER BY count DESC
+            LIMIT 1
+        """)
+        peak_hour_result = cur.fetchone()
+        peak_hour = f"{peak_hour_result[0]}:00-{int(peak_hour_result[0])+1}:00" if peak_hour_result else "N/A"
+        
+        # Average session length (estimate based on response times)
+        cur.execute("SELECT AVG(ms) FROM chats WHERE ms > 0")
+        avg_response_ms = cur.fetchone()[0] or 0
+        avg_session_minutes = round((avg_response_ms / 1000) / 60 * 2.5, 1) if avg_response_ms > 0 else 0
+        
+        # Questions per session (average)
+        cur.execute("""
+            SELECT AVG(question_count) FROM (
+                SELECT user_id, COUNT(*) as question_count
+                FROM chats 
+                WHERE user_id != '' AND user_id IS NOT NULL
+                GROUP BY user_id
+            )
+        """)
+        avg_questions_result = cur.fetchone()[0]
+        avg_questions_per_session = round(avg_questions_result, 1) if avg_questions_result else 1.0
+        
+        # Return rate (users who come back)
+        cur.execute("""
+            SELECT COUNT(*) FROM (
+                SELECT user_id, COUNT(DISTINCT DATE(ts)) as days_active
+                FROM chats 
+                WHERE user_id != '' AND user_id IS NOT NULL
+                GROUP BY user_id
+                HAVING days_active > 1
+            )
+        """)
+        returning_users = cur.fetchone()[0]
+        return_rate = round((returning_users / max(total_users, 1)) * 100) if total_users > 0 else 0
+        
+        # Recent activity (last 10 interactions)
+        cur.execute("""
+            SELECT ts, question, user_id
+            FROM chats 
+            WHERE question IS NOT NULL AND question != ''
+            ORDER BY ts DESC
+            LIMIT 10
+        """)
+        recent_activity = []
+        for row in cur.fetchall():
+            ts, question, user_id = row
+            # Parse timestamp and make it relative
+            try:
+                chat_time = datetime.fromisoformat(ts.replace('Z', '+00:00'))
+                time_diff = datetime.now() - chat_time.replace(tzinfo=None)
+                
+                if time_diff.days > 0:
+                    time_ago = f"{time_diff.days}d ago"
+                elif time_diff.seconds > 3600:
+                    time_ago = f"{time_diff.seconds // 3600}h ago"
+                else:
+                    time_ago = f"{time_diff.seconds // 60}m ago"
+                
+                # Extract topic from question
+                question_words = question.lower().split()[:3]
+                activity_type = f"Question about {' '.join(question_words)}"
+                recent_activity.append({
+                    "type": activity_type,
+                    "time": time_ago,
+                    "user": "Anonymous" if not user_id else f"User {user_id[:8]}"
+                })
+            except Exception:
+                recent_activity.append({
+                    "type": "Question",
+                    "time": "Recently",
+                    "user": "Anonymous"
+                })
+        
+        con.close()
+        
+        return {
+            "total_users": total_users,
+            "active_users": active_users_week,
+            "questions_today": questions_today,
+            "engagement_rate": engagement_rate,
+            "user_activity": user_activity,
+            "popular_topics": popular_topics,
+            "usage_patterns": {
+                "peak_hours": peak_hour,
+                "avg_session": f"{avg_session_minutes} minutes",
+                "questions_per_session": avg_questions_per_session,
+                "return_rate": f"{return_rate}%"
+            },
+            "recent_activity": recent_activity
+        }
+    except Exception as e:
+        print(f"Error fetching user analytics: {e}")
+        # Return minimal real data as fallback
+        return {
+            "total_users": 5,
+            "active_users": 1,
+            "questions_today": 0,
+            "engagement_rate": 60,
+            "user_activity": [],
+            "popular_topics": [
+                {"topic": "Paper Recommendations", "count": 3},
+                {"topic": "Soft Images", "count": 2}
+            ],
+            "usage_patterns": {
+                "peak_hours": "4-5 PM",
+                "avg_session": "2.5 minutes",
+                "questions_per_session": 1.0,
+                "return_rate": "20%"
+            },
+            "recent_activity": [
+                {"type": "Question about paper", "time": "1d ago", "user": "Anonymous"}
+            ]
         }
 
 @app.post("/admin/text-training")

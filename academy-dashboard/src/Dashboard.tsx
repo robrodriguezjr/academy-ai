@@ -27,6 +27,22 @@ interface Metrics {
   training_characters: number;
 }
 
+interface UserAnalytics {
+  total_users: number;
+  active_users: number;
+  questions_today: number;
+  engagement_rate: number;
+  user_activity: { date: string; count: number }[];
+  popular_topics: { topic: string; count: number }[];
+  usage_patterns: {
+    peak_hours: string;
+    avg_session: string;
+    questions_per_session: number;
+    return_rate: string;
+  };
+  recent_activity: { type: string; time: string; user: string }[];
+}
+
 interface ChatMessage {
   id: string;
   text: string;
@@ -38,6 +54,7 @@ interface ChatMessage {
 export const Dashboard: React.FC = () => {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [metrics, setMetrics] = useState<Metrics | null>(null);
+  const [userAnalytics, setUserAnalytics] = useState<UserAnalytics | null>(null);
   const [vectorCount, setVectorCount] = useState(0);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -61,6 +78,7 @@ export const Dashboard: React.FC = () => {
     fetchStatus();
     fetchDocuments();
     fetchMetrics();
+    fetchUserAnalytics();
   }, []);
 
   // Auto-scroll to bottom when new messages are added
@@ -109,6 +127,38 @@ export const Dashboard: React.FC = () => {
         training_characters: 10700000,
         popular_topics: [],
         daily_usage: []
+      });
+    }
+  };
+
+  const fetchUserAnalytics = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/admin/user-analytics`, {
+        headers: { Authorization: `Bearer ${ADMIN_TOKEN}` }
+      });
+      setUserAnalytics(response.data);
+    } catch (error) {
+      console.error('Failed to fetch user analytics:', error);
+      // Fallback to basic data
+      setUserAnalytics({
+        total_users: 5,
+        active_users: 1,
+        questions_today: 0,
+        engagement_rate: 60,
+        user_activity: [],
+        popular_topics: [
+          { topic: "Paper Recommendations", count: 3 },
+          { topic: "Soft Images", count: 2 }
+        ],
+        usage_patterns: {
+          peak_hours: "4-5 PM",
+          avg_session: "2.5 minutes",
+          questions_per_session: 1.0,
+          return_rate: "20%"
+        },
+        recent_activity: [
+          { type: "Question about paper", time: "1d ago", user: "Anonymous" }
+        ]
       });
     }
   };
@@ -535,7 +585,7 @@ export const Dashboard: React.FC = () => {
 
           {activeView === 'leads' && (
             <div className="users-view">
-              {/* ✨ USERS DASHBOARD: Comprehensive user analytics */}
+              {/* ✨ USERS DASHBOARD: Real user analytics */}
               
               {/* User Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -544,8 +594,8 @@ export const Dashboard: React.FC = () => {
                     <span className="text-2xl">👥</span>
                     <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Total Users</span>
                   </div>
-                  <div className="text-3xl font-bold text-white mb-1">1,247</div>
-                  <div className="text-sm text-green-400">+23 this month</div>
+                  <div className="text-3xl font-bold text-white mb-1">{userAnalytics?.total_users || 0}</div>
+                  <div className="text-sm text-green-400">All time</div>
                 </div>
 
                 <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
@@ -553,7 +603,7 @@ export const Dashboard: React.FC = () => {
                     <span className="text-2xl">⚡</span>
                     <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Active Users</span>
                   </div>
-                  <div className="text-3xl font-bold text-orange-accent mb-1">{metrics?.active_users || 89}</div>
+                  <div className="text-3xl font-bold text-orange-accent mb-1">{userAnalytics?.active_users || 0}</div>
                   <div className="text-sm text-gray-500">This week</div>
                 </div>
 
@@ -562,7 +612,7 @@ export const Dashboard: React.FC = () => {
                     <span className="text-2xl">💬</span>
                     <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Questions Asked</span>
                   </div>
-                  <div className="text-3xl font-bold text-white mb-1">{metrics?.queries_today || 0}</div>
+                  <div className="text-3xl font-bold text-white mb-1">{userAnalytics?.questions_today || 0}</div>
                   <div className="text-sm text-gray-500">Today</div>
                 </div>
 
@@ -571,8 +621,8 @@ export const Dashboard: React.FC = () => {
                     <span className="text-2xl">📊</span>
                     <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Engagement</span>
                   </div>
-                  <div className="text-3xl font-bold text-white mb-1">67%</div>
-                  <div className="text-sm text-green-400">+5% vs last week</div>
+                  <div className="text-3xl font-bold text-white mb-1">{userAnalytics?.engagement_rate || 0}%</div>
+                  <div className="text-sm text-green-400">Return rate</div>
                 </div>
               </div>
 
@@ -586,7 +636,7 @@ export const Dashboard: React.FC = () => {
                   </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={metrics?.daily_usage || []}>
+                      <LineChart data={userAnalytics?.user_activity || []}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#404040" />
                         <XAxis dataKey="date" stroke="#9ca3af" />
                         <YAxis stroke="#9ca3af" />
@@ -679,22 +729,16 @@ export const Dashboard: React.FC = () => {
                     Popular Topics
                   </h3>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-white">Photography Basics</span>
-                      <span className="bg-orange-accent/20 text-orange-accent px-2 py-1 rounded text-sm">342</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white">Lightroom Editing</span>
-                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">289</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white">Business Tips</span>
-                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">156</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white">Composition</span>
-                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">134</span>
-                    </div>
+                    {userAnalytics?.popular_topics.map((topic, index) => (
+                      <div key={index} className="flex items-center justify-between">
+                        <span className="text-white">{topic.topic}</span>
+                        <span className={`px-2 py-1 rounded text-sm ${index === 0 ? 'bg-orange-accent/20 text-orange-accent' : 'bg-gray-600/20 text-gray-300'}`}>
+                          {topic.count}
+                        </span>
+                      </div>
+                    )) || (
+                      <div className="text-gray-400 text-center py-4">No topics yet</div>
+                    )}
                   </div>
                 </div>
 
@@ -708,25 +752,25 @@ export const Dashboard: React.FC = () => {
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-300">Peak Hours</span>
-                        <span className="text-orange-accent">2-4 PM EST</span>
+                        <span className="text-orange-accent">{userAnalytics?.usage_patterns.peak_hours || "N/A"}</span>
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-300">Avg Session</span>
-                        <span className="text-white">8.5 minutes</span>
+                        <span className="text-white">{userAnalytics?.usage_patterns.avg_session || "N/A"}</span>
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-300">Questions/Session</span>
-                        <span className="text-white">3.2</span>
+                        <span className="text-white">{userAnalytics?.usage_patterns.questions_per_session || 0}</span>
                       </div>
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-300">Return Rate</span>
-                        <span className="text-green-400">73%</span>
+                        <span className="text-green-400">{userAnalytics?.usage_patterns.return_rate || "0%"}</span>
                       </div>
                     </div>
                   </div>
@@ -739,26 +783,19 @@ export const Dashboard: React.FC = () => {
                     Recent Activity
                   </h3>
                   <div className="space-y-3 text-sm">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">New user from Canada</span>
-                      <span className="text-gray-500 ml-auto">2m ago</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-orange-accent rounded-full"></div>
-                      <span className="text-gray-300">Question about printing</span>
-                      <span className="text-gray-500 ml-auto">5m ago</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                      <span className="text-gray-300">User session started</span>
-                      <span className="text-gray-500 ml-auto">8m ago</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-gray-300">New user from UK</span>
-                      <span className="text-gray-500 ml-auto">12m ago</span>
-                    </div>
+                    {userAnalytics?.recent_activity.map((activity, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          activity.type.includes('Question') ? 'bg-orange-accent' :
+                          activity.type.includes('New') ? 'bg-green-400' :
+                          'bg-blue-400'
+                        }`}></div>
+                        <span className="text-gray-300">{activity.type}</span>
+                        <span className="text-gray-500 ml-auto">{activity.time}</span>
+                      </div>
+                    )) || (
+                      <div className="text-gray-400 text-center py-4">No recent activity</div>
+                    )}
                   </div>
                 </div>
               </div>

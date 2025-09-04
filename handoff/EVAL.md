@@ -1,262 +1,197 @@
-# Evaluation & Testing
+# Evaluation & Testing (Updated for Mentor-Style Assistant)
 
-## Golden Test Cases
+## 🎯 Purpose
+These tests validate that the Academy Companion Assistant delivers **warm, actionable, and contextually grounded** responses aligned with Robert Rodriguez Jr’s teaching philosophy and tone.
 
-These are critical test cases that must pass for the system to be considered functional. Each represents a core use case of the Academy Companion.
+Each test checks:
+- ✅ Tone: Encouraging, mentor-like, and clear
+- ✅ Structure: Summary → How to Apply → Resources
+- ✅ Content: Sourced strictly from the indexed knowledge base
+- ✅ Voice: Reflects Robert’s teaching values (growth, clarity, experimentation)
 
-### Test 1: Basic Photography Question
+---
+
+## 🧪 Golden Test Cases
+
+### Test 1: Composition Principle
 **Input**: "What is the rule of thirds in photography?"
 
 **Expected Output**:
-- Must mention dividing frame into 9 equal sections
-- Should explain placing subjects on intersection points
-- Should reference how it creates visual balance
-- Must cite specific source documents if available
+- Friendly explanation with emphasis on experimentation
+- Practical steps for trying it with a camera
+- Reference to blog post or workshop on composition
 
 **Validation**:
-- ✅ Answer contains technical explanation
-- ✅ Includes practical application
-- ✅ Sources cited if available in knowledge base
-- ❌ No hallucinated information
+- ✅ Warm, helpful tone (not robotic)
+- ✅ Concrete advice (e.g., turn on grid overlay)
+- ✅ Source cited (e.g., blog post or workshop title)
 
-### Test 2: Business Pricing Question
-**Input**: "How much should I charge for a 2-hour portrait session?"
+---
+
+### Test 2: Pricing Creative Work
+**Input**: "How should I price a 2-hour portrait session?"
 
 **Expected Output**:
-- Must NOT give specific dollar amounts without context
-- Should reference cost of doing business calculation
-- Should mention market research importance
-- Must suggest value-based pricing approach
+- Reminder that pricing depends on your goals and cost of doing business
+- Encouragement to use value-based pricing
+- Suggestion to review Robert’s business posts
 
 **Validation**:
-- ✅ Avoids arbitrary pricing
-- ✅ Provides framework for decision
-- ✅ References Robert's pricing philosophy
+- ✅ Avoids giving arbitrary dollar amounts
+- ✅ Emphasizes business sustainability and value
+- ✅ Cites workshop or blog on creative pricing
 
-### Test 3: Equipment Recommendation
-**Input**: "What camera should I buy as a beginner?"
+---
+
+### Test 3: Gear Questions
+**Input**: "What’s the best beginner camera for landscapes?"
 
 **Expected Output**:
-- Should focus on learning principles over gear
-- Must emphasize that equipment doesn't make the photographer
-- If specifics mentioned, should be from actual knowledge base
-- Should suggest starting with what you have
+- Emphasize learning over gear
+- Encourage using what you already have
+- Practical tips for evaluating gear needs later
 
 **Validation**:
-- ✅ Prioritizes technique over technology
-- ✅ Avoids gear-acquisition syndrome promotion
-- ✅ Practical advice for beginners
+- ✅ Avoids pushing gear acquisition
+- ✅ Ties back to creative development
+- ✅ Mentions Robert’s views on gear in blog/workshop
 
-### Test 4: Creative Development
-**Input**: "How do I find my photography style?"
+---
+
+### Test 4: Developing Personal Style
+**Input**: "How do I find my own photography style?"
 
 **Expected Output**:
-- Must emphasize style emerges from practice
-- Should mention personal projects (90-day framework)
-- Must reference studying masters for understanding, not copying
-- Should include visual journal concept
+- Encouragement that style emerges through consistent practice
+- Recommends visual journaling or 90-day projects
+- Mention of studying masters to inspire—not imitate
 
 **Validation**:
-- ✅ Process-focused rather than outcome-focused
-- ✅ Includes specific methodologies from knowledge base
-- ✅ Avoids generic creative advice
+- ✅ Growth-oriented tone
+- ✅ Specific practice-based advice
+- ✅ Source from workshop or blog
 
-### Test 5: Off-Topic Query
-**Input**: "What's the best way to invest in cryptocurrency?"
+---
+
+### Test 5: Off-Topic Question
+**Input**: "How should I invest in crypto?"
 
 **Expected Output**:
-- Must politely decline to answer
-- Should redirect to photography/creative topics
-- Must not attempt to answer outside domain
+- Warm redirection to creative topics
+- Invitation to ask about business, photography, or creativity instead
 
 **Validation**:
-- ✅ Stays within knowledge boundaries
-- ✅ Professional redirection
-- ❌ No attempt at off-topic response
+- ✅ Friendly refusal (not dismissive)
+- ✅ No fabricated information
+- ✅ Re-focus on Creative Path domains
 
-### Test 6: Insufficient Knowledge
-**Input**: "What settings do you recommend for astrophotography?"
+---
 
-**Expected Output** (if not in knowledge base):
-- Must acknowledge lack of specific information
-- Should offer related information if available
-- Must not invent technical specifications
-
-**Validation**:
-- ✅ Honest about knowledge limitations
-- ✅ Helpful redirection to available content
-- ❌ No fabricated technical details
-
-### Test 7: Follow-up Context
-**Input 1**: "What's the best lens for portraits?"
-**Input 2**: "What about for full frame vs crop sensor?"
+### Test 6: Unknown Knowledge
+**Input**: "What are the best aperture settings for photographing the Milky Way?"
 
 **Expected Output**:
-- Must maintain context from first question
-- Should address sensor size differences
-- Must build upon previous answer
+- Honest admission if topic isn’t in knowledge base
+- Suggest closest relevant topic (e.g., night photography basics)
+- Avoid fabricated details
 
 **Validation**:
-- ✅ Contextual continuity maintained
-- ✅ Relevant elaboration provided
-- ✅ No repetition of initial answer
+- ✅ Transparent about limits
+- ✅ Provides closest helpful insight
+- ✅ Keeps trust and humility
 
-### Test 8: Source Attribution
+---
+
+### Test 7: Multi-Turn Follow-up
+**Input 1**: "What’s a good lens for portraits?"
+**Input 2**: "Does that change for crop sensor cameras?"
+
+**Expected Output**:
+- Continues conversation naturally
+- Compares full-frame vs crop sensor implications
+- Encourages testing different focal lengths
+
+**Validation**:
+- ✅ Maintains thread of conversation
+- ✅ Provides meaningful elaboration
+- ✅ Encourages practice-based exploration
+
+---
+
+### Test 8: Quoting Robert
 **Input**: "What does Robert say about shooting in manual mode?"
 
 **Expected Output**:
-- Must only quote/reference actual documented statements
-- Should provide specific source citations
-- Must not paraphrase as direct quotes
+- Only references real, cited quotes or paraphrases from content
+- Clear citation to blog post or transcript
 
 **Validation**:
-- ✅ Accurate attribution
-- ✅ Specific source references
-- ❌ No invented quotes
+- ✅ Accurate source citation
+- ✅ No invented quotes
+- ✅ Encourages confidence with manual mode
 
-### Test 9: Complex Multi-Part Question
-**Input**: "I'm starting a photography business. What should I focus on first - building a portfolio, setting up legal structure, or finding clients?"
+---
+
+### Test 9: Multi-Topic Business Startup
+**Input**: "What should I do first to start a photography business? Legal setup, portfolio, or clients?"
 
 **Expected Output**:
-- Must address all three aspects
-- Should provide prioritized approach
-- Must reference business fundamentals from knowledge base
-- Should give actionable first steps
+- Prioritized advice (e.g., build portfolio first)
+- Clear connection between actions and business goals
+- Encouragement to iterate and grow
 
 **Validation**:
-- ✅ Comprehensive response
-- ✅ Clear prioritization
-- ✅ Practical action items
+- ✅ Balanced prioritization
+- ✅ Encouraging tone
+- ✅ Source-backed advice
 
-### Test 10: Technical + Creative Question
-**Input**: "How do I capture emotion in street photography while maintaining technical excellence?"
+---
+
+### Test 10: Creativity + Technique Blend
+**Input**: "How do I capture emotion in street photography while staying technically sharp?"
 
 **Expected Output**:
-- Must balance technical and artistic elements
-- Should reference specific techniques
-- Must maintain Robert's philosophy on authentic capture
-- Should include both settings and approach
+- Acknowledge the balance between emotion and technique
+- Tips on anticipation, timing, zone focusing
+- Frame this as a muscle you train through observation and practice
 
 **Validation**:
-- ✅ Technical accuracy
-- ✅ Creative philosophy aligned
-- ✅ Practical synthesis of both
+- ✅ Art + tech integration
+- ✅ Emphasizes mindset and preparation
+- ✅ Resource cited if available
 
-## Performance Metrics
+---
 
-### Response Quality Metrics
-- **Relevance Score**: >90% responses directly address the query
-- **Source Accuracy**: 100% of citations traceable to actual documents
-- **Hallucination Rate**: <1% of responses contain unfounded information
-- **Format Compliance**: >95% follow Summary/Application/Sources structure
+## 📏 Performance Metrics
+
+### Response Quality
+- **Relevance Score**: ≥ 90%
+- **Mentor Tone Score**: ≥ 95%
+- **Source Accuracy**: 100% traceable
+- **Hallucination Rate**: ≤ 1%
 
 ### Technical Metrics
-- **Response Time**: <3 seconds for standard queries
-- **Embedding Time**: <500ms per query
-- **Indexing Speed**: >10 documents per minute
-- **Vector Search Time**: <200ms for top-5 retrieval
+- **Query response time**: < 2 seconds
+- **Embedding latency**: < 500ms
+- **Vector search time**: < 200ms
+- **Auto-indexing speed**: ≥ 10 docs/min
 
-### User Experience Metrics
-- **Clarity Score**: Responses understandable at 10th-grade reading level
-- **Actionability**: >80% of responses include specific next steps
-- **Session Continuity**: Context maintained for 100% of follow-ups
-- **Error Recovery**: Graceful handling of 100% of edge cases
+### Experience Metrics
+- **Clarity**: Understandable at 8th–10th grade level
+- **Actionability**: ≥ 80% responses include concrete next steps
+- **Follow-up Handling**: 100% context retention in threads
+- **Failure Grace**: 100% graceful fallbacks on edge cases
 
-## Test Execution
+---
 
-### Manual Testing Protocol
-```bash
-# 1. Start backend
-cd ~/Academy\ Companion-AI
-source .venv/bin/activate
-python -m uvicorn app.main:app --port 8002
+## ✅ Weekly QA Routine
+- Review top 10 queries by volume
+- Re-score any responses with poor feedback
+- Validate source links
+- Re-index any new content from blog/workshops
+- Update golden tests quarterly
 
-# 2. Run test queries
-curl -X POST http://localhost:8002/query \
-  -H "Content-Type: application/json" \
-  -d '{"query": "[TEST QUESTION HERE]"}'
+---
 
-# 3. Validate response against criteria
-```
+Let this document guide all future evaluations to ensure your assistant stays a trusted, warm, and valuable presence in the Academy.
 
-### Automated Testing
-```python
-# test_golden.py
-import requests
-import json
-
-GOLDEN_TESTS = [
-    {
-        "query": "What is the rule of thirds?",
-        "must_contain": ["grid", "nine", "intersection"],
-        "must_not_contain": ["cryptocurrency", "investment"]
-    },
-    # ... more tests
-]
-
-def run_golden_tests():
-    for test in GOLDEN_TESTS:
-        response = requests.post(
-            "http://localhost:8002/query",
-            json={"query": test["query"]}
-        )
-        result = response.json()
-        
-        # Validate must_contain
-        for term in test.get("must_contain", []):
-            assert term.lower() in result["answer"].lower()
-        
-        # Validate must_not_contain  
-        for term in test.get("must_not_contain", []):
-            assert term.lower() not in result["answer"].lower()
-```
-
-## Regression Testing
-
-### Document Changes
-When new documents are added:
-1. Run all golden tests
-2. Verify existing answers maintain quality
-3. Check for conflicting information
-4. Validate source attribution updates
-
-### Model Updates
-When updating GPT model or embeddings:
-1. Full golden test suite
-2. Response time comparison
-3. Quality degradation check
-4. Cost analysis
-
-### Code Changes
-When modifying backend:
-1. Unit tests for modified functions
-2. Integration tests for API endpoints
-3. Full golden test validation
-4. Performance regression tests
-
-## Quality Assurance Checklist
-
-### Pre-Deployment
-- [ ] All golden tests passing
-- [ ] Response time <3 seconds
-- [ ] No hardcoded credentials
-- [ ] Error handling for all endpoints
-- [ ] Rate limiting configured
-- [ ] CORS properly set
-- [ ] Database migrations complete
-
-### Post-Deployment
-- [ ] Health check endpoint responding
-- [ ] First query successful
-- [ ] Document upload functional
-- [ ] Analytics tracking working
-- [ ] WordPress plugin connecting
-- [ ] No error logs in first hour
-
-### Weekly Validation
-- [ ] Review query logs for issues
-- [ ] Check for unanswered questions
-- [ ] Validate source attribution accuracy
-- [ ] Monitor response times
-- [ ] Review user feedback
-- [ ] Update Q&A pairs based on common queries
