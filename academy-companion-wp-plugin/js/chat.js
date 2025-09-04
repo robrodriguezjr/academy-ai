@@ -60,7 +60,7 @@
                     background: white !important;
                     border-radius: 20px !important;
                     box-shadow: 0 25px 50px rgba(0,0,0,0.25) !important;
-                    border: 5px solid red !important;
+                    border: 1px solid rgba(14, 165, 233, 0.1) !important;
                     display: block !important;
                     opacity: 1 !important;
                     margin: 0 !important;

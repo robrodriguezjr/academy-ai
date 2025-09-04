@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Academy Companion Chat
  * Description: AI chat assistant for Creative Path Academy members with floating widget
- * Version: 2.9
+ * Version: 3.0
  * Author: Robert Rodriguez Jr
  */
 
