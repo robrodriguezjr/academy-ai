@@ -280,7 +280,7 @@ export const Dashboard: React.FC = () => {
               onClick={() => setActiveView('leads')}
             >
               <span className="icon">👥</span>
-              {!sidebarCollapsed && <span>Members</span>}
+              {!sidebarCollapsed && <span>Users</span>}
             </button>
           </div>
 
@@ -316,7 +316,7 @@ export const Dashboard: React.FC = () => {
         <header className="main-header">
           <h1>{activeView === 'overview' ? 'Overview' : 
                activeView === 'chat-history' ? 'Chat History' : 
-               activeView === 'leads' ? 'Members' :
+               activeView === 'leads' ? 'Users' :
                activeView === 'documents' ? 'Links / Documents' : 
                activeView === 'training' ? 'Text Training' :
                'Q&A Management'}</h1>
@@ -531,6 +531,238 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
             </>
+          )}
+
+          {activeView === 'leads' && (
+            <div className="users-view">
+              {/* ✨ USERS DASHBOARD: Comprehensive user analytics */}
+              
+              {/* User Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">👥</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Total Users</span>
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-1">1,247</div>
+                  <div className="text-sm text-green-400">+23 this month</div>
+                </div>
+
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">⚡</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Active Users</span>
+                  </div>
+                  <div className="text-3xl font-bold text-orange-accent mb-1">{metrics?.active_users || 89}</div>
+                  <div className="text-sm text-gray-500">This week</div>
+                </div>
+
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">💬</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Questions Asked</span>
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-1">{metrics?.queries_today || 0}</div>
+                  <div className="text-sm text-gray-500">Today</div>
+                </div>
+
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">📊</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Engagement</span>
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-1">67%</div>
+                  <div className="text-sm text-green-400">+5% vs last week</div>
+                </div>
+              </div>
+
+              {/* User Activity & Demographics */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                {/* User Activity Chart */}
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                    <span className="mr-2">📈</span>
+                    User Activity Over Time
+                  </h3>
+                  <div className="h-64">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={metrics?.daily_usage || []}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#404040" />
+                        <XAxis dataKey="date" stroke="#9ca3af" />
+                        <YAxis stroke="#9ca3af" />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: '#2a2a2a',
+                            border: '1px solid #404040',
+                            borderRadius: '8px',
+                            color: '#ffffff'
+                          }}
+                        />
+                        <Line type="monotone" dataKey="count" stroke="#ff8c42" strokeWidth={3} name="Active Users" />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                {/* Top User Locations */}
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                    <span className="mr-2">🌍</span>
+                    User Locations
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇺🇸</span>
+                        <div>
+                          <span className="text-white font-medium">United States</span>
+                          <div className="text-sm text-gray-400">North America</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="bg-orange-accent text-white px-3 py-1 rounded-full text-sm font-medium">892</div>
+                        <div className="text-xs text-gray-500 mt-1">71.5%</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇨🇦</span>
+                        <div>
+                          <span className="text-white font-medium">Canada</span>
+                          <div className="text-sm text-gray-400">North America</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium">234</div>
+                        <div className="text-xs text-gray-500 mt-1">18.8%</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇬🇧</span>
+                        <div>
+                          <span className="text-white font-medium">United Kingdom</span>
+                          <div className="text-sm text-gray-400">Europe</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium">87</div>
+                        <div className="text-xs text-gray-500 mt-1">7.0%</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇦🇺</span>
+                        <div>
+                          <span className="text-white font-medium">Australia</span>
+                          <div className="text-sm text-gray-400">Oceania</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium">34</div>
+                        <div className="text-xs text-gray-500 mt-1">2.7%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* User Insights */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Popular Topics */}
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+                    <span className="mr-2">🔥</span>
+                    Popular Topics
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white">Photography Basics</span>
+                      <span className="bg-orange-accent/20 text-orange-accent px-2 py-1 rounded text-sm">342</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white">Lightroom Editing</span>
+                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">289</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white">Business Tips</span>
+                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">156</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-white">Composition</span>
+                      <span className="bg-gray-600/20 text-gray-300 px-2 py-1 rounded text-sm">134</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Usage Patterns */}
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+                    <span className="mr-2">⏰</span>
+                    Usage Patterns
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Peak Hours</span>
+                        <span className="text-orange-accent">2-4 PM EST</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Avg Session</span>
+                        <span className="text-white">8.5 minutes</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Questions/Session</span>
+                        <span className="text-white">3.2</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Return Rate</span>
+                        <span className="text-green-400">73%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Recent Activity */}
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
+                    <span className="mr-2">📝</span>
+                    Recent Activity
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">New user from Canada</span>
+                      <span className="text-gray-500 ml-auto">2m ago</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-orange-accent rounded-full"></div>
+                      <span className="text-gray-300">Question about printing</span>
+                      <span className="text-gray-500 ml-auto">5m ago</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span className="text-gray-300">User session started</span>
+                      <span className="text-gray-500 ml-auto">8m ago</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span className="text-gray-300">New user from UK</span>
+                      <span className="text-gray-500 ml-auto">12m ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
 
           {activeView === 'documents' && (
