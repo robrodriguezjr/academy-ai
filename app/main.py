@@ -631,19 +631,38 @@ async def get_user_analytics(request: Request):
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
         
-        # Get total users (distinct user_ids, count empty as anonymous sessions)
+        # Get total users (count distinct user_ids, treat all anonymous as 1 user)
         cur.execute("""
-            SELECT COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) FROM chats
+            SELECT COUNT(DISTINCT user_id) FROM chats WHERE user_id != '' AND user_id IS NOT NULL
         """)
-        total_users = cur.fetchone()[0]
+        identified_users = cur.fetchone()[0]
         
-        # Get active users this week
+        # Check if there are any anonymous sessions (empty/null user_id)
+        cur.execute("""
+            SELECT COUNT(*) FROM chats WHERE user_id = '' OR user_id IS NULL
+        """)
+        anonymous_sessions = cur.fetchone()[0]
+        
+        # Total users = identified users + 1 if there are anonymous sessions
+        total_users = identified_users + (1 if anonymous_sessions > 0 else 0)
+        
+        # Get active users this week (same logic as total users)
         week_ago = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
         cur.execute("""
-            SELECT COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) FROM chats 
-            WHERE DATE(ts) >= ?
+            SELECT COUNT(DISTINCT user_id) FROM chats 
+            WHERE DATE(ts) >= ? AND user_id != '' AND user_id IS NOT NULL
         """, (week_ago,))
-        active_users_week = cur.fetchone()[0]
+        identified_active_users = cur.fetchone()[0]
+        
+        # Check if there are any anonymous sessions this week
+        cur.execute("""
+            SELECT COUNT(*) FROM chats 
+            WHERE DATE(ts) >= ? AND (user_id = '' OR user_id IS NULL)
+        """, (week_ago,))
+        anonymous_active_sessions = cur.fetchone()[0]
+        
+        # Active users = identified users + 1 if there are anonymous sessions this week
+        active_users_week = identified_active_users + (1 if anonymous_active_sessions > 0 else 0)
         
         # Get questions asked today
         today = datetime.now().strftime('%Y-%m-%d')
@@ -666,16 +685,16 @@ async def get_user_analytics(request: Request):
         engaged_users = cur.fetchone()[0]
         engagement_rate = round((engaged_users / max(total_users, 1)) * 100, 1) if total_users > 0 else 0
         
-        # Get user activity over time (last 30 days)
+        # Get user activity over time (last 30 days) - simplified for current data
         thirty_days_ago = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')
         cur.execute("""
-            SELECT DATE(ts) as date, COUNT(DISTINCT CASE WHEN user_id = '' OR user_id IS NULL THEN id ELSE user_id END) as count
+            SELECT DATE(ts) as date, 1 as count
             FROM chats
             WHERE DATE(ts) >= ?
             GROUP BY DATE(ts)
             ORDER BY date
         """, (thirty_days_ago,))
-        user_activity = [{"date": row[0], "count": row[1]} for row in cur.fetchall()]
+        user_activity = [{"date": row[0], "count": 1} for row in cur.fetchall()]
         
         # Get popular topics from questions (extract keywords)
         cur.execute("""
