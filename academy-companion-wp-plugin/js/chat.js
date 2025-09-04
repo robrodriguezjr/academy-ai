@@ -215,6 +215,14 @@
                 // Convert **bold** to <strong>
                 formattedAnswer = formattedAnswer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 
+                // Convert markdown images to actual <img> tags
+                formattedAnswer = formattedAnswer.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, altText, imageUrl) {
+                    return `<div class="instructional-image" style="margin: 16px 0; text-align: center;">
+                        <img src="${imageUrl}" alt="${altText}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+                        ${altText ? `<div style="font-size: 12px; color: #6B7280; margin-top: 8px; font-style: italic;">${altText}</div>` : ''}
+                    </div>`;
+                });
+                
                 // Convert bullet points (- or •) to proper list items
                 formattedAnswer = formattedAnswer.replace(/^\s*[-•]\s+(.+)$/gm, '<li>$1</li>');
                 

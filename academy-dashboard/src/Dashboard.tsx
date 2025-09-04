@@ -213,6 +213,14 @@ export const Dashboard: React.FC = () => {
     // Convert **bold** to <strong>
     text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
+    // Convert markdown images to actual <img> tags for inline display
+    text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, altText, imageUrl) {
+      return `<div style="margin: 16px 0; text-align: center;">
+        <img src="${imageUrl}" alt="${altText}" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);" />
+        ${altText ? `<div style="font-size: 12px; color: #9ca3af; margin-top: 8px; font-style: italic;">${altText}</div>` : ''}
+      </div>`;
+    });
+    
     // Convert numbered sections like "1) Summary" to bold headers
     text = text.replace(/^(\d+\)\s*\*\*.*?\*\*)/gm, '<div style="font-weight:600;color:#ffffff;margin:15px 0 8px 0;font-size:15px;">$1</div>');
     
