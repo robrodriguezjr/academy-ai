@@ -328,55 +328,62 @@ export const Dashboard: React.FC = () => {
         <div className="content-area">
           {activeView === 'overview' && (
             <>
-              <div className="metrics-grid">
-                <div className="metric-card">
-                  <div className="metric-header">
-                    <span className="metric-icon">👥</span>
-                    <span className="metric-label">Today's Users</span>
+              {/* ✨ TAILWIND TRANSFORMATION: Responsive grid with modern cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">👥</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Today's Users</span>
                   </div>
-                  <div className="metric-value">{metrics?.active_users || 0}</div>
-                  <div className="metric-subtext">Users</div>
+                  <div className="text-3xl font-bold text-white mb-1">{metrics?.active_users || 0}</div>
+                  <div className="text-sm text-gray-500">Active Users</div>
                 </div>
 
-                <div className="metric-card">
-                  <div className="metric-header">
-                    <span className="metric-icon">💬</span>
-                    <span className="metric-label">Messages</span>
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">💬</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Messages</span>
                   </div>
-                  <div className="metric-value">{metrics?.queries_today || 0}</div>
-                  <div className="metric-subtext">Messages</div>
-                  <div className="metric-badge">0.00%</div>
-                </div>
-
-                <div className="metric-card">
-                  <div className="metric-header">
-                    <span className="metric-icon">📚</span>
-                    <span className="metric-label">Has sent</span>
-                  </div>
-                  <div className="metric-value">{metrics?.messages_sent || 11} <span className="metric-total">/ 2000</span></div>
-                  <div className="metric-chart">
-                    <div className="progress-bar">
-                      <div className="progress-fill" style={{width: '0.55%'}}></div>
-                    </div>
+                  <div className="text-3xl font-bold text-orange-accent mb-1">{metrics?.queries_today || 0}</div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">Total Messages</span>
+                    <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">0.00%</span>
                   </div>
                 </div>
 
-                <div className="metric-card">
-                  <div className="metric-header">
-                    <span className="metric-icon">🎯</span>
-                    <span className="metric-label">Leads</span>
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">📚</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Messages Sent</span>
                   </div>
-                  <div className="metric-value">0</div>
-                  <div className="metric-subtext">Generated</div>
+                  <div className="flex items-baseline space-x-2 mb-3">
+                    <span className="text-3xl font-bold text-white">{metrics?.messages_sent || 11}</span>
+                    <span className="text-lg text-gray-500">/ 2000</span>
+                  </div>
+                  <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="bg-orange-accent h-2 rounded-full transition-all duration-500" style={{width: '0.55%'}}></div>
+                  </div>
                 </div>
 
-                <div className="metric-card">
-                  <div className="metric-header">
-                    <span className="metric-icon">📝</span>
-                    <span className="metric-label">Training</span>
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">🎯</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Leads</span>
                   </div>
-                  <div className="metric-value">{(vectorCount * 1000).toLocaleString()} <span className="metric-unit">/ 12M</span></div>
-                  <div className="metric-subtext">Characters used</div>
+                  <div className="text-3xl font-bold text-white mb-1">0</div>
+                  <div className="text-sm text-gray-500">Generated</div>
+                </div>
+
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl">📝</span>
+                    <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">Training Data</span>
+                  </div>
+                  <div className="flex items-baseline space-x-2 mb-1">
+                    <span className="text-2xl font-bold text-white">{(vectorCount * 1000).toLocaleString()}</span>
+                    <span className="text-sm text-gray-500">/ 12M</span>
+                  </div>
+                  <div className="text-sm text-gray-500">Characters used</div>
                   <ResponsiveContainer width="100%" height={60}>
                     <PieChart>
                       <Pie
@@ -397,38 +404,67 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div className="chart-section">
-                <div className="chart-card">
-                  <h3>Activity Over Time</h3>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={metrics?.daily_usage || []}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                      <XAxis dataKey="date" />
-                      <YAxis />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="count" stroke="#ff6b35" strokeWidth={2} />
-                    </LineChart>
-                  </ResponsiveContainer>
+              {/* ✨ TAILWIND TRANSFORMATION: Responsive chart grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                    <span className="mr-2">📈</span>
+                    Activity Over Time
+                  </h3>
+                  <div className="h-80">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={metrics?.daily_usage || []}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#404040" />
+                        <XAxis dataKey="date" stroke="#9ca3af" />
+                        <YAxis stroke="#9ca3af" />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: '#2a2a2a',
+                            border: '1px solid #404040',
+                            borderRadius: '8px',
+                            color: '#ffffff'
+                          }}
+                        />
+                        <Line type="monotone" dataKey="count" stroke="#ff8c42" strokeWidth={3} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
                 </div>
 
-                <div className="world-map-card">
-                  <h3>Popular Countries</h3>
-                  <div className="map-placeholder">
-                    <div className="country-list">
-                      <div className="country-item">
-                        <span className="country-flag">🇺🇸</span>
-                        <span>United States</span>
-                        <span className="country-count">5</span>
+                <div className="bg-dark-card p-6 rounded-xl border border-dark-border shadow-lg">
+                  <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                    <span className="mr-2">🌍</span>
+                    Popular Countries
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇺🇸</span>
+                        <span className="text-white font-medium">United States</span>
                       </div>
+                      <span className="bg-orange-accent text-white px-3 py-1 rounded-full text-sm font-medium">5</span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 bg-dark-bg rounded-lg hover:bg-gray-800 transition-colors">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-2xl">🇨🇦</span>
+                        <span className="text-white font-medium">Canada</span>
+                      </div>
+                      <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-medium">2</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="chat-interface">
-                <h3>Live Chat Interface</h3>
-                <div className="chat-container">
-                  <div className="chat-messages" ref={chatMessagesRef}>
+              {/* ✨ TAILWIND TRANSFORMATION: Modern chat interface */}
+              <div className="bg-dark-card rounded-xl border border-dark-border shadow-lg overflow-hidden">
+                <div className="bg-gradient-to-r from-orange-accent to-orange-hover p-4">
+                  <h3 className="text-xl font-semibold text-white flex items-center">
+                    <span className="mr-2">💬</span>
+                    Live Chat Interface
+                  </h3>
+                </div>
+                <div className="h-96 flex flex-col">
+                  <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={chatMessagesRef}>
                     {chatMessages.map((message) => (
                       <div key={message.id} className={`chat-message ${message.isUser ? 'user' : 'assistant'}`}>
                         <div className="message-content">
@@ -467,23 +503,30 @@ export const Dashboard: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  <div className="chat-input-container">
-                    <textarea
-                      value={chatInput}
-                      onChange={(e) => setChatInput(e.target.value)}
-                      onKeyPress={handleChatKeyPress}
-                      placeholder="Ask about photography, business, or creative techniques..."
-                      className="chat-input"
-                      rows={2}
-                      disabled={chatLoading}
-                    />
-                    <button 
-                      onClick={sendChatMessage}
-                      disabled={chatLoading || !chatInput.trim()}
-                      className="chat-send-btn"
-                    >
-                      {chatLoading ? '⏳' : '→'}
-                    </button>
+                  {/* ✨ TAILWIND TRANSFORMATION: Modern input with button */}
+                  <div className="border-t border-dark-border p-4">
+                    <div className="flex space-x-3">
+                      <textarea
+                        value={chatInput}
+                        onChange={(e) => setChatInput(e.target.value)}
+                        onKeyPress={handleChatKeyPress}
+                        placeholder="Ask about photography, business, or creative techniques..."
+                        className="flex-1 bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white placeholder-gray-400 resize-none focus:ring-2 focus:ring-orange-accent focus:border-transparent transition-all"
+                        rows={2}
+                        disabled={chatLoading}
+                      />
+                      <button 
+                        onClick={sendChatMessage}
+                        disabled={chatLoading || !chatInput.trim()}
+                        className="bg-orange-accent hover:bg-orange-hover disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center min-w-[60px]"
+                      >
+                        {chatLoading ? (
+                          <div className="animate-spin">⏳</div>
+                        ) : (
+                          <span className="text-lg">→</span>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -518,8 +561,13 @@ export const Dashboard: React.FC = () => {
                     <span className="stat-value">0</span>
                   </div>
                 </div>
-                <button className="btn-primary" onClick={() => setShowUploadModal(true)}>
-                  <span>⊕</span> Add Links / Upload Docs
+                {/* ✨ TAILWIND TRANSFORMATION: Modern upload button */}
+                <button 
+                  className="bg-orange-accent hover:bg-orange-hover text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105" 
+                  onClick={() => setShowUploadModal(true)}
+                >
+                  <span>📁</span>
+                  <span>Upload Documents</span>
                 </button>
               </div>
 
