@@ -281,9 +281,14 @@ def generate_url_from_title(title: str, source: str = None, path: str = None) ->
         return f"https://robertrodriguezjr.com/{slug}/"
     elif source == "blog-cpa" or (path and "creativepathworkshops" in path):
         return f"https://creativepathworkshops.com/{slug}/"
+    elif any(academy_term in title.lower() for academy_term in 
+        ["academy", "ls", "print lab", "open studio", "creative cafe", "lightroom essentials", 
+         "mastering composition", "live session", "academy live"]):
+        # Academy content goes to creativepathworkshops.com
+        return f"https://creativepathworkshops.com/{slug}/"
     elif source in ["blog-rrjr", "upload"] or any(word in title.lower() for word in 
-        ["photo", "lightroom", "print", "workshop", "landscape", "composition", "academy"]):
-        # Default to robertrodriguezjr.com for photography content
+        ["photo", "lightroom", "print", "workshop", "landscape", "composition"]):
+        # Default to robertrodriguezjr.com for general photography content
         return f"https://robertrodriguezjr.com/{slug}/"
     
     return None
