@@ -261,6 +261,33 @@ def embed_query(text: str) -> List[float]:
         print(f"Embedding error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create embedding")
 
+def generate_url_from_title(title: str, source: str = None, path: str = None) -> Optional[str]:
+    """Generate URL from title and metadata if not provided"""
+    if not title:
+        return None
+    
+    import re
+    
+    def slugify(text):
+        """Convert title to URL slug"""
+        slug = re.sub(r'[^\w\s-]', '', text.lower())
+        slug = re.sub(r'[-\s]+', '-', slug)
+        return slug.strip('-')
+    
+    slug = slugify(title)
+    
+    # Determine site based on source or content
+    if source == "blog-rrjr" or (path and "robertrodriguezjr" in path):
+        return f"https://robertrodriguezjr.com/{slug}/"
+    elif source == "blog-cpa" or (path and "creativepathworkshops" in path):
+        return f"https://creativepathworkshops.com/{slug}/"
+    elif source in ["blog-rrjr", "upload"] or any(word in title.lower() for word in 
+        ["photo", "lightroom", "print", "workshop", "landscape", "composition", "academy"]):
+        # Default to robertrodriguezjr.com for photography content
+        return f"https://robertrodriguezjr.com/{slug}/"
+    
+    return None
+
 def log_query(user_id: str, query: str, response_time: float, tokens_used: int = 0):
     """Log a query for analytics"""
     try:
@@ -326,10 +353,19 @@ async def query(data: QueryIn):
             contexts.append(doc)
             title = metadata.get("title", "Unknown")
             if title not in sources_dict:
+                # Get URL from metadata or generate it
+                url = metadata.get("url")
+                if not url:
+                    url = generate_url_from_title(
+                        title, 
+                        metadata.get("source"), 
+                        metadata.get("path")
+                    )
+                
                 sources_dict[title] = Source(
                     title=title,
                     path=metadata.get("path"),
-                    url=metadata.get("url"),
+                    url=url,
                     source=metadata.get("source", "doc")
                 )
         
