@@ -98,16 +98,24 @@ def init_database():
     )
     """)
     
-    # Q&A pairs
+    # Q&A pairs with optional images
     cur.execute("""
     CREATE TABLE IF NOT EXISTS qa_pairs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       question TEXT,
       answer TEXT,
+      image_url TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       used_count INTEGER DEFAULT 0
     )
     """)
+    
+    # Add image_url column to existing qa_pairs table if it doesn't exist
+    try:
+        cur.execute("ALTER TABLE qa_pairs ADD COLUMN image_url TEXT")
+    except sqlite3.OperationalError:
+        # Column already exists
+        pass
     
     con.commit()
     con.close()
@@ -232,6 +240,7 @@ class TextTrainingIn(BaseModel):
 class QAPairIn(BaseModel):
     question: str
     answer: str
+    image_url: Optional[str] = None
 
 # === Utils ===
 def _require_admin(req: Request):
@@ -357,7 +366,7 @@ async def query(data: QueryIn):
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
         cur.execute("""
-            SELECT answer FROM qa_pairs 
+            SELECT answer, image_url FROM qa_pairs 
             WHERE LOWER(question) = LOWER(?)
             LIMIT 1
         """, (data.query,))
@@ -368,20 +377,27 @@ async def query(data: QueryIn):
             response_time = time.time() - start_time
             response_time_ms = int(response_time * 1000)
             
+            answer_text = qa_result[0]
+            image_url = qa_result[1]
+            
+            # Add image to answer if available
+            if image_url:
+                answer_text += f"\n\n![Instructional Image]({image_url})"
+            
             # Log to both tables for analytics
             log_query(data.user_id or "anonymous", data.query, response_time)
             log_chat(
                 user_id=data.user_id or "",
                 question=data.query,
-                answer=qa_result[0],
+                answer=answer_text,
                 sources=[],
                 tokens_in=len(data.query.split()) * 1.3,  # Rough estimate
-                tokens_out=len(qa_result[0].split()) * 1.3,  # Rough estimate
+                tokens_out=len(answer_text.split()) * 1.3,  # Rough estimate
                 response_time_ms=response_time_ms,
                 cost_usd=0.0
             )
             
-            return QueryOut(answer=qa_result[0], sources=[])
+            return QueryOut(answer=answer_text, sources=[])
         
         # Regular ChromaDB search
         query_embedding = embed_query(data.query)
@@ -944,7 +960,7 @@ async def get_qa_pairs(request: Request):
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
         cur.execute("""
-            SELECT id, question, answer, created_at, used_count
+            SELECT id, question, answer, image_url, created_at, used_count
             FROM qa_pairs
             ORDER BY created_at DESC
         """)
@@ -957,8 +973,9 @@ async def get_qa_pairs(request: Request):
                 "id": row[0],
                 "question": row[1],
                 "answer": row[2],
-                "created_at": row[3],
-                "used_count": row[4]
+                "image_url": row[3],
+                "created_at": row[4],
+                "used_count": row[5]
             })
         
         return {"qa_pairs": qa_pairs}
@@ -975,9 +992,9 @@ async def add_qa_pair(data: QAPairIn, request: Request):
         con = sqlite3.connect(METRICS_DB)
         cur = con.cursor()
         cur.execute("""
-            INSERT INTO qa_pairs (question, answer)
-            VALUES (?, ?)
-        """, (data.question, data.answer))
+            INSERT INTO qa_pairs (question, answer, image_url)
+            VALUES (?, ?, ?)
+        """, (data.question, data.answer, data.image_url))
         con.commit()
         con.close()
         

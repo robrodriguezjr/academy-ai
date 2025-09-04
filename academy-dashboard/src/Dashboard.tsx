@@ -906,26 +906,87 @@ export const Dashboard: React.FC = () => {
           )}
 
           {activeView === 'qa' && (
-            <div className="qa-view">
-              <div className="qa-header">
-                <p>Use this section to add frequently asked questions and the responses the chatbot should provide.</p>
-                <div className="qa-actions">
-                  <button className="btn-success">↓ Upgrade for self improving Q&A</button>
-                  <button className="btn-primary">⊕ Add Q&A</button>
-                  <button className="btn-secondary">Save</button>
-                  <button className="btn-secondary">Delete (0)</button>
-                  <button className="btn-info">Export all</button>
+            <div className="qa-view bg-dark-bg min-h-screen p-6">
+              <div className="max-w-6xl mx-auto">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-white mb-4">Q&A Management</h2>
+                  <p className="text-gray-300 mb-6">Add frequently asked questions with optional instructional images. These answers take priority over AI-generated responses.</p>
+                  
+                  <div className="flex flex-wrap gap-3">
+                    <button className="bg-orange-accent hover:bg-orange-hover text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                      ⊕ Add Q&A
+                    </button>
+                    <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                      💾 Save All
+                    </button>
+                    <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                      🗑 Delete Selected
+                    </button>
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                      📤 Export All
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="qa-list">
-                <div className="qa-item">
-                  <div className="qa-question">
-                    <input type="text" placeholder="Enter Question" />
+
+                {/* Q&A Form */}
+                <div className="bg-dark-card rounded-xl border border-dark-border p-6 mb-6">
+                  <h3 className="text-lg font-semibold text-white mb-4">Add New Q&A Pair</h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Question</label>
+                      <input
+                        type="text"
+                        placeholder="e.g., Where is the masking tool in Lightroom?"
+                        className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-accent focus:border-transparent transition-all"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Answer</label>
+                      <textarea
+                        rows={4}
+                        placeholder="Provide a detailed answer..."
+                        className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-accent focus:border-transparent transition-all resize-vertical"
+                      ></textarea>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Instructional Image URL (Optional)
+                        <span className="text-xs text-gray-500 ml-2">- Add screenshots or diagrams to enhance your answer</span>
+                      </label>
+                      <input
+                        type="url"
+                        placeholder="https://creativepathworkshops.com/images/lightroom-masking-tool.jpg"
+                        className="w-full bg-dark-bg border border-dark-border rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-accent focus:border-transparent transition-all"
+                      />
+                    </div>
+                    
+                    <div className="flex gap-3">
+                      <button className="bg-orange-accent hover:bg-orange-hover text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                        💾 Save Q&A
+                      </button>
+                      <button className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                        🔄 Clear Form
+                      </button>
+                    </div>
                   </div>
-                  <div className="qa-answer">
-                    <textarea placeholder="Enter Answer"></textarea>
+                </div>
+
+                {/* Existing Q&A List */}
+                <div className="bg-dark-card rounded-xl border border-dark-border overflow-hidden">
+                  <div className="p-4 border-b border-dark-border">
+                    <h3 className="text-lg font-semibold text-white">Existing Q&A Pairs</h3>
                   </div>
-                  <button className="btn-icon delete">🗑</button>
+                  
+                  <div className="p-6">
+                    <div className="text-center py-12 text-gray-400">
+                      <div className="text-6xl mb-4">❓</div>
+                      <h4 className="text-xl font-medium mb-2">No Q&A pairs yet</h4>
+                      <p className="text-gray-500">Add your first question and answer above to get started.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
