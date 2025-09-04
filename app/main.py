@@ -307,6 +307,38 @@ def log_query(user_id: str, query: str, response_time: float, tokens_used: int =
     except Exception as e:
         print(f"Failed to log query: {e}")
 
+def log_chat(user_id: str, question: str, answer: str, sources: list, tokens_in: int, tokens_out: int, response_time_ms: int, cost_usd: float = 0.0):
+    """Log a chat interaction to the chats table for user analytics"""
+    try:
+        con = sqlite3.connect(METRICS_DB)
+        cur = con.cursor()
+        
+        # Convert sources to JSON string
+        sources_json = json.dumps([{
+            "title": src.title,
+            "url": src.url,
+            "source": src.source
+        } for src in sources]) if sources else "[]"
+        
+        cur.execute("""
+            INSERT INTO chats (ts, user_id, question, answer, sources_json, tokens_in, tokens_out, ms, cost_usd)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            datetime.now().isoformat() + "Z",
+            user_id or "",
+            question,
+            answer,
+            sources_json,
+            tokens_in,
+            tokens_out,
+            response_time_ms,
+            cost_usd
+        ))
+        con.commit()
+        con.close()
+    except Exception as e:
+        print(f"Failed to log chat: {e}")
+
 # === Original Endpoints ===
 @app.post("/query", response_model=QueryOut)
 async def query(data: QueryIn):
@@ -334,7 +366,21 @@ async def query(data: QueryIn):
         
         if qa_result:
             response_time = time.time() - start_time
+            response_time_ms = int(response_time * 1000)
+            
+            # Log to both tables for analytics
             log_query(data.user_id or "anonymous", data.query, response_time)
+            log_chat(
+                user_id=data.user_id or "",
+                question=data.query,
+                answer=qa_result[0],
+                sources=[],
+                tokens_in=len(data.query.split()) * 1.3,  # Rough estimate
+                tokens_out=len(qa_result[0].split()) * 1.3,  # Rough estimate
+                response_time_ms=response_time_ms,
+                cost_usd=0.0
+            )
+            
             return QueryOut(answer=qa_result[0], sources=[])
         
         # Regular ChromaDB search
@@ -413,7 +459,20 @@ Provide an answer following the format guidelines (summary, how to apply, source
         
         answer = response.choices[0].message.content
         response_time = time.time() - start_time
+        response_time_ms = int(response_time * 1000)
+        
+        # Log to both tables for analytics
         log_query(data.user_id or "anonymous", data.query, response_time, 500)
+        log_chat(
+            user_id=data.user_id or "",
+            question=data.query,
+            answer=answer,
+            sources=list(sources_dict.values()),
+            tokens_in=len(data.query.split()) * 1.3,  # Rough estimate
+            tokens_out=500,  # Max tokens used
+            response_time_ms=response_time_ms,
+            cost_usd=0.0  # Calculate if needed
+        )
         
         return QueryOut(answer=answer, sources=list(sources_dict.values()))
         

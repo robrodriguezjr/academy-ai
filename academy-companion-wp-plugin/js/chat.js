@@ -187,7 +187,8 @@
                     },
                     body: JSON.stringify({
                         query: query,
-                        top_k: 5
+                        top_k: 5,
+                        user_id: academyCompanion.userId ? `wp_${academyCompanion.userId}` : null
                     })
                 });
                 
