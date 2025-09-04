@@ -27,6 +27,7 @@
     function initializeFloatingChat(chatRoot, toggleButton, backdrop) {
         console.log('Academy Chat: Initializing floating chat', chatRoot, toggleButton, backdrop);
         let isOpen = false;
+        window.academyChatOpen = false;
         
         // Toggle chat visibility
         toggleButton.addEventListener('click', function(e) {
@@ -40,6 +41,7 @@
                 backdrop.style.display = 'none';
                 backdrop.classList.remove('show');
                 isOpen = false;
+                window.academyChatOpen = false;
             } else {
                 if (!chatRoot.innerHTML.trim()) {
                     initializeChat(chatRoot, true);
@@ -76,6 +78,7 @@
                     console.log('Academy Chat: Animation complete, final transform applied');
                 }, 10);
                 isOpen = true;
+                window.academyChatOpen = true;
                 
                 // Hide unread indicator
                 const unreadCount = document.getElementById('unread-count');
@@ -93,6 +96,7 @@
                 backdrop.style.display = 'none';
                 backdrop.classList.remove('show');
                 isOpen = false;
+                window.academyChatOpen = false;
             }
         });
     }
@@ -104,6 +108,7 @@
                 <div class="chat-header">
                     <h3>Academy Companion</h3>
                     <span class="subtitle">Your AI Photography Assistant</span>
+                    <button class="close-button" id="chat-close">×</button>
                 </div>
                 
                 <div class="messages" id="chat-messages">
@@ -131,11 +136,28 @@
         const input = chatRoot.querySelector('#chat-input');
         const sendBtn = chatRoot.querySelector('#chat-send');
         const messages = chatRoot.querySelector('#chat-messages');
+        const closeBtn = chatRoot.querySelector('#chat-close');
         
         sendBtn.addEventListener('click', sendMessage);
         input.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') sendMessage();
         });
+        
+        // Close button handler (only for floating chat)
+        if (isFloating && closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const floatingRoot = document.getElementById('academy-companion-root-float');
+                const backdrop = document.getElementById('academy-companion-backdrop');
+                if (floatingRoot && backdrop) {
+                    floatingRoot.style.display = 'none';
+                    floatingRoot.classList.remove('show');
+                    backdrop.style.display = 'none';
+                    backdrop.classList.remove('show');
+                    // Update the isOpen state in the parent scope
+                    window.academyChatOpen = false;
+                }
+            });
+        }
         
         // Create scoped suggestion function for this chat instance
         const useSuggestion = function(text) {
