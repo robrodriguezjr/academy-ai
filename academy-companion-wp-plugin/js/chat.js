@@ -56,8 +56,8 @@
                     right: auto !important;
                     bottom: auto !important;
                     transform: translate(-50%, -50%) scale(0.95) !important;
-                    width: 500px !important;
-                    height: 650px !important;
+                    width: 600px !important;
+                    height: 700px !important;
                     z-index: 999999 !important;
                     background: white !important;
                     border-radius: 20px !important;
