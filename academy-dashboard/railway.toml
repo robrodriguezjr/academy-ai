@@ -1,0 +1,8 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm run build && npx serve -s build -p $PORT"
+
+[[services]]
+name = "academy-dashboard"
